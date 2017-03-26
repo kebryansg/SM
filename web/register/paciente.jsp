@@ -19,21 +19,21 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Cedula *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="inputUserName" placeholder="Cedula">
+                                <input type="text" class="form-control" id="idCedula" maxlength="10" id="inputUserName" placeholder="Cedula">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-sm-3">Nombres *</label>
                             <div class="form-inline">
-                                <input type="text" class="form-control" id="inputUserName" placeholder="Primer nombre">
-                                <input type="text" class="form-control" id="inputUserName" placeholder="Segundo nombre">
+                                <input type="text" class="form-control" id="primerNombre" placeholder="Primer nombre">
+                                <input type="text" class="form-control" id="segundoNombre" placeholder="Segundo nombre">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-sm-3">Apellidos *</label>
                             <div class="form-inline">
-                                <input type="text" class="form-control" id="inputUserName" placeholder="Primer apellido">
-                                <input type="text" class="form-control" id="inputUserName" placeholder="Segundo apellido">
+                                <input type="text" class="form-control" id="primerApellido" placeholder="Primer apellido">
+                                <input type="text" class="form-control" id="segundoApellido" placeholder="Segundo apellido">
                             </div>
                         </div>
 
