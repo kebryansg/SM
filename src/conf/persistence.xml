@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="SMPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>test.EstudioImagen</class>
+    <class>test.Medico</class>
+    <class>test.DetalleIngresos</class>
+    <class>test.Ingresos</class>
+    <class>test.Metodos</class>
+    <class>test.MedicoEspecialidad</class>
+    <class>test.TipoIngreso</class>
+    <class>test.Causa</class>
+    <class>test.Consulta</class>
+    <class>test.Prescripcion</class>
+    <class>test.ConsultaEstudiosLabs</class>
+    <class>test.SignosVitales</class>
+    <class>test.DetallesEstudiosImg</class>
+    <class>test.EstudiosLaboratorio</class>
+    <class>test.ConsultaEstudiosImagen</class>
+    <class>test.EspecialidadEgreso</class>
+    <class>test.HistorialClinico</class>
+    <class>test.Hospital</class>
+    <class>test.VisitaDomicilio</class>
+    <class>test.DetalleEstudiosLabs</class>
+    <class>test.Especialidad</class>
+    <class>test.Caso</class>
+    <class>test.Diagnostico</class>
+    <class>mvc.controlador.entidades.sm.Diagnostico</class>
+    <class>mvc.controlador.entidades.sm.SignosVitales</class>
+    <class>mvc.controlador.entidades.sm.Medico</class>
+    <class>mvc.controlador.entidades.sm.EstudioImagen</class>
+    <class>mvc.controlador.entidades.sm.DetalleIngresos</class>
+    <class>mvc.controlador.entidades.sm.Caso</class>
+    <class>mvc.controlador.entidades.sm.Causa</class>
+    <class>mvc.controlador.entidades.sm.HistorialClinico</class>
+    <class>mvc.controlador.entidades.sm.EspecialidadEgreso</class>
+    <class>mvc.controlador.entidades.sm.Especialidad</class>
+    <class>mvc.controlador.entidades.sm.Consulta</class>
+    <class>mvc.controlador.entidades.sm.DetallesEstudiosImg</class>
+    <class>mvc.controlador.entidades.sm.Prescripcion</class>
+    <class>mvc.controlador.entidades.sm.ConsultaEstudiosImagen</class>
+    <class>mvc.controlador.entidades.sm.EstudiosLaboratorio</class>
+    <class>mvc.controlador.entidades.sm.VisitaDomicilio</class>
+    <class>mvc.controlador.entidades.sm.TipoIngreso</class>
+    <class>mvc.controlador.entidades.sm.MedicoEspecialidad</class>
+    <class>mvc.controlador.entidades.sm.Hospital</class>
+    <class>mvc.controlador.entidades.sm.Metodos</class>
+    <class>mvc.controlador.entidades.sm.ConsultaEstudiosLabs</class>
+    <class>mvc.controlador.entidades.sm.DetalleEstudiosLabs</class>
+    <class>mvc.controlador.entidades.sm.Ingresos</class>
+    <class>mvc.controlador.entidades.ip.Paciente</class>
+    <class>mvc.controlador.entidades.ip.Parroquia</class>
+    <class>mvc.controlador.entidades.ip.Canton</class>
+    <class>mvc.controlador.entidades.ip.Enfermedad</class>
+    <class>mvc.controlador.entidades.ip.Parientes</class>
+    <class>mvc.controlador.entidades.ip.ParienteEnfermedadPaciente</class>
+    <class>mvc.controlador.entidades.ip.Obstetricos</class>
+    <class>mvc.controlador.entidades.ip.Provincia</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=prueba"/>
+      <property name="javax.persistence.jdbc.user" value="sa"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.password" value="FKebryan1995"/>
+    </properties>
+  </persistence-unit>
+</persistence>
