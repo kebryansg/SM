@@ -1,7 +1,6 @@
 .disabledTab {
     pointer-events: none;
 }
-
 .bx{
     outline: 1px blue solid;
 }
