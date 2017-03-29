@@ -12,7 +12,7 @@ package mvc.controlador;
 public class con_db {
     public static final int MSSQL_SM = 1;
     public static final int MSSQL_IP = 2;
-    private static final String[] configMSSQL = {"","1433","Parcial","campeonato"};
+    private static final String[] configMSSQL = {"","1433","sm","sm1234"};
     //Linux
     //private static final String[] configMSSQL = {"","1433","sa","FKebryan1995"}; 
     

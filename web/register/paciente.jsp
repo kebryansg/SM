@@ -1,3 +1,8 @@
+<%@page import="mvc.controlador.entidades.ip.Parientes"%>
+<%@page import="mvc.modelo.ipDaoImp.ParientesDaoImp"%>
+<%@page import="mvc.modelo.ipDaoImp.EnfermedadDaoImp"%>
+<%@page import="mvc.controlador.entidades.ip.Enfermedad"%>
+<%@page import="mvc.modelo.ipDao.EnfermedadDao"%>
 <%@page import="mvc.controlador.entidades.ip.Provincia"%>
 <%@page import="java.util.List"%>
 <%@page import="mvc.modelo.ipDao.ProvinciaDao"%>
@@ -8,47 +13,54 @@
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#ip">Informacion personal</a></li>
         <li><a data-toggle="tab" href="#antecedentes">Antecedentes</a></li>
-        <li><a data-toggle="tab" href="#obstetricia">Obstetricia</a></li>
+        <li id="tabObstetricia" class="disabledTab"><a data-toggle="tab" href="#obstetricia">Obstetricia</a></li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade in active" id="ip" style="padding-top: 10px;">
             <div class="form-horizontal">
                 <div class="row">
-                    <div class="col-sm-6" >
+                    <div class="col-sm-6">
 
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Cedula *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="inputUserName" placeholder="Cedula">
+                                <input type="text" class="form-control" id="pac_Cedula" maxlength="10" id="inputUserName" placeholder="Cedula">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-sm-3">Nombres *</label>
                             <div class="form-inline">
-                                <input type="text" class="form-control" id="inputUserName" placeholder="Primer nombre">
-                                <input type="text" class="form-control" id="inputUserName" placeholder="Segundo nombre">
+                                <input type="text" class="form-control" id="pac_primerNombre" placeholder="Primer nombre">
+                                <input type="text" class="form-control" id="pac_segundoNombre" placeholder="Segundo nombre">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-sm-3">Apellidos *</label>
                             <div class="form-inline">
-                                <input type="text" class="form-control" id="inputUserName" placeholder="Primer apellido">
-                                <input type="text" class="form-control" id="inputUserName" placeholder="Segundo apellido">
+                                <input type="text" class="form-control" id="pac_primerApellido" placeholder="Primer apellido">
+                                <input type="text" class="form-control" id="pac_segundoApellido" placeholder="Segundo apellido">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Fecha Nac. *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="inputUserName" placeholder="Fecha Nacimiento">
+                                <input type="date" class="form-control" id="pac_FechaNac" placeholder="Fecha Nacimiento">
                             </div>
                         </div>
 
 
                     </div>
-                    <div class="col-sm-3">
-                        asdads
-                        <img src="" class="img-responsive" height="150"/>
+                    <div id="contenedorImg" >
+                        <div>
+                            <img src="resources/img/user.png" id="pac_imagen" class="img-thumbnail" height="150" width="150"/>  
+                        </div>
+
+                        <div class="btn-foto" >
+                            <input type="file" id="file_imagen" style="display: none;" >      
+                            <button class="btn btn-info" id="btnAddPhoto"><i class="fa fa-camera"></i></button>
+                            <button class="btn btn-danger" id="btnRemovePhoto"><i class="fa fa-remove"></i></button>
+                        </div>       
                     </div>
                 </div>
                 <div class="row">
@@ -56,7 +68,7 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Nacionalidad *</label>
                             <div class="col-md-8">
-                                <select class="form-control">
+                                <select class="form-control" id="pac_nacionalidad">
                                     <option value="1">Ecuatoriano</option>
                                     <option value="2">Extranjero</option>
                                 </select>
@@ -65,19 +77,19 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Tef. Casa *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="inputUserName" placeholder="Tef. Casa">
+                                <input type="text" class="form-control" maxlength="10" id="pac_TelCasa" placeholder="Tef. Casa">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">E-mail *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="inputUserName" placeholder="E-mail">
+                                <input type="text" class="form-control" maxlength="10" id="pac_Email" placeholder="E-mail">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Etnia *</label>
                             <div class="col-md-8">
-                                <select class="form-control">
+                                <select class="form-control" id="pac_Etnia">
                                     <option value="1">Mulato</option>
                                     <option value="2">Casado</option>
                                     <option value="3">Divorciado</option>
@@ -89,13 +101,13 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Domicilio *</label>
                             <div class="col-md-8">
-                                <textarea class="form-control" rows="3" id="comment"></textarea>
+                                <textarea class="form-control" rows="3" id="pac_Domicilio"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Discapacidad *</label>
                             <div class="col-md-8">
-                                <label><input type="checkbox" value=""></label>
+                                <label><input type="checkbox" value="" id="pac_Discapacidad"></label>
                             </div>
                         </div>
                     </div>
@@ -103,13 +115,13 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Cuidad *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="inputUserName" placeholder="Ciudad">
+                                <input type="text" class="form-control" maxlength="10" id="pac_Ciudad" placeholder="Ciudad">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Estado civil *</label>
                             <div class="col-md-8">
-                                <select class="form-control">
+                                <select class="form-control" id="pac_EstadoCivil">
                                     <option value="1">Soltero</option>
                                     <option value="2">Casado</option>
                                     <option value="3">Divorciado</option>
@@ -121,34 +133,28 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Tef. Oficina *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="inputUserName" placeholder="Tef. Oficina">
+                                <input type="text" class="form-control" maxlength="10" id="pac_TelOficina" placeholder="Tef. Oficina">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Género *</label>
                             <div class="col-md-8">
-                                <select class="form-control">
+                                <select class="form-control" id="pac_Genero">
                                     <option value="1">Masculino</option>
                                     <option value="2">Femenino</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputUserName" class="control-label col-md-3">E-mail *</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="inputUserName" placeholder="E-mail">
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Pais Nac. *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="inputUserName" placeholder="Pais Nacimiento">
+                                <input type="text" class="form-control" maxlength="10" id="pac_PaisNac" placeholder="Pais Nacimiento">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Lugar Nac. *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="inputUserName" placeholder="Lugar Nacimiento">
+                                <input type="text" class="form-control" maxlength="10" id="pac_LugarNac" placeholder="Lugar Nacimiento">
                             </div>
                         </div>
                     </div>
@@ -174,7 +180,7 @@
                             <label class="control-label col-md-3">Parroquia *</label>
                             <div class="col-md-8">
                                 <select class="form-control" id="cboParroquia">
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -185,7 +191,7 @@
                             <label class="control-label col-md-3">Canton *</label>
                             <div class="col-md-8">
                                 <select class="form-control" id="cboCanton">
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -197,11 +203,129 @@
             </div>
 
         </div>
-        <div class="tab-pane fade" id="antecedentes">
-            antecedentes
+        <div class="tab-pane fade " id="antecedentes" style="padding-top: 10px;">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td> Enfermedad</td>
+                            <%
+                                List<Parientes> parientes = new ParientesDaoImp().list();
+                                for (Parientes pariente : parientes) {%>
+                            <td><%= pariente.getParentesco()%></td>        
+                            <% } %>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            List<Enfermedad> enfermedades = new EnfermedadDaoImp().list();
+                            for (Enfermedad enfermedad : enfermedades) {%>
+                        <tr>
+                            <td><%= enfermedad.getNombres()%></td>
+                            <% for (Parientes pariente : parientes) { %>
+                            <td><input type="checkbox" dEnfermedad="<%= enfermedad.getId() %>" dParient="<%= pariente.getId() %>"> </td>
+                                <% } %>
+                        </tr>
+
+                        <% }%>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="tab-pane fade" id="obstetricia">
-            obstetricia
+        <div class="tab-pane fade" id="obstetricia" style="padding-top: 10px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-3">F.P.P *</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" id="datepicker">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-3">Gestacion</label>
+                            <div class="col-md-5">
+                                <input class="form-control"  type="number" min="0" max="10">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-3">Abortos</label>
+                            <div class="col-md-5">
+                                <input class="form-control"  type="number" min="0" max="10">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+
+
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-3">Partos</label>
+                            <div class="col-md-5">
+                                <input class="form-control" type="number" min="0" max="10">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-3">Cesareas</label>
+                            <div class="col-md-5">
+                                <input class="form-control"  type="number" min="0" max="10">
+                            </div>
+                        </div>
+                    </div>       
+
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-3">Nacido vivos</label>
+                            <div class="col-md-5">
+                                <input class="form-control"  type="number" min="0" max="10">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-3">Nacidos muertos</label>
+                            <div class="col-md-5">
+                                <input class="form-control"  type="number" min="0" max="10">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+
+
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-3">Hijos vivos</label>
+                            <div class="col-md-5">
+                                <input class="form-control" type="number" min="0" max="10">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-3">Hijos Muertos</label>
+                            <div class="col-md-5">
+                                <input class="form-control"  type="number" min="0" max="10">
+                            </div>
+                        </div>
+                    </div>       
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
+

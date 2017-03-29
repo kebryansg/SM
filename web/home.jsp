@@ -6,9 +6,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Sistema Mèdico</title>
+
         <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="resources/js-ui/jquery-ui.css" rel="stylesheet"/>
         <link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
         <link href="resources/css/style_home.css" rel="stylesheet" type="text/css"/>
+
     </head>
     <body>
         <div class="fill">
@@ -75,11 +79,13 @@
                         <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>-->
                         <button class="close close-all-tab" type="button" ><i class="fa fa-close"></i></button>
                     </ul>
-                    
+
 
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
+
                             <%@include file="register/paciente.jsp" %>
+
                         </div>
                         <!--<div id="menu1" class="tab-pane fade">
                             <h3>Menu 1</h3>
@@ -109,8 +115,23 @@
             </div>-->
 
             <script src="resources/js/jquery.min.js"></script>
+
             <script src="resources/bootstrap/js/bootstrap.min.js"></script>
+            <script src="resources/js-ui/jquery-ui.js" type="text/javascript"></script>
+
             <script src="resources/js/style.js" type="text/javascript"></script>
             <script src="resources/js/tabPanel.js" type="text/javascript"></script>
+
+            <script>
+                $(function () {
+                    $("#spinner").spinner();
+
+                    $("#datepicker").datepicker({
+                        changeMonth: true,
+                        changeYear: true
+                    });
+                });
+
+            </script>                    
     </body>
 </html>
