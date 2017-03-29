@@ -1,5 +1,3 @@
-
-
 $("#cerrarMenu").click(function () {
     $(".menu-lateral").toggleClass("close-menu");
     $(".contenedor").toggleClass("open-contenedor");
@@ -27,7 +25,7 @@ $("#cboProvincia").change(function () {
             id: $("#cboProvincia").val(),
             op: 'cantones'
         },
-        success:function(response){
+        success: function (response) {
             $("#cboCanton").html(response);
         }
 
@@ -41,9 +39,41 @@ $("#cboCanton").change(function () {
             id: $("#cboCanton").val(),
             op: 'parroquias'
         },
-        success:function(response){
+        success: function (response) {
             $("#cboParroquia").html(response);
         }
 
     });
+});
+
+$("#pac_Genero").change(function () {
+    $("#tabObstetricia").toggleClass("disabledTab");
+});
+
+$("#btnAddPhoto").click(function () {
+    $("#file_imagen").click();
+});
+$("#btnRemovePhoto").click(function(){
+    $("#pac_imagen").attr("src","resources/img/user.png");
+});
+$("#file_imagen").change(function (evt) {
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+        // Only process image files.
+        if (!f.type.match('image.*')) {
+            continue;
+        }
+
+        var reader = new FileReader();
+        // Closure to capture the file information.
+        reader.onload = (function (theFile) {
+            return function (e) {
+                $("#pac_imagen").attr("src",e.target.result);
+            };
+        })(f);
+        // Read in the image file as a data URL.
+        reader.readAsDataURL(f);
+    }
 });

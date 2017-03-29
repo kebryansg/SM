@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import mvc.controlador.C_BD;
 import mvc.controlador.con_db;
 import mvc.controlador.entidades.ip.Paciente;
-import mvc.controlador.entidades.ip.Paciente_;
 import mvc.modelo.ipDao.PacienteDao;
 
 /**
