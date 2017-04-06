@@ -124,9 +124,13 @@
 
             <script>
                 $(function () {
-                    $("#spinner").spinner();
 
-                    $("#datepicker").datepicker({
+                    $("#pac_FechaNac").datepicker({
+                        changeMonth: true,
+                        changeYear: true
+                    });
+                    
+                    $("#pac_FPP").datepicker({
                         changeMonth: true,
                         changeYear: true
                     });

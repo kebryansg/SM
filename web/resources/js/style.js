@@ -53,8 +53,8 @@ $("#pac_Genero").change(function () {
 $("#btnAddPhoto").click(function () {
     $("#file_imagen").click();
 });
-$("#btnRemovePhoto").click(function(){
-    $("#pac_imagen").attr("src","resources/img/user.png");
+$("#btnRemovePhoto").click(function () {
+    $("#pac_imagen").attr("src", "resources/img/user.png");
 });
 $("#file_imagen").change(function (evt) {
     var files = evt.target.files; // FileList object
@@ -70,10 +70,36 @@ $("#file_imagen").change(function (evt) {
         // Closure to capture the file information.
         reader.onload = (function (theFile) {
             return function (e) {
-                $("#pac_imagen").attr("src",e.target.result);
+                $("#pac_imagen").attr("src", e.target.result);
             };
         })(f);
         // Read in the image file as a data URL.
         reader.readAsDataURL(f);
     }
 });
+
+$("#savePaciente").click(function () {
+    $.getScript("resources/js/paciente.js", function () {
+        save();
+    });
+});
+
+
+function loadScript(url, callback) {
+    var script = document.createElement('script');
+
+    if (script.readyState) { // IE
+        script.onreadystatechange = function () {
+            if (script.readyState === 'loaded' || script.readyState === 'complete') {
+                script.onreadystatechange = null;
+                callback();
+            }
+        };
+    } else { // Others
+        script.onload = function () {
+            callback();
+        };
+    }
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+}

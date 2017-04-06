@@ -4,9 +4,17 @@
         <servlet-name>pruebaCombo</servlet-name>
         <servlet-class>test.pruebaCombo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>sPaciente</servlet-name>
+        <servlet-class>mvc.servlet.sPaciente</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>pruebaCombo</servlet-name>
         <url-pattern>/pruebaCombo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sPaciente</servlet-name>
+        <url-pattern>/sPaciente</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

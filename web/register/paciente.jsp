@@ -10,6 +10,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <div class="contenedor-tabs">
+    <div class="row ">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <button class="btn btn-info">Cancelar</button>
+                <button class="btn btn-info" id="savePaciente">Guardar</button>
+            </div>       
+
+        </div>
+    </div>
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#ip">Informacion personal</a></li>
         <li><a data-toggle="tab" href="#antecedentes">Antecedentes</a></li>
@@ -29,15 +38,20 @@
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-sm-3">Nombres *</label>
-                            <div class="form-inline">
+                            <div class="col-md-4">
                                 <input type="text" class="form-control" id="pac_primerNombre" placeholder="Primer nombre">
+                            </div>
+                            <div class="col-md-4">
                                 <input type="text" class="form-control" id="pac_segundoNombre" placeholder="Segundo nombre">
                             </div>
+
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-sm-3">Apellidos *</label>
-                            <div class="form-inline">
+                            <div class="col-md-4">
                                 <input type="text" class="form-control" id="pac_primerApellido" placeholder="Primer apellido">
+                            </div>
+                            <div class="col-md-4">
                                 <input type="text" class="form-control" id="pac_segundoApellido" placeholder="Segundo apellido">
                             </div>
                         </div>
@@ -45,7 +59,7 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Fecha Nac. *</label>
                             <div class="col-md-8">
-                                <input type="date" class="form-control" id="pac_FechaNac" placeholder="Fecha Nacimiento">
+                                <input class="form-control" id="pac_FechaNac" type="text">
                             </div>
                         </div>
 
@@ -222,8 +236,8 @@
                             for (Enfermedad enfermedad : enfermedades) {%>
                         <tr>
                             <td><%= enfermedad.getNombres()%></td>
-                            <% for (Parientes pariente : parientes) { %>
-                            <td><input type="checkbox" dEnfermedad="<%= enfermedad.getId() %>" dParient="<%= pariente.getId() %>"> </td>
+                            <% for (Parientes pariente : parientes) {%>
+                            <td><input type="checkbox" antecedentes data-id="0" dEnfermedad="<%= enfermedad.getId()%>" dParient="<%= pariente.getId()%>"> </td>
                                 <% } %>
                         </tr>
 
@@ -239,7 +253,7 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">F.P.P *</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control" id="datepicker">
+                                <input class="form-control date" id="pac_FPP" type="text">
                             </div>
                         </div>
                     </div>
@@ -254,13 +268,13 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Gestacion</label>
                             <div class="col-md-5">
-                                <input class="form-control"  type="number" min="0" max="10">
+                                <input class="form-control" id="pac_Gestacion"  type="number" min="0" max="10">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Abortos</label>
                             <div class="col-md-5">
-                                <input class="form-control"  type="number" min="0" max="10">
+                                <input class="form-control" id="pac_Abortos"  type="number" min="0" max="10">
                             </div>
                         </div>
 
@@ -273,13 +287,13 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Partos</label>
                             <div class="col-md-5">
-                                <input class="form-control" type="number" min="0" max="10">
+                                <input class="form-control" id="pac_Partos" type="number" min="0" max="10">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Cesareas</label>
                             <div class="col-md-5">
-                                <input class="form-control"  type="number" min="0" max="10">
+                                <input class="form-control" id="pac_Cesareas" type="number" min="0" max="10">
                             </div>
                         </div>
                     </div>       
@@ -293,13 +307,13 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Nacido vivos</label>
                             <div class="col-md-5">
-                                <input class="form-control"  type="number" min="0" max="10">
+                                <input class="form-control" id="pac_NacidoVivo"  type="number" min="0" max="10">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Nacidos muertos</label>
                             <div class="col-md-5">
-                                <input class="form-control"  type="number" min="0" max="10">
+                                <input class="form-control" id="pac_NacidoMuerto"  type="number" min="0" max="10">
                             </div>
                         </div>
 
@@ -312,17 +326,16 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Hijos vivos</label>
                             <div class="col-md-5">
-                                <input class="form-control" type="number" min="0" max="10">
+                                <input class="form-control" id="pac_HijosVivos" type="number" min="0" max="10">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Hijos Muertos</label>
                             <div class="col-md-5">
-                                <input class="form-control"  type="number" min="0" max="10">
+                                <input class="form-control" id="pac_HijosMuertos"  type="number" min="0" max="10">
                             </div>
                         </div>
                     </div>       
-
                 </div>
             </div>
         </div>
