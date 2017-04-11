@@ -7,13 +7,17 @@ package mvc.controlador.entidades.ip;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -66,16 +70,21 @@ public class Paciente implements Serializable {
     @Column(name = "fechaNacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
-    @Lob
-    @Column(name = "foto")
-    private byte[] foto;
     @Column(name = "etnia")
     private Integer etnia;
     @Column(name = "discapacidad")
     private Integer discapacidad;
+    @Column(name = "imagen")
+    private String imagen;
+    @OneToMany(mappedBy = "idPaciente")
+    private List<Obstetricos> obstetricosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
+    private List<ParienteEnfermedadPaciente> parienteEnfermedadPacienteList;
+    @JoinColumn(name = "idParroquia", referencedColumnName = "id")
+    @ManyToOne
+    private Parroquia idParroquia;
 
     public Paciente() {
-        this.id = 0;
     }
 
     public Paciente(Integer id) {
@@ -218,14 +227,6 @@ public class Paciente implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
-
     public Integer getEtnia() {
         return etnia;
     }
@@ -240,6 +241,38 @@ public class Paciente implements Serializable {
 
     public void setDiscapacidad(Integer discapacidad) {
         this.discapacidad = discapacidad;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public List<Obstetricos> getObstetricosList() {
+        return obstetricosList;
+    }
+
+    public void setObstetricosList(List<Obstetricos> obstetricosList) {
+        this.obstetricosList = obstetricosList;
+    }
+
+    public List<ParienteEnfermedadPaciente> getParienteEnfermedadPacienteList() {
+        return parienteEnfermedadPacienteList;
+    }
+
+    public void setParienteEnfermedadPacienteList(List<ParienteEnfermedadPaciente> parienteEnfermedadPacienteList) {
+        this.parienteEnfermedadPacienteList = parienteEnfermedadPacienteList;
+    }
+
+    public Parroquia getIdParroquia() {
+        return idParroquia;
+    }
+
+    public void setIdParroquia(Parroquia idParroquia) {
+        this.idParroquia = idParroquia;
     }
 
     @Override

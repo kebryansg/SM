@@ -1,11 +1,13 @@
 function save(){
-    var pac = obtenerDatos();
+    var newA = newAntecedentes();
+    alert(newA);
     $.ajax({
         url: 'sPaciente',
         type: 'POST',
         async: false,
         data: {
             paciente : obtenerDatos(),
+            newAntecedentes: newA,
             op: 'save'
         },
         success: function (response) {
@@ -62,6 +64,7 @@ function newAntecedentes() {
     });
     return ids;
 }
+
 function addAntecedentes(antecedentes) {
     $.each(antecedentes, function (index, value) {
         var enfermedad = value.split(":")[0];
@@ -71,6 +74,7 @@ function addAntecedentes(antecedentes) {
         $("input[antecedentes][dEnfermedad='" + enfermedad + "'][dParient='" + pariente + "']").prop("checked",true);
     });
 }
+
 function editAntecedentes() {
     // Retorna los antecedentes que han sido editados
     var ids = [];

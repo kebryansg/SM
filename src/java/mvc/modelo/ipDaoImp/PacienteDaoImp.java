@@ -9,12 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mvc.controlador.C_BD;
 import mvc.controlador.con_db;
 import mvc.controlador.entidades.ip.Paciente;
-import mvc.controlador.entidades.ip.Paciente_;
 import mvc.modelo.ipDao.PacienteDao;
 
 /**
@@ -66,13 +63,34 @@ public class PacienteDaoImp implements PacienteDao {
         this.conn = con_db.open(con_db.MSSQL_IP);
         String sql = "";
         try {
-            if(value.getId() == 0){
+            if (value.getId() == 0) {
+                sql = "INSERT INTO [dbo].[paciente]([cedula],[nombre1],[nombre2],[apellido1],[apellido2],[domicilio],[nacionalidad],[ciudad],[estadoCivil],[telefonoDomicilio],[telefonoOficina],[email],[sexo],[paisNacimiento],[lugarNacimiento],[fechaNacimiento],[etnia],[discapacidad],[idParroquia],[imagen])\n"
+                        + "     VALUES\n"
+                        + "           ('" + value.getCedula() + "'\n"
+                        + "           ,'" + value.getNombre1() + "'\n"
+                        + "           ,'" + value.getNombre2() + "'\n"
+                        + "           ,'" + value.getApellido1() + "'\n"
+                        + "           ,'" + value.getApellido2() + "'\n"
+                        + "           ,'" + value.getDomicilio() + "'\n"
+                        + "           ,'" + value.getNacionalidad() + "'\n"
+                        + "           ,'" + value.getCiudad() + "'\n"
+                        + "           ,'" + value.getEstadoCivil() + "'\n"
+                        + "           ,'" + value.getTelefonoDomicilio() + "'\n"
+                        + "           ,'" + value.getTelefonoOficina() + "'\n"
+                        + "           ,'" + value.getEmail() + "'\n"
+                        + "           ,'" + test.test.Sexo(value.getSexo()) + "'\n"
+                        + "           ,'" + value.getPaisNacimiento() + "'\n"
+                        + "           ,'" + value.getLugarNacimiento() + "'\n"
+                        + "           ,'" + test.test.SQLSave(value.getFechaNacimiento()) + "'\n"
+                        + "           ,'" + value.getEtnia() + "'\n"
+                        + "           ,'" + value.getDiscapacidad() + "'\n"
+                        + "           ,'" + value.getIdParroquia().getId() + "'\n"
+                        + "           ,'" + value.getImagen() + "')";
+            } else {
                 sql = "";
             }
-            else{
-                sql = "";
-            }
-            conn.execute("");
+            //conn.execute(sql);
+            System.out.println(sql);
             return true;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

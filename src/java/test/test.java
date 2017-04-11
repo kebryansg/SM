@@ -5,29 +5,60 @@
  */
 package test;
 
-import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import mvc.controlador.C_BD;
 import mvc.controlador.con_db;
-import mvc.controlador.entidades.ip.Provincia;
-import mvc.modelo.ipDao.ProvinciaDao;
-import mvc.modelo.ipDaoImp.ProvinciaDaoImp;
 
 /**
  *
  * @author kebryan
  */
 public class test {
-    
-    public static void main(String[] args) {
-        C_BD conn;
-        conn = con_db.open(con_db.MSSQL_IP);
-        
-        ProvinciaDao provinciaDao = new ProvinciaDaoImp();
-        List<Provincia> list = provinciaDao.list();
-        for (Provincia provincia : list) {
-            System.out.println(provincia.getDescripcion());
-        }
-        
+
+    public static void main(String[] args) throws ParseException {
+
     }
-    
+
+    public static int getID(String tabla) {
+        int id = 0;
+        C_BD conn = con_db.open(con_db.MSSQL_IP);
+        try {
+            ResultSet rs = conn.query("select SCOPE_IDENTITY() id");
+            while (rs.next()) {
+                id = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+        } finally {
+            conn.close();
+        }
+        return id;
+    }
+
+    public static Date fechaSQL(String stringFecha) {
+        try {
+            DateFormat fechaHora = new SimpleDateFormat("yyyy-MM-dd");
+            Date convertido = fechaHora.parse(stringFecha);
+            return convertido;
+        } catch (ParseException e) {
+            return null;
+        }
+
+    }
+
+    public static String SQLSave(Date fecha) {
+        DateFormat fechaHora = new SimpleDateFormat("yyyy-MM-dd");
+        String convertido = fechaHora.format(fecha);
+        return convertido;
+    }
+
+    public static String Sexo(Boolean sexo) {
+        return sexo ? "1" : "0";
+    }
+
 }

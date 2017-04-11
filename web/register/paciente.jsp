@@ -97,18 +97,21 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">E-mail *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="pac_Email" placeholder="E-mail">
+                                <input type="text" class="form-control"  id="pac_Email" placeholder="E-mail">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Etnia *</label>
                             <div class="col-md-8">
                                 <select class="form-control" id="pac_Etnia">
-                                    <option value="1">Mulato</option>
-                                    <option value="2">Casado</option>
-                                    <option value="3">Divorciado</option>
-                                    <option value="4">Viudo</option>
-                                    <option value="5">Union libre</option>
+                                    <option value="1">Indigena</option>
+                                    <option value="2">Afroecuatoriano</option>
+                                    <option value="3">Negro(a)</option>
+                                    <option value="4">Mulato(a)</option>
+                                    <option value="5">Montubio(a)</option>
+                                    <option value="6">Mestizo(a)</option>
+                                    <option value="7">Blanco(a)</option>
+                                    <option value="8">Otro(a)</option>
                                 </select>
                             </div>
                         </div>
@@ -129,7 +132,7 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Cuidad *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="pac_Ciudad" placeholder="Ciudad">
+                                <input type="text" class="form-control"  id="pac_Ciudad" placeholder="Ciudad">
                             </div>
                         </div>
                         <div class="form-group">
@@ -162,13 +165,13 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Pais Nac. *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="pac_PaisNac" placeholder="Pais Nacimiento">
+                                <input type="text" class="form-control"  id="pac_PaisNac" placeholder="Pais Nacimiento">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Lugar Nac. *</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" maxlength="10" id="pac_LugarNac" placeholder="Lugar Nacimiento">
+                                <input type="text" class="form-control"  id="pac_LugarNac" placeholder="Lugar Nacimiento">
                             </div>
                         </div>
                     </div>

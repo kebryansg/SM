@@ -7,11 +7,23 @@ package mvc.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mvc.controlador.entidades.ip.Enfermedad;
+import mvc.controlador.entidades.ip.Obstetricos;
 import mvc.controlador.entidades.ip.Paciente;
+import mvc.controlador.entidades.ip.ParienteEnfermedadPaciente;
+import mvc.controlador.entidades.ip.Parientes;
+import mvc.controlador.entidades.ip.Parroquia;
+import mvc.modelo.ipDaoImp.ObstetricosDaoImp;
+import mvc.modelo.ipDaoImp.PacienteDaoImp;
+import mvc.modelo.ipDaoImp.ParienteEnfermedadPacienteDaoImp;
+import test.test;
 
 /**
  *
@@ -36,7 +48,7 @@ public class sPaciente extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet sPaciente</title>");            
+            out.println("<title>Servlet sPaciente</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet sPaciente at " + request.getContextPath() + "</h1>");
@@ -76,29 +88,59 @@ public class sPaciente extends HttpServlet {
         PrintWriter out = response.getWriter();
         String op = request.getParameter("op");
         //String cedula = request.getParameter("paciente[cedula]");
-        switch(op){
-            case "save": 
-                Paciente paciente = new Paciente();
-                paciente.setCedula(request.getParameter("paciente[cedula]"));
-                paciente.setNombre1(request.getParameter("paciente[primerNombre]"));
-                paciente.setNombre2(request.getParameter("paciente[segundoNombre]"));
-                paciente.setApellido1(request.getParameter("paciente[primerApellido]"));
-                paciente.setApellido2(request.getParameter("paciente[segundoApellido]"));
-                paciente.setFechaNacimiento(request.getParameter("paciente[fechaNac]"));
-                //paciente.setFoto(request.getParameter("paciente[imagen]"));
-                paciente.setNacionalidad(request.getParameter("paciente[nacionalidad]"));
-                paciente.setTelefonoDomicilio(request.getParameter("paciente[telCasa]"));
-                paciente.setEtnia(request.getParameter("paciente[etnia]"));
-                paciente.setDomicilio(request.getParameter("paciente[domicilio]"));
-                paciente.setDiscapacidad(request.getParameter("paciente[discapacidad]"));
-                paciente.setCiudad(request.getParameter("paciente[ciudad]"));
-                paciente.setEstadoCivil(request.getParameter("paciente[estadoCivil]"));
-                paciente.setTelefonoOficina(request.getParameter("paciente[telOficina]"));
-                paciente.setSexo(request.getParameter("paciente[genero]"));
-                paciente.setPaisNacimiento(request.getParameter("paciente[paisNac]"));
-                paciente.setLugarNacimiento(request.getParameter("paciente[lugarNac]"));
-                //paciente.setNombre1(request.getParameter("paciente[parroquia]"));
-            break;
+        switch (op) {
+            case "save":
+                Paciente paciente = new Paciente(0);
+//                paciente.setCedula(request.getParameter("paciente[cedula]"));
+//                paciente.setNombre1(request.getParameter("paciente[primerNombre]"));
+//                paciente.setNombre2(request.getParameter("paciente[segundoNombre]"));
+//                paciente.setApellido1(request.getParameter("paciente[primerApellido]"));
+//                paciente.setApellido2(request.getParameter("paciente[segundoApellido]"));
+//                paciente.setFechaNacimiento(test.fechaSQL(request.getParameter("paciente[fechaNac]")));
+//                paciente.setImagen(request.getParameter("paciente[imagen]"));
+//                paciente.setNacionalidad(request.getParameter("paciente[nacionalidad]"));
+//                paciente.setTelefonoDomicilio(request.getParameter("paciente[telCasa]"));
+//                paciente.setEmail(request.getParameter("paciente[email]"));;
+//                paciente.setEtnia(Integer.parseInt(request.getParameter("paciente[etnia]")));
+//                paciente.setDomicilio(request.getParameter("paciente[domicilio]"));
+//                paciente.setDiscapacidad(request.getParameter("paciente[discapacidad]").equals("true") ? 1 : 0);
+//                paciente.setCiudad(request.getParameter("paciente[ciudad]"));
+//                paciente.setEstadoCivil(request.getParameter("paciente[estadoCivil]"));
+//                paciente.setTelefonoOficina(request.getParameter("paciente[telOficina]"));
+//                Boolean sexo = request.getParameter("paciente[genero]").equals("1") ? true : false;
+//                paciente.setSexo(sexo);
+//                paciente.setPaisNacimiento(request.getParameter("paciente[paisNac]"));
+//                paciente.setLugarNacimiento(request.getParameter("paciente[lugarNac]"));
+//                paciente.setIdParroquia(new Parroquia(Integer.parseInt(request.getParameter("paciente[parroquia]"))));
+                new PacienteDaoImp().save(paciente);
+                paciente.setId(test.getID("paciente"));
+
+                /*if (!sexo) {
+                    Obstetricos obstetricos = new Obstetricos(0);
+                    obstetricos.setGestas(Integer.parseInt(request.getParameter("paciente[gestacion]")));
+                    obstetricos.setAbortos(Integer.parseInt(request.getParameter("paciente[abortos]")));
+                    obstetricos.setCesareas(Integer.parseInt(request.getParameter("paciente[cesareas]")));
+                    obstetricos.setFpp(test.fechaSQL(request.getParameter("paciente[fpp]")));
+                    obstetricos.setHijosVivos(Integer.parseInt(request.getParameter("paciente[hijosVivos]")));
+                    obstetricos.setIdPaciente(paciente);//Agregar Id
+                    obstetricos.setMuertos(Integer.parseInt(request.getParameter("paciente[hijosMuertos]")));
+                    obstetricos.setNacidosMuertos(Integer.parseInt(request.getParameter("paciente[nacidoMuerto]")));
+                    obstetricos.setNacidosVivos(Integer.parseInt(request.getParameter("paciente[nacidoVivo]")));
+                    obstetricos.setObservaciones("");
+                    obstetricos.setPartos(Integer.parseInt(request.getParameter("paciente[partos]")));
+                    new ObstetricosDaoImp().save(obstetricos);
+                }*/
+                //String arrayLis = request.getParameter("newAntecedentes");
+                String[] parientes_enfermedad = request.getParameterValues("newAntecedentes[]");
+                for (String pariente_enfermedad : parientes_enfermedad) {
+                    ParienteEnfermedadPaciente par_enfer = new ParienteEnfermedadPaciente(0);
+                    par_enfer.setIdPaciente(paciente);
+                    par_enfer.setIdEnfermedad(new Enfermedad(Integer.parseInt(pariente_enfermedad.split(":")[0])));
+                    par_enfer.setIdPariente(new Parientes(Integer.parseInt(pariente_enfermedad.split(":")[1])));
+                    new ParienteEnfermedadPacienteDaoImp().save(par_enfer);
+                }
+
+                break;
         }
     }
 

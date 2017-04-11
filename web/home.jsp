@@ -127,12 +127,14 @@
 
                     $("#pac_FechaNac").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'yy-mm-dd'
                     });
                     
                     $("#pac_FPP").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'yy-mm-dd'
                     });
                 });
 
