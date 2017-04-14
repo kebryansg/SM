@@ -89,7 +89,7 @@ public class PacienteDaoImp implements PacienteDao {
             } else {
                 sql = "";
             }
-            //conn.execute(sql);
+            conn.execute(sql);
             System.out.println(sql);
             return true;
         } catch (Exception ex) {

@@ -8,6 +8,8 @@
         <title>Sistema Mèdico</title>
 
         <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="resources/bootstrap/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css"/>
+
         <link href="resources/js-ui/jquery-ui.css" rel="stylesheet"/>
         <link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
@@ -74,7 +76,7 @@
                 </div>
                 <div class="contenedor">
                     <ul class="nav nav-tabs" id="TabAdm">
-                        <li class="active"><a data-toggle="tab" href="#home"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>Home</a></li>
+                        <li class="active"><a data-toggle="tab" href="#home"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>Registro de paciente</a></li>
                         <!--<li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
                         <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>-->
                         <button class="close close-all-tab" type="button" ><i class="fa fa-close"></i></button>
@@ -83,6 +85,8 @@
 
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
+
+                            
 
                             <%@include file="register/paciente.jsp" %>
 
@@ -114,27 +118,29 @@
                 <label class="right">Soft @2017</label>
             </div>-->
 
-            <script src="resources/js/jquery.min.js"></script>
-
-            <script src="resources/bootstrap/js/bootstrap.min.js"></script>
+            <script src="resources/js/jquery.min.js" type="text/javascript"></script>
+            <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+            <script src="resources/bootstrap/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+            <script src="resources/bootstrap/js/bootstrap-datetimepicker.es.js" type="text/javascript"></script>
             <script src="resources/js-ui/jquery-ui.js" type="text/javascript"></script>
-
             <script src="resources/js/style.js" type="text/javascript"></script>
             <script src="resources/js/tabPanel.js" type="text/javascript"></script>
 
             <script>
-                $(function () {
 
-                    $("#pac_FechaNac").datepicker({
-                        changeMonth: true,
-                        changeYear: true,
-                        dateFormat: 'yy-mm-dd'
-                    });
-                    
-                    $("#pac_FPP").datepicker({
-                        changeMonth: true,
-                        changeYear: true,
-                        dateFormat: 'yy-mm-dd'
+
+                $(function () {
+                    $('.form_date').datetimepicker({
+                        format: "yyyy-mm-dd",
+                        language: 'es',
+                        weekStart: 1,
+                        todayBtn: 1,
+                        autoclose: 1,
+                        todayHighlight: 1,
+                        startView: 2,
+                        pickerPosition: "bottom-left",
+                        minView: 2,
+                        forceParse: 0
                     });
                 });
 

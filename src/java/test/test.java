@@ -5,6 +5,8 @@
  */
 package test;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -21,7 +23,8 @@ import mvc.controlador.con_db;
  */
 public class test {
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, IOException {
+        System.out.println(ruta());
 
     }
 
@@ -29,7 +32,7 @@ public class test {
         int id = 0;
         C_BD conn = con_db.open(con_db.MSSQL_IP);
         try {
-            ResultSet rs = conn.query("select SCOPE_IDENTITY() id");
+            ResultSet rs = conn.query("select max(id) id from " + tabla);
             while (rs.next()) {
                 id = rs.getInt("id");
             }
@@ -59,6 +62,10 @@ public class test {
 
     public static String Sexo(Boolean sexo) {
         return sexo ? "1" : "0";
+    }
+
+    public static String ruta() throws IOException {
+        return new File(".").getCanonicalPath().replace("\\", "/") + "/web/";
     }
 
 }

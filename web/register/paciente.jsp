@@ -13,7 +13,7 @@
     <div class="row ">
         <div class="col-md-12">
             <div class="pull-right">
-                <button class="btn btn-info">Cancelar</button>
+                <button class="btn btn-info" id="cancelPaciente">Cancelar</button>
                 <button class="btn btn-info" id="savePaciente">Guardar</button>
             </div>       
 
@@ -59,7 +59,13 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Fecha Nac. *</label>
                             <div class="col-md-8">
-                                <input class="form-control" id="pac_FechaNac" type="text">
+                                <!--<input class="form-control" id="pac_FechaNac" type="text">-->
+                                <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
+                                    <input class="form-control" id="pac_FechaNac" size="16" type="text" value="" readonly>
+                                    <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+
                             </div>
                         </div>
 
@@ -256,7 +262,12 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">F.P.P *</label>
                             <div class="col-md-5">
-                                <input class="form-control date" id="pac_FPP" type="text">
+                                <!--<input class="form-control date" id="pac_FPP" type="text">-->
+                                <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
+                                    <input class="form-control" id="pac_FPP" size="16" type="text" value="" readonly>
+                                    <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -271,13 +282,13 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Gestacion</label>
                             <div class="col-md-5">
-                                <input class="form-control" id="pac_Gestacion"  type="number" min="0" max="10">
+                                <input class="form-control" id="pac_Gestacion"  type="number" value="0" min="0" max="10">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Abortos</label>
                             <div class="col-md-5">
-                                <input class="form-control" id="pac_Abortos"  type="number" min="0" max="10">
+                                <input class="form-control" id="pac_Abortos"  type="number" value="0" min="0" max="10">
                             </div>
                         </div>
 
@@ -290,13 +301,13 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Partos</label>
                             <div class="col-md-5">
-                                <input class="form-control" id="pac_Partos" type="number" min="0" max="10">
+                                <input class="form-control" id="pac_Partos" type="number" value="0" min="0" max="10">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Cesareas</label>
                             <div class="col-md-5">
-                                <input class="form-control" id="pac_Cesareas" type="number" min="0" max="10">
+                                <input class="form-control" id="pac_Cesareas" type="number" value="0" min="0" max="10">
                             </div>
                         </div>
                     </div>       
@@ -310,13 +321,13 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Nacido vivos</label>
                             <div class="col-md-5">
-                                <input class="form-control" id="pac_NacidoVivo"  type="number" min="0" max="10">
+                                <input class="form-control" id="pac_NacidoVivo"  type="number" value="0" min="0" max="10">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Nacidos muertos</label>
                             <div class="col-md-5">
-                                <input class="form-control" id="pac_NacidoMuerto"  type="number" min="0" max="10">
+                                <input class="form-control" id="pac_NacidoMuerto"  type="number" value="0" min="0" max="10">
                             </div>
                         </div>
 
@@ -329,13 +340,13 @@
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Hijos vivos</label>
                             <div class="col-md-5">
-                                <input class="form-control" id="pac_HijosVivos" type="number" min="0" max="10">
+                                <input class="form-control" id="pac_HijosVivos" type="number" value="0" min="0" max="10">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputUserName" class="control-label col-md-3">Hijos Muertos</label>
                             <div class="col-md-5">
-                                <input class="form-control" id="pac_HijosMuertos"  type="number" min="0" max="10">
+                                <input class="form-control" id="pac_HijosMuertos"  type="number" value="0" min="0" max="10">
                             </div>
                         </div>
                     </div>       

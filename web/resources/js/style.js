@@ -84,6 +84,11 @@ $("#savePaciente").click(function () {
     });
 });
 
+$("#cancelPaciente").click(function(){
+    alert($("#pac_FechaNac").val());
+    alert($("#pac_FPP").val());
+});
+
 
 function loadScript(url, callback) {
     var script = document.createElement('script');

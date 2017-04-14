@@ -37,20 +37,20 @@ public class ObstetricosDaoImp implements ObstetricosDao {
             if (value.getId() == 0) {
                 sql = "INSERT INTO [dbo].[obstetricos]([fpp],[gestas],[abortos],[partos],[cesareas],[nacidosVivos],[nacidosMuertos],[hijosVivos],[muertos],[observaciones],[idPaciente])\n"
                         + "     VALUES\n"
-                        + "           (" + value.getFpp() + "\n"
-                        + "           ," + value.getGestas()+ "\n"
-                        + "           ," + value.getAbortos()+ "\n"
-                        + "           ," + value.getPartos()+ "\n"
-                        + "           ," + value.getCesareas()+ "\n"
-                        + "           ," + value.getNacidosVivos()+ "\n"
-                        + "           ," + value.getNacidosMuertos()+ "\n"
-                        + "           ," + value.getHijosVivos()+ "\n"
-                        + "           ," + value.getMuertos()+ "\n"
-                        + "           ," + value.getObservaciones()+ "\n"
-                        + "           ," + value.getIdPaciente().getId()+ ")";
+                        + "           ('" + test.test.SQLSave(value.getFpp())+ "'\n"
+                        + "           ," + value.getGestas() + "\n"
+                        + "           ," + value.getAbortos() + "\n"
+                        + "           ," + value.getPartos() + "\n"
+                        + "           ," + value.getCesareas() + "\n"
+                        + "           ," + value.getNacidosVivos() + "\n"
+                        + "           ," + value.getNacidosMuertos() + "\n"
+                        + "           ," + value.getHijosVivos() + "\n"
+                        + "           ," + value.getMuertos() + "\n"
+                        + "           ,'" + value.getObservaciones() + "'\n"
+                        + "           ," + value.getIdPaciente().getId() + ")";
             } else {
             }
-            //conn.execute(sql);
+            conn.execute(sql);
             System.out.println(sql);
             return true;
         } catch (Exception ex) {

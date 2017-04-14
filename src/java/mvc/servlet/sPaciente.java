@@ -5,6 +5,8 @@
  */
 package mvc.servlet;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -14,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.DatatypeConverter;
 import mvc.controlador.entidades.ip.Enfermedad;
 import mvc.controlador.entidades.ip.Obstetricos;
 import mvc.controlador.entidades.ip.Paciente;
@@ -89,33 +92,41 @@ public class sPaciente extends HttpServlet {
         String op = request.getParameter("op");
         //String cedula = request.getParameter("paciente[cedula]");
         switch (op) {
+            case "editar":
+
+                break;
             case "save":
                 Paciente paciente = new Paciente(0);
-//                paciente.setCedula(request.getParameter("paciente[cedula]"));
-//                paciente.setNombre1(request.getParameter("paciente[primerNombre]"));
-//                paciente.setNombre2(request.getParameter("paciente[segundoNombre]"));
-//                paciente.setApellido1(request.getParameter("paciente[primerApellido]"));
-//                paciente.setApellido2(request.getParameter("paciente[segundoApellido]"));
-//                paciente.setFechaNacimiento(test.fechaSQL(request.getParameter("paciente[fechaNac]")));
-//                paciente.setImagen(request.getParameter("paciente[imagen]"));
-//                paciente.setNacionalidad(request.getParameter("paciente[nacionalidad]"));
-//                paciente.setTelefonoDomicilio(request.getParameter("paciente[telCasa]"));
-//                paciente.setEmail(request.getParameter("paciente[email]"));;
-//                paciente.setEtnia(Integer.parseInt(request.getParameter("paciente[etnia]")));
-//                paciente.setDomicilio(request.getParameter("paciente[domicilio]"));
-//                paciente.setDiscapacidad(request.getParameter("paciente[discapacidad]").equals("true") ? 1 : 0);
-//                paciente.setCiudad(request.getParameter("paciente[ciudad]"));
-//                paciente.setEstadoCivil(request.getParameter("paciente[estadoCivil]"));
-//                paciente.setTelefonoOficina(request.getParameter("paciente[telOficina]"));
-//                Boolean sexo = request.getParameter("paciente[genero]").equals("1") ? true : false;
-//                paciente.setSexo(sexo);
-//                paciente.setPaisNacimiento(request.getParameter("paciente[paisNac]"));
-//                paciente.setLugarNacimiento(request.getParameter("paciente[lugarNac]"));
-//                paciente.setIdParroquia(new Parroquia(Integer.parseInt(request.getParameter("paciente[parroquia]"))));
+                int idPaciente = test.getID("paciente") + 1;
+                paciente.setCedula(request.getParameter("paciente[cedula]"));
+                paciente.setNombre1(request.getParameter("paciente[primerNombre]"));
+                paciente.setNombre2(request.getParameter("paciente[segundoNombre]"));
+                paciente.setApellido1(request.getParameter("paciente[primerApellido]"));
+                paciente.setApellido2(request.getParameter("paciente[segundoApellido]"));
+                paciente.setFechaNacimiento(test.fechaSQL(request.getParameter("paciente[fechaNac]")));
+                
+                paciente.setNacionalidad(request.getParameter("paciente[nacionalidad]"));
+                paciente.setTelefonoDomicilio(request.getParameter("paciente[telCasa]"));
+                paciente.setEmail(request.getParameter("paciente[email]"));
+                paciente.setEtnia(Integer.parseInt(request.getParameter("paciente[etnia]")));
+                paciente.setDomicilio(request.getParameter("paciente[domicilio]"));
+                paciente.setDiscapacidad(request.getParameter("paciente[discapacidad]").equals("true") ? 1 : 0);
+                paciente.setCiudad(request.getParameter("paciente[ciudad]"));
+                paciente.setEstadoCivil(request.getParameter("paciente[estadoCivil]"));
+                paciente.setTelefonoOficina(request.getParameter("paciente[telOficina]"));
+                Boolean sexo = request.getParameter("paciente[genero]").equals("1") ? true : false;
+                paciente.setSexo(sexo);
+                paciente.setPaisNacimiento(request.getParameter("paciente[paisNac]"));
+                paciente.setLugarNacimiento(request.getParameter("paciente[lugarNac]"));
+                paciente.setIdParroquia(new Parroquia(Integer.parseInt(request.getParameter("paciente[parroquia]"))));
+                
+                
+                paciente.setImagen("imagen/paciente/p_" + idPaciente + ".jpg");
                 new PacienteDaoImp().save(paciente);
-                paciente.setId(test.getID("paciente"));
+                paciente.setId(idPaciente);
+                saveFoto(request.getParameter("paciente[imagen]"), paciente.getId());
 
-                /*if (!sexo) {
+                if (!sexo) {
                     Obstetricos obstetricos = new Obstetricos(0);
                     obstetricos.setGestas(Integer.parseInt(request.getParameter("paciente[gestacion]")));
                     obstetricos.setAbortos(Integer.parseInt(request.getParameter("paciente[abortos]")));
@@ -129,7 +140,7 @@ public class sPaciente extends HttpServlet {
                     obstetricos.setObservaciones("");
                     obstetricos.setPartos(Integer.parseInt(request.getParameter("paciente[partos]")));
                     new ObstetricosDaoImp().save(obstetricos);
-                }*/
+                }
                 //String arrayLis = request.getParameter("newAntecedentes");
                 String[] parientes_enfermedad = request.getParameterValues("newAntecedentes[]");
                 for (String pariente_enfermedad : parientes_enfermedad) {
@@ -139,8 +150,15 @@ public class sPaciente extends HttpServlet {
                     par_enfer.setIdPariente(new Parientes(Integer.parseInt(pariente_enfermedad.split(":")[1])));
                     new ParienteEnfermedadPacienteDaoImp().save(par_enfer);
                 }
-
                 break;
+        }
+    }
+
+    public void saveFoto(String data, int idPaciente) throws FileNotFoundException, IOException {
+        String path = test.ruta() + "imagen/paciente/p_" + idPaciente + ".jpg";
+        byte[] imageByteArray = DatatypeConverter.parseBase64Binary(data);
+        try (FileOutputStream fileout = new FileOutputStream(path)) {
+            fileout.write(imageByteArray);
         }
     }
 
