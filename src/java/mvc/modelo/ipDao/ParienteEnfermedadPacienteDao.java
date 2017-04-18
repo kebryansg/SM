@@ -14,6 +14,7 @@ import mvc.controlador.entidades.ip.ParienteEnfermedadPaciente;
  */
 public interface ParienteEnfermedadPacienteDao {
     public List<ParienteEnfermedadPaciente> list();
+    public List<ParienteEnfermedadPaciente> list_Paciente(int idPaciente);
     public ParienteEnfermedadPaciente edit(int id);
     public boolean save(ParienteEnfermedadPaciente value);
     public boolean delete(int id);

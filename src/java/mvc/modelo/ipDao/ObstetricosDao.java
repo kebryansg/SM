@@ -15,6 +15,7 @@ import mvc.controlador.entidades.ip.Obstetricos;
 public interface ObstetricosDao {
     public List<Obstetricos> list();
     public Obstetricos edit(int id);
+    public Obstetricos edit_idPaciente(int idPaciente);
     public boolean save(Obstetricos value);
     public boolean delete(int id);
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import mvc.controlador.C_BD;
 import mvc.controlador.con_db;
 import mvc.controlador.entidades.ip.Paciente;
+import mvc.controlador.entidades.ip.Parroquia;
 import mvc.modelo.ipDao.PacienteDao;
 
 /**
@@ -49,6 +50,26 @@ public class PacienteDaoImp implements PacienteDao {
         try {
             while (rs.next()) {
                 value.setCedula(rs.getNString("cedula"));
+                value.setNombre1(rs.getNString("nombre1"));
+                value.setNombre2(rs.getNString("nombre2"));
+                value.setApellido1(rs.getNString("apellido1"));
+                value.setApellido2(rs.getNString("apellido2"));
+                value.setCiudad(rs.getNString("ciudad"));
+                value.setDiscapacidad(rs.getInt("discapacidad"));
+                value.setDomicilio(rs.getNString("domicilio"));
+                value.setEmail(rs.getNString("email"));
+                value.setEstadoCivil(rs.getString("estadoCivil"));
+                value.setEtnia(rs.getInt("etnia"));
+                value.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                value.setId(rs.getInt("id"));
+                value.setIdParroquia(new Parroquia(rs.getInt("idParroquia")));
+                value.setImagen(rs.getNString("imagen"));
+                value.setLugarNacimiento(rs.getNString("lugarNacimiento"));
+                value.setNacionalidad(rs.getString("nacionalidad"));
+                value.setPaisNacimiento(rs.getNString("paisNacimiento"));
+                value.setSexo(rs.getBoolean("sexo"));
+                value.setTelefonoDomicilio(rs.getNString("telefonoDomicilio"));
+                value.setTelefonoOficina(rs.getNString("telefonoOficina"));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -78,7 +99,7 @@ public class PacienteDaoImp implements PacienteDao {
                         + "           ,'" + value.getTelefonoDomicilio() + "'\n"
                         + "           ,'" + value.getTelefonoOficina() + "'\n"
                         + "           ,'" + value.getEmail() + "'\n"
-                        + "           ,'" + test.test.Sexo(value.getSexo()) + "'\n"
+                        + "           ,'" + test.test.getSexo(value.getSexo()) + "'\n"
                         + "           ,'" + value.getPaisNacimiento() + "'\n"
                         + "           ,'" + value.getLugarNacimiento() + "'\n"
                         + "           ,'" + test.test.SQLSave(value.getFechaNacimiento()) + "'\n"
@@ -87,7 +108,28 @@ public class PacienteDaoImp implements PacienteDao {
                         + "           ,'" + value.getIdParroquia().getId() + "'\n"
                         + "           ,'" + value.getImagen() + "')";
             } else {
-                sql = "";
+                sql = "UPDATE [dbo].[paciente]\n"
+                        + "   SET [cedula] = '" + value.getCedula() + "'\n"
+                        + "      ,[nombre1] = '" + value.getNombre1() + "'\n"
+                        + "      ,[nombre2] = '" + value.getNombre2() + "'\n"
+                        + "      ,[apellido1] = '" + value.getApellido1() + "'\n"
+                        + "      ,[apellido2] = '" + value.getApellido2() + "'\n"
+                        + "      ,[domicilio] = '" + value.getDomicilio() + "'\n"
+                        + "      ,[nacionalidad] = '" + value.getNacionalidad() + "'\n"
+                        + "      ,[ciudad] = '" + value.getCiudad() + "'\n"
+                        + "      ,[estadoCivil] = '" + value.getEstadoCivil() + "'\n"
+                        + "      ,[telefonoDomicilio] = '" + value.getTelefonoDomicilio() + "'\n"
+                        + "      ,[telefonoOficina] = '" + value.getTelefonoOficina() + "'\n"
+                        + "      ,[email] = '" + value.getEmail() + "'\n"
+                        + "      ,[sexo] = '" + test.test.getSexo(value.getSexo()) + "'\n"
+                        + "      ,[paisNacimiento] = '" + value.getPaisNacimiento() + "'\n"
+                        + "      ,[lugarNacimiento] = '" + value.getLugarNacimiento() + "'\n"
+                        + "      ,[fechaNacimiento] = '" + test.test.SQLSave(value.getFechaNacimiento()) + "'\n"
+                        + "      ,[etnia] = '" + value.getEtnia() + "'\n"
+                        + "      ,[discapacidad] = '" + value.getDiscapacidad() + "'\n"
+                        + "      ,[idParroquia] = '" + value.getIdParroquia().getId() + "'\n"
+                        + "      ,[imagen] = '" + value.getImagen() + "'\n"
+                        + " WHERE id = '"+ value.getId() +"'";
             }
             conn.execute(sql);
             System.out.println(sql);

@@ -60,8 +60,11 @@ public class test {
         return convertido;
     }
 
-    public static String Sexo(Boolean sexo) {
+    public static String getSexo(Boolean sexo) {
         return sexo ? "1" : "0";
+    }
+    public static Boolean setSexo(String sexo) {
+        return sexo.equals("1") ? true : false;
     }
 
     public static String ruta() throws IOException {

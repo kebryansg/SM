@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="pull-right">
                 <button class="btn btn-info" id="cancelPaciente">Cancelar</button>
-                <button class="btn btn-info" id="savePaciente">Guardar</button>
+                <button class="btn btn-info" id="savePaciente" data-id="0">Guardar</button>
             </div>       
 
         </div>
@@ -73,7 +73,7 @@
                     </div>
                     <div id="contenedorImg" >
                         <div>
-                            <img src="resources/img/user.png" id="pac_imagen" class="img-thumbnail" height="150" width="150"/>  
+                            <img src="resources/img/user.png" id="pac_imagen" edit="resources/img/user.png" class="img-thumbnail" height="150" width="150"/>  
                         </div>
 
                         <div class="btn-foto" >

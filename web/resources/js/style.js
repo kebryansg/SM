@@ -17,10 +17,11 @@ $(".close-all-tab").click(function (e) {
 });
 
 
-$("#cboProvincia").change(function () {
+function change_cboProvincia() {
     $.ajax({
         type: 'Post',
         url: 'pruebaCombo',
+        async: false,
         data: {
             id: $("#cboProvincia").val(),
             op: 'cantones'
@@ -30,11 +31,16 @@ $("#cboProvincia").change(function () {
         }
 
     });
+}
+
+$("#cboProvincia").change(function () {
+    change_cboProvincia();
 });
-$("#cboCanton").change(function () {
+function change_cboCanton() {
     $.ajax({
         type: 'Post',
         url: 'pruebaCombo',
+        async: false,
         data: {
             id: $("#cboCanton").val(),
             op: 'parroquias'
@@ -44,11 +50,21 @@ $("#cboCanton").change(function () {
         }
 
     });
+}
+$("#cboCanton").change(function () {
+    change_cboCanton();
 });
 
-$("#pac_Genero").change(function () {
-    $("#tabObstetricia").toggleClass("disabledTab");
-});
+function change_Genero() {
+    if ($("#pac_Genero").val() === "1") {
+        $("#tabObstetricia").addClass("disabledTab");
+    }
+    else{
+        $("#tabObstetricia").removeClass("disabledTab");
+    }
+}
+
+$("#pac_Genero").change(change_Genero);
 
 $("#btnAddPhoto").click(function () {
     $("#file_imagen").click();
@@ -80,13 +96,21 @@ $("#file_imagen").change(function (evt) {
 
 $("#savePaciente").click(function () {
     $.getScript("resources/js/paciente.js", function () {
-        save();
+        var id = $("#savePaciente").attr("data-id");
+        if(id === "0"){
+            save();
+        }
+        else{
+            editSave();
+        }
+        
     });
 });
 
-$("#cancelPaciente").click(function(){
-    alert($("#pac_FechaNac").val());
-    alert($("#pac_FPP").val());
+$("#cancelPaciente").click(function () {
+    $.getScript("resources/js/paciente.js", function () {
+        edit();
+    });
 });
 
 

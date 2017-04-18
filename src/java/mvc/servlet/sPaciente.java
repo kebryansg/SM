@@ -5,6 +5,7 @@
  */
 package mvc.servlet;
 
+import com.google.gson.Gson;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,6 +27,7 @@ import mvc.controlador.entidades.ip.Parroquia;
 import mvc.modelo.ipDaoImp.ObstetricosDaoImp;
 import mvc.modelo.ipDaoImp.PacienteDaoImp;
 import mvc.modelo.ipDaoImp.ParienteEnfermedadPacienteDaoImp;
+import mvc.modelo.ipDaoImp.ParroquiaDaoImp;
 import test.test;
 
 /**
@@ -89,22 +91,37 @@ public class sPaciente extends HttpServlet {
         //processRequest(request, response);
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
-        String op = request.getParameter("op");
+        String result = "", op = request.getParameter("op");
         //String cedula = request.getParameter("paciente[cedula]");
+        Paciente paciente = new Paciente(0);
+        Gson gson = new Gson();
         switch (op) {
-            case "editar":
-
+            case "det":
+                String detParroquia = new ParroquiaDaoImp().detParroquia(Integer.parseInt(request.getParameter("idParroquia")));
+                out.print(detParroquia);
+                out.close();
+                break;
+            case "edit":
+                paciente = new PacienteDaoImp().edit(Integer.parseInt(request.getParameter("id")));
+                Obstetricos obs = new ObstetricosDaoImp().edit_idPaciente(paciente.getId());
+                List<ParienteEnfermedadPaciente> list = new ParienteEnfermedadPacienteDaoImp().list_Paciente(paciente.getId());
+                out = response.getWriter();
+                result = "{\"paciente\": " + gson.toJson(paciente) + ",\"obs\": " + gson.toJson(obs) + ",\"list\": " + gson.toJson(list) + "}";
+                out.print(result);
+                out.flush();
+                out.close();
                 break;
             case "save":
-                Paciente paciente = new Paciente(0);
-                int idPaciente = test.getID("paciente") + 1;
+                //Paciente paciente = new Paciente(0); //Llama arriba
+                paciente.setId(Integer.parseInt(request.getParameter("id")));
+                int idPaciente = (paciente.getId() == 0)? (test.getID("paciente") + 1): paciente.getId();
+                
                 paciente.setCedula(request.getParameter("paciente[cedula]"));
                 paciente.setNombre1(request.getParameter("paciente[primerNombre]"));
                 paciente.setNombre2(request.getParameter("paciente[segundoNombre]"));
                 paciente.setApellido1(request.getParameter("paciente[primerApellido]"));
                 paciente.setApellido2(request.getParameter("paciente[segundoApellido]"));
                 paciente.setFechaNacimiento(test.fechaSQL(request.getParameter("paciente[fechaNac]")));
-                
                 paciente.setNacionalidad(request.getParameter("paciente[nacionalidad]"));
                 paciente.setTelefonoDomicilio(request.getParameter("paciente[telCasa]"));
                 paciente.setEmail(request.getParameter("paciente[email]"));
@@ -120,11 +137,16 @@ public class sPaciente extends HttpServlet {
                 paciente.setLugarNacimiento(request.getParameter("paciente[lugarNac]"));
                 paciente.setIdParroquia(new Parroquia(Integer.parseInt(request.getParameter("paciente[parroquia]"))));
                 
-                
-                paciente.setImagen("imagen/paciente/p_" + idPaciente + ".jpg");
+                if (request.getParameter("paciente[editImg]").equals("1")) {
+                    saveFoto(request.getParameter("paciente[imagen]"), idPaciente);
+                    paciente.setImagen("imagen/paciente/p_" + idPaciente + ".jpg");
+                }
+                else{
+                    paciente.setImagen(request.getParameter("paciente[imagen]"));
+                }                
                 new PacienteDaoImp().save(paciente);
                 paciente.setId(idPaciente);
-                saveFoto(request.getParameter("paciente[imagen]"), paciente.getId());
+                
 
                 if (!sexo) {
                     Obstetricos obstetricos = new Obstetricos(0);
@@ -155,7 +177,10 @@ public class sPaciente extends HttpServlet {
     }
 
     public void saveFoto(String data, int idPaciente) throws FileNotFoundException, IOException {
-        String path = test.ruta() + "imagen/paciente/p_" + idPaciente + ".jpg";
+        String path = getServletContext().getRealPath("/");
+        path = path.replace("web", "imagen");
+        path = path.replace("build", "web");
+        path = path + "paciente\\p_" + idPaciente + ".jpg";
         byte[] imageByteArray = DatatypeConverter.parseBase64Binary(data);
         try (FileOutputStream fileout = new FileOutputStream(path)) {
             fileout.write(imageByteArray);

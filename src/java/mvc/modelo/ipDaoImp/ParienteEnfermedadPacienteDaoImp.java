@@ -5,10 +5,16 @@
  */
 package mvc.modelo.ipDaoImp;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import mvc.controlador.C_BD;
 import mvc.controlador.con_db;
+import mvc.controlador.entidades.ip.Enfermedad;
+import mvc.controlador.entidades.ip.Paciente;
 import mvc.controlador.entidades.ip.ParienteEnfermedadPaciente;
+import mvc.controlador.entidades.ip.Parientes;
 import mvc.modelo.ipDao.ParienteEnfermedadPacienteDao;
 
 /**
@@ -41,6 +47,11 @@ public class ParienteEnfermedadPacienteDaoImp implements ParienteEnfermedadPacie
                         + "           ," + value.getIdEnfermedad().getId() + "\n"
                         + "           ," + value.getIdPaciente().getId() + ")";
             } else {
+                sql = "UPDATE [dbo].[pariente_enfermedad_paciente]\n"
+                        + "   SET [idPariente] = " + value.getIdPariente().getId() + "\n"
+                        + "      ,[idEnfermedad] = " + value.getIdEnfermedad().getId() + "\n"
+                        + "      ,[idPaciente] = " + value.getIdPaciente().getId() + "\n"
+                        + " WHERE id = " + value.getId();
             }
             conn.execute(sql);
             System.out.println(sql);
@@ -56,6 +67,27 @@ public class ParienteEnfermedadPacienteDaoImp implements ParienteEnfermedadPacie
     @Override
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<ParienteEnfermedadPaciente> list_Paciente(int idPaciente) {
+        this.conn = con_db.open(con_db.MSSQL_IP);
+        List<ParienteEnfermedadPaciente> list = new ArrayList<>();
+        ResultSet rs = this.conn.query("select * from pariente_enfermedad_paciente where idPaciente = '" + idPaciente + "'");
+        try {
+            while (rs.next()) {
+                ParienteEnfermedadPaciente value = new ParienteEnfermedadPaciente(rs.getInt("id"));
+                value.setIdEnfermedad(new Enfermedad(rs.getInt("idEnfermedad")));
+                value.setIdPariente(new Parientes(rs.getInt("idPariente")));
+                value.setIdPaciente(new Paciente(rs.getInt("idPaciente")));
+                list.add(value);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
 }
