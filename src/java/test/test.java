@@ -26,6 +26,9 @@ public class test {
     public static void main(String[] args) throws ParseException, IOException {
         System.out.println(ruta());
 
+//        final Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new BidirectionalDateSerializer()).create();
+//Esta linea de código es igualmente valida tanto para la operación de serializacion como para la opuesta.
+
     }
 
     public static int getID(String tabla) {
@@ -63,6 +66,7 @@ public class test {
     public static String getSexo(Boolean sexo) {
         return sexo ? "1" : "0";
     }
+
     public static Boolean setSexo(String sexo) {
         return sexo.equals("1") ? true : false;
     }

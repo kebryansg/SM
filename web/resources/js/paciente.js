@@ -26,7 +26,7 @@ function editSave() {
         type: 'POST',
         async: false,
         data: {
-            id: $("#savePaciente").val(),
+            id: $("#savePaciente").attr("data-id"),
             paciente: obtenerDatos(),
             newAntecedentes: newA,
             editAntecedentes: editA,
@@ -81,6 +81,7 @@ function obtenerDatos() {
         parroquia: $("#cboParroquia").val(),
         canton: $("#cboCanton").val(),
         //Obstetricia
+        idObs: $("#tabObstetricia").attr("data-id"),
         fpp: $("#pac_FPP").val(),
         gestacion: $("#pac_Gestacion").val(),
         abortos: $("#pac_Abortos").val(),
@@ -123,6 +124,7 @@ function editAntecedentes() {
 }
 
 function asignarObstetrico(obs) {
+    $("#tabObstetricia").attr("data-id",obs.id);
     $("#pac_FPP").val(obs.fpp);
     $("#pac_Gestacion").val(obs.gestas);
     $("#pac_Abortos").val(obs.abortos);

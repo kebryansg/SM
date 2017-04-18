@@ -6,11 +6,14 @@
 package mvc.servlet;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -94,7 +97,11 @@ public class sPaciente extends HttpServlet {
         String result = "", op = request.getParameter("op");
         //String cedula = request.getParameter("paciente[cedula]");
         Paciente paciente = new Paciente(0);
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
+        //Gson gson = new GsonBuilder().registerTypeAdapter(java.util.Date.class, new BidirectionalDateSerializer()).create();
+        final String FORMATO_FECHA = "yyyy-MM-dd";
+        final DateFormat DF = new SimpleDateFormat(FORMATO_FECHA);
+        Gson gson = new GsonBuilder().setDateFormat(FORMATO_FECHA).create();
         switch (op) {
             case "det":
                 String detParroquia = new ParroquiaDaoImp().detParroquia(Integer.parseInt(request.getParameter("idParroquia")));
@@ -114,8 +121,8 @@ public class sPaciente extends HttpServlet {
             case "save":
                 //Paciente paciente = new Paciente(0); //Llama arriba
                 paciente.setId(Integer.parseInt(request.getParameter("id")));
-                int idPaciente = (paciente.getId() == 0)? (test.getID("paciente") + 1): paciente.getId();
-                
+                int idPaciente = (paciente.getId() == 0) ? (test.getID("paciente") + 1) : paciente.getId();
+
                 paciente.setCedula(request.getParameter("paciente[cedula]"));
                 paciente.setNombre1(request.getParameter("paciente[primerNombre]"));
                 paciente.setNombre2(request.getParameter("paciente[segundoNombre]"));
@@ -136,20 +143,18 @@ public class sPaciente extends HttpServlet {
                 paciente.setPaisNacimiento(request.getParameter("paciente[paisNac]"));
                 paciente.setLugarNacimiento(request.getParameter("paciente[lugarNac]"));
                 paciente.setIdParroquia(new Parroquia(Integer.parseInt(request.getParameter("paciente[parroquia]"))));
-                
+
                 if (request.getParameter("paciente[editImg]").equals("1")) {
                     saveFoto(request.getParameter("paciente[imagen]"), idPaciente);
                     paciente.setImagen("imagen/paciente/p_" + idPaciente + ".jpg");
-                }
-                else{
+                } else {
                     paciente.setImagen(request.getParameter("paciente[imagen]"));
-                }                
+                }
                 new PacienteDaoImp().save(paciente);
                 paciente.setId(idPaciente);
-                
 
                 if (!sexo) {
-                    Obstetricos obstetricos = new Obstetricos(0);
+                    Obstetricos obstetricos = new Obstetricos(Integer.parseInt(request.getParameter("paciente[idObs]")));
                     obstetricos.setGestas(Integer.parseInt(request.getParameter("paciente[gestacion]")));
                     obstetricos.setAbortos(Integer.parseInt(request.getParameter("paciente[abortos]")));
                     obstetricos.setCesareas(Integer.parseInt(request.getParameter("paciente[cesareas]")));
@@ -165,12 +170,21 @@ public class sPaciente extends HttpServlet {
                 }
                 //String arrayLis = request.getParameter("newAntecedentes");
                 String[] parientes_enfermedad = request.getParameterValues("newAntecedentes[]");
-                for (String pariente_enfermedad : parientes_enfermedad) {
-                    ParienteEnfermedadPaciente par_enfer = new ParienteEnfermedadPaciente(0);
-                    par_enfer.setIdPaciente(paciente);
-                    par_enfer.setIdEnfermedad(new Enfermedad(Integer.parseInt(pariente_enfermedad.split(":")[0])));
-                    par_enfer.setIdPariente(new Parientes(Integer.parseInt(pariente_enfermedad.split(":")[1])));
-                    new ParienteEnfermedadPacienteDaoImp().save(par_enfer);
+                if (parientes_enfermedad != null) {
+                    for (String pariente_enfermedad : parientes_enfermedad) {
+                        ParienteEnfermedadPaciente par_enfer = new ParienteEnfermedadPaciente(0);
+                        par_enfer.setIdPaciente(paciente);
+                        par_enfer.setIdEnfermedad(new Enfermedad(Integer.parseInt(pariente_enfermedad.split(":")[0])));
+                        par_enfer.setIdPariente(new Parientes(Integer.parseInt(pariente_enfermedad.split(":")[1])));
+                        new ParienteEnfermedadPacienteDaoImp().save(par_enfer);
+                    }
+                }
+
+                if (Integer.parseInt(request.getParameter("id")) != 0) {
+                    String[] parientes_enfermedad_edit = request.getParameterValues("editAntecedentes[]");
+                    for (String value : parientes_enfermedad_edit) {
+                        new ParienteEnfermedadPacienteDaoImp().delete(Integer.parseInt(value));
+                    }
                 }
                 break;
         }

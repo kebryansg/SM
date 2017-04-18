@@ -66,7 +66,17 @@ public class ParienteEnfermedadPacienteDaoImp implements ParienteEnfermedadPacie
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.conn = con_db.open(con_db.MSSQL_IP);
+        boolean bandera = false;
+        try {
+            bandera = this.conn.execute("delete from pariente_enfermedad_paciente where id = " + id);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            this.conn.close();
+        }
+
+        return bandera;
     }
 
     @Override

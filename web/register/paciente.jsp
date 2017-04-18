@@ -22,7 +22,7 @@
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#ip">Informacion personal</a></li>
         <li><a data-toggle="tab" href="#antecedentes">Antecedentes</a></li>
-        <li id="tabObstetricia" class="disabledTab"><a data-toggle="tab" href="#obstetricia">Obstetricia</a></li>
+        <li id="tabObstetricia" data-id="0" class="disabledTab"><a data-toggle="tab" href="#obstetricia">Obstetricia</a></li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade in active" id="ip" style="padding-top: 10px;">
