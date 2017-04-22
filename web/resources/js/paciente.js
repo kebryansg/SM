@@ -1,3 +1,46 @@
+function list() {
+    $.ajax({
+        url: 'sPaciente',
+        type: 'POST',
+        async: false,
+        data: {
+            op: 'list'
+        },
+        success: function (response) {
+            $("#tablePaciente").html(response);
+        }
+    });
+}
+
+function list_filter(filter) {
+    var cantList = $("#cantList").val();
+    $.ajax({
+        url: 'sPaciente',
+        type: 'POST',
+        async: false,
+        data: {
+            filter: filter,
+            top: cantList,
+            pag : 0,
+            op: 'list_filter'
+        },
+        success: function (response) {
+            var obj = $.parseJSON(response);
+            $("#tablePaciente").html(obj.list);
+            $('#pagination-demo').twbsPagination('destroy');
+            var obj = $('#pagination-demo').twbsPagination({
+                totalPages: (obj.cant / cantList),
+                visiblePages: 4,
+                first: "Primero",
+                onPageClick: function (event, page) {
+                    
+                }
+            });
+        }
+    });
+}
+
+
 function edit() {
     $.ajax({
         url: 'sPaciente',
@@ -37,6 +80,7 @@ function editSave() {
         }
     });
 }
+
 function save() {
     var newA = newAntecedentes();
     $.ajax({
@@ -124,7 +168,7 @@ function editAntecedentes() {
 }
 
 function asignarObstetrico(obs) {
-    $("#tabObstetricia").attr("data-id",obs.id);
+    $("#tabObstetricia").attr("data-id", obs.id);
     $("#pac_FPP").val(obs.fpp);
     $("#pac_Gestacion").val(obs.gestas);
     $("#pac_Abortos").val(obs.abortos);

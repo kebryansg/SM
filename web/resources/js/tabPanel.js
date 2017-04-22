@@ -28,8 +28,12 @@ function registerComposeButtonEvent() {
         var tabId = "compose" + composeCount; //this is id on tab content div where the 
         composeCount = composeCount + 1; //increment compose count
 
-        $('.nav-tabs').append('<li><a href="#' + tabId + '"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>'+ $(this).attr("data-url") +'</a></li>');
-        $('.tab-content').append('<div class="tab-pane fade" id="' + tabId + '"><h3>'+$(this).attr("data-url")+'</h3></div>');
+        $('#TabAdm').append('<li><a href="#' + tabId + '"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>'+ $(this).attr("data-title") +'</a></li>');
+        $('#ContentAdm').append('<div class="tab-pane fade" id="' + tabId + '"></div>');
+        $("#"+tabId).load($(this).attr("data-url"),function(){
+            
+            
+        });
 
         //craeteNewTabAndLoadUrl("", "./SamplePage.html", "#" + tabId);
 

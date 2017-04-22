@@ -8,6 +8,9 @@
 <%@page import="mvc.modelo.ipDao.ProvinciaDao"%>
 <%@page import="mvc.modelo.ipDaoImp.ProvinciaDaoImp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script src="paciente/js/stylePaciente.js" type="text/javascript"></script>
+<script src="resources/bootstrap/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+<script src="resources/bootstrap/js/bootstrap-datetimepicker.es.js" type="text/javascript"></script>
 <!DOCTYPE html>
 <div class="contenedor-tabs">
     <div class="row ">
@@ -356,3 +359,17 @@
     </div>
 </div>
 
+<script>
+    $('.form_date').datetimepicker({
+        format: "yyyy-mm-dd",
+        language: 'es',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        pickerPosition: "bottom-left",
+        minView: 2,
+        forceParse: 0
+    });
+</script>

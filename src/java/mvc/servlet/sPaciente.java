@@ -95,6 +95,7 @@ public class sPaciente extends HttpServlet {
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
         String result = "", op = request.getParameter("op");
+        List<Paciente> listP = null;
         //String cedula = request.getParameter("paciente[cedula]");
         Paciente paciente = new Paciente(0);
         //Gson gson = new Gson();
@@ -103,6 +104,44 @@ public class sPaciente extends HttpServlet {
         final DateFormat DF = new SimpleDateFormat(FORMATO_FECHA);
         Gson gson = new GsonBuilder().setDateFormat(FORMATO_FECHA).create();
         switch (op) {
+            case "list": 
+                listP = new PacienteDaoImp().list();
+                for (Paciente paciente1 : listP) {
+                    result += "<tr>";
+                    result += "<td> Historia clinica </td>";
+                    result += "<td>" + paciente1.getCedula() + "</td>";
+                    result += "<td>" + paciente1.getApellido1() + " " + paciente1.getApellido2() + "</td>";
+                    result += "<td>" + paciente1.getNombre1() + " " + paciente1.getNombre2() + "</td>";
+                    result += "<td>" + paciente1.getCiudad() + "</td>";
+                    result += "<td>" + paciente1.getDomicilio() + "</td>";
+                    result += "</tr>";
+                }
+                out.print(result);
+                out.flush();
+                out.close();
+                break;
+            case "list_filter":
+                String filter = request.getParameter("filter");
+                int topSQL = Integer.parseInt(request.getParameter("top"));
+                int inicioSQL = 0;
+                listP = new PacienteDaoImp().list_Filter(filter, inicioSQL, topSQL);
+                
+                String listString = "";
+                for (Paciente paciente1 : listP) {
+                    listString += "<tr>";
+                    listString += "<td> Historia clinica </td>";
+                    listString += "<td>" + paciente1.getCedula() + "</td>";
+                    listString += "<td>" + paciente1.getApellido1() + " " + paciente1.getApellido2() + "</td>";
+                    listString += "<td>" + paciente1.getNombre1() + " " + paciente1.getNombre2() + "</td>";
+                    listString += "<td>" + paciente1.getCiudad() + "</td>";
+                    listString += "<td>" + paciente1.getDomicilio() + "</td>";
+                    listString += "</tr>";
+                }
+                result = "{\"list\": \"" + listString + "\",\"cant\":\"" + listP.size() + "\"}";
+                out.print(result);
+                out.flush();
+                out.close();
+                break;
             case "det":
                 String detParroquia = new ParroquiaDaoImp().detParroquia(Integer.parseInt(request.getParameter("idParroquia")));
                 out.print(detParroquia);
@@ -195,9 +234,10 @@ public class sPaciente extends HttpServlet {
         path = path.replace("web", "imagen");
         path = path.replace("build", "web");
         path = path + "paciente\\p_" + idPaciente + ".jpg";
-        byte[] imageByteArray = DatatypeConverter.parseBase64Binary(data);
+        byte[] imageByteArray = DatatypeConverter.parseBase64Binary(data.substring(data.indexOf(",") + 1));
         try (FileOutputStream fileout = new FileOutputStream(path)) {
             fileout.write(imageByteArray);
+            fileout.close();
         }
     }
 

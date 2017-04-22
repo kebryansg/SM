@@ -15,6 +15,9 @@
 
         <link href="resources/css/style_home.css" rel="stylesheet" type="text/css"/>
 
+        <script src="resources/js/jquery.min.js" type="text/javascript"></script>
+        <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
     </head>
     <body>
         <div class="fill">
@@ -36,8 +39,8 @@
                             <div id="collapse1" class="panel-collapse collapse in">
                                 <div class="panel-body menu-body">
                                     <div class="list-group">
-                                        <a class="list-group-item" data-url="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Paciente</a>
-                                        <a class="list-group-item" data-url="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Buscar Paciente</a>
+                                        <a class="list-group-item" data-url="paciente/paciente.jsp" data-title="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Paciente</a>
+                                        <a class="list-group-item" data-url="paciente/listPacientes.jsp" data-title="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Buscar Paciente</a>
                                     </div>
                                 </div>
                             </div>
@@ -83,12 +86,12 @@
                     </ul>
 
 
-                    <div class="tab-content">
+                    <div class="tab-content" id="ContentAdm">
                         <div id="home" class="tab-pane fade in active">
 
-                            
 
-                            <%@include file="register/paciente.jsp" %>
+                            <jsp:include page="paciente/listPacientes.jsp"/>
+                            
 
                         </div>
                         <!--<div id="menu1" class="tab-pane fade">
@@ -118,17 +121,16 @@
                 <label class="right">Soft @2017</label>
             </div>-->
 
-            <script src="resources/js/jquery.min.js" type="text/javascript"></script>
-            <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-            <script src="resources/bootstrap/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
-            <script src="resources/bootstrap/js/bootstrap-datetimepicker.es.js" type="text/javascript"></script>
+            <!--<script src="resources/js/jquery.min.js" type="text/javascript"></script>
+            <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>-->
+            <!--<script src="resources/bootstrap/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+            <script src="resources/bootstrap/js/bootstrap-datetimepicker.es.js" type="text/javascript"></script>-->
+            <!--<script src="resources/bootstrap/js/jquery.twbsPagination.min.js" type="text/javascript"></script>-->
             <script src="resources/js-ui/jquery-ui.js" type="text/javascript"></script>
             <script src="resources/js/style.js" type="text/javascript"></script>
             <script src="resources/js/tabPanel.js" type="text/javascript"></script>
 
             <script>
-
-
                 $(function () {
                     $('.form_date').datetimepicker({
                         format: "yyyy-mm-dd",
@@ -142,6 +144,14 @@
                         minView: 2,
                         forceParse: 0
                     });
+                    /*$('#pagination-demo').twbsPagination({
+                     totalPages: 35,
+                     visiblePages: 7,
+                     //first: "Siguiente",
+                     onPageClick: function (event, page) {
+                     $('#page-content').text('Page ' + page);
+                     }
+                     });*/
                 });
 
             </script>                    

@@ -14,6 +14,7 @@ import mvc.controlador.entidades.ip.Paciente;
  */
 public interface PacienteDao {
     public List<Paciente> list();
+    public List<Paciente> list_Filter(String value,int pag,int top);
     public Paciente edit(int id);
     public boolean save(Paciente value);
     public boolean delete(int id);

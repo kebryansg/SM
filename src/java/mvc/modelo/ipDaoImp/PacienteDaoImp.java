@@ -27,11 +27,31 @@ public class PacienteDaoImp implements PacienteDao {
     public List<Paciente> list() {
         this.conn = con_db.open(con_db.MSSQL_IP);
         List<Paciente> list = new ArrayList<>();
-        ResultSet rs = this.conn.query("select * from paciente");
+        ResultSet rs = this.conn.query("select top 10 * from paciente");
         try {
             while (rs.next()) {
                 Paciente value = new Paciente();
                 value.setCedula(rs.getNString("cedula"));
+                value.setNombre1(rs.getNString("nombre1"));
+                value.setNombre2(rs.getNString("nombre2"));
+                value.setApellido1(rs.getNString("apellido1"));
+                value.setApellido2(rs.getNString("apellido2"));
+                value.setCiudad(rs.getNString("ciudad"));
+                value.setDiscapacidad(rs.getInt("discapacidad"));
+                value.setDomicilio(rs.getNString("domicilio"));
+                value.setEmail(rs.getNString("email"));
+                value.setEstadoCivil(rs.getString("estadoCivil"));
+                value.setEtnia(rs.getInt("etnia"));
+                value.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                value.setId(rs.getInt("id"));
+                value.setIdParroquia(new Parroquia(rs.getInt("idParroquia")));
+                value.setImagen(rs.getNString("imagen"));
+                value.setLugarNacimiento(rs.getNString("lugarNacimiento"));
+                value.setNacionalidad(rs.getString("nacionalidad"));
+                value.setPaisNacimiento(rs.getNString("paisNacimiento"));
+                value.setSexo(rs.getBoolean("sexo"));
+                value.setTelefonoDomicilio(rs.getNString("telefonoDomicilio"));
+                value.setTelefonoOficina(rs.getNString("telefonoOficina"));
                 list.add(value);
             }
         } catch (SQLException ex) {
@@ -129,7 +149,7 @@ public class PacienteDaoImp implements PacienteDao {
                         + "      ,[discapacidad] = '" + value.getDiscapacidad() + "'\n"
                         + "      ,[idParroquia] = '" + value.getIdParroquia().getId() + "'\n"
                         + "      ,[imagen] = '" + value.getImagen() + "'\n"
-                        + " WHERE id = '"+ value.getId() +"'";
+                        + " WHERE id = '" + value.getId() + "'";
             }
             conn.execute(sql);
             System.out.println(sql);
@@ -145,6 +165,45 @@ public class PacienteDaoImp implements PacienteDao {
     @Override
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Paciente> list_Filter(String filter, int pag, int top) {
+        this.conn = con_db.open(con_db.MSSQL_IP);
+        List<Paciente> list = new ArrayList<>();
+        ResultSet rs = this.conn.query("select paciente.* from paciente where nombre1 like '%" + filter + "%' or nombre2 like '%" + filter + "%' or apellido1 like '%" + filter + "%' or apellido2 like '%" + filter + "%' or cedula like '%" + filter + "%' order by id OFFSET " + pag + " ROWS FETCH NEXT " + top + " ROWS ONLY;");
+        try {
+            while (rs.next()) {
+                Paciente value = new Paciente();
+                value.setCedula(rs.getNString("cedula"));
+                value.setNombre1(rs.getNString("nombre1"));
+                value.setNombre2(rs.getNString("nombre2"));
+                value.setApellido1(rs.getNString("apellido1"));
+                value.setApellido2(rs.getNString("apellido2"));
+                value.setCiudad(rs.getNString("ciudad"));
+                value.setDiscapacidad(rs.getInt("discapacidad"));
+                value.setDomicilio(rs.getNString("domicilio"));
+                value.setEmail(rs.getNString("email"));
+                value.setEstadoCivil(rs.getString("estadoCivil"));
+                value.setEtnia(rs.getInt("etnia"));
+                value.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                value.setId(rs.getInt("id"));
+                value.setIdParroquia(new Parroquia(rs.getInt("idParroquia")));
+                value.setImagen(rs.getNString("imagen"));
+                value.setLugarNacimiento(rs.getNString("lugarNacimiento"));
+                value.setNacionalidad(rs.getString("nacionalidad"));
+                value.setPaisNacimiento(rs.getNString("paisNacimiento"));
+                value.setSexo(rs.getBoolean("sexo"));
+                value.setTelefonoDomicilio(rs.getNString("telefonoDomicilio"));
+                value.setTelefonoOficina(rs.getNString("telefonoOficina"));
+                list.add(value);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
 }
