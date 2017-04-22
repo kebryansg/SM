@@ -92,9 +92,9 @@ $("#cancelPaciente").click(function () {
 });
 
 
-$("#txt_filterPaciente").keyup(function(){
-    var filter = $(this).val();
+$("#txt_filterPaciente").keyup(function () {
+    //var filter = $(this).val();
     $.getScript("resources/js/paciente.js", function () {
-        list_filter(filter);
+        list_filter();
     });
 });

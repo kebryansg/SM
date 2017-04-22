@@ -123,7 +123,10 @@ public class sPaciente extends HttpServlet {
             case "list_filter":
                 String filter = request.getParameter("filter");
                 int topSQL = Integer.parseInt(request.getParameter("top"));
-                int inicioSQL = 0;
+                int inicioSQL = Integer.parseInt(request.getParameter("pag"));
+                listP = new PacienteDaoImp().list_Filter(filter, inicioSQL, -1);
+                int cantTotal = listP.size();
+                
                 listP = new PacienteDaoImp().list_Filter(filter, inicioSQL, topSQL);
                 
                 String listString = "";
@@ -137,7 +140,7 @@ public class sPaciente extends HttpServlet {
                     listString += "<td>" + paciente1.getDomicilio() + "</td>";
                     listString += "</tr>";
                 }
-                result = "{\"list\": \"" + listString + "\",\"cant\":\"" + listP.size() + "\"}";
+                result = "{\"list\": \"" + listString + "\",\"cant\":\"" + cantTotal + "\"}";
                 out.print(result);
                 out.flush();
                 out.close();

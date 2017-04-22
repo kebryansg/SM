@@ -12,32 +12,70 @@ function list() {
     });
 }
 
-function list_filter(filter) {
+var $pagination = $('#pagination-demo');
+var defaultOpts = {
+    totalPages: 20,
+    visiblePages: 10,
+    first: "Primero"
+};
+function indexPag(pag) {
     var cantList = $("#cantList").val();
     $.ajax({
         url: 'sPaciente',
         type: 'POST',
         async: false,
         data: {
-            filter: filter,
+            filter: $("#txt_filterPaciente").val(),
             top: cantList,
-            pag : 0,
+            pag: (pag * cantList) - (cantList) + 1,
             op: 'list_filter'
         },
         success: function (response) {
             var obj = $.parseJSON(response);
             $("#tablePaciente").html(obj.list);
-            $('#pagination-demo').twbsPagination('destroy');
-            var obj = $('#pagination-demo').twbsPagination({
-                totalPages: (obj.cant / cantList),
-                visiblePages: 4,
-                first: "Primero",
-                onPageClick: function (event, page) {
-                    
-                }
-            });
+            var totalPages = obj.cant;
+            var currentPage = $pagination.twbsPagination('getCurrentPage');
+            alert();
+            $pagination.twbsPagination('destroy');
+            $pagination.twbsPagination($.extend({}, defaultOpts, {
+                startPage: currentPage,
+                totalPages: totalPages
+            }));
         }
     });
+
+}
+
+function list_filter() {
+    $pagination.twbsPagination(defaultOpts);
+    /*$('#pagination-demo').twbsPagination({
+     //totalPages: (obj.cant / cantList),
+     totalPages: 20,
+     visiblePages: 10,
+     first: "Primero",
+     onPageClick: function (event, page) {
+     indexPag(page);
+     }
+     });*/
+
+
+    /*var cantList = $("#cantList").val();
+     $.ajax({
+     url: 'sPaciente',
+     type: 'POST',
+     async: false,
+     data: {
+     filter: $("#txt_filterPaciente").val(),
+     top: cantList,
+     pag: 0,
+     op: 'list_filter'
+     },
+     success: function (response) {
+     var obj = $.parseJSON(response);
+     $("#tablePaciente").html(obj.list);
+     
+     }
+     });*/
 }
 
 

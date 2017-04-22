@@ -171,7 +171,8 @@ public class PacienteDaoImp implements PacienteDao {
     public List<Paciente> list_Filter(String filter, int pag, int top) {
         this.conn = con_db.open(con_db.MSSQL_IP);
         List<Paciente> list = new ArrayList<>();
-        ResultSet rs = this.conn.query("select paciente.* from paciente where nombre1 like '%" + filter + "%' or nombre2 like '%" + filter + "%' or apellido1 like '%" + filter + "%' or apellido2 like '%" + filter + "%' or cedula like '%" + filter + "%' order by id OFFSET " + pag + " ROWS FETCH NEXT " + top + " ROWS ONLY;");
+        String paginacion = (top != -1)? "OFFSET " + pag + " ROWS FETCH NEXT " + top + " ROWS ONLY;" : "";
+        ResultSet rs = this.conn.query("select paciente.* from paciente where nombre1 like '%" + filter + "%' or nombre2 like '%" + filter + "%' or apellido1 like '%" + filter + "%' or apellido2 like '%" + filter + "%' or cedula like '%" + filter + "%' order by id " + paginacion);
         try {
             while (rs.next()) {
                 Paciente value = new Paciente();
