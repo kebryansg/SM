@@ -16,7 +16,16 @@ $(".close-all-tab").click(function (e) {
     $('.tab-content').html("");
 });
 
+function openModal(id){
+    $("#"+id).modal('show');
+    $.each($("#"+id+" input"), function (){
+        $(this).val("");
+    }); 
+}
 
+function closeModal(id){
+     $("#"+id).modal('toggle');
+}
 
 
 
