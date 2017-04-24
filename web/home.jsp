@@ -38,7 +38,7 @@
     <script>
         
         alert("....");
-        </scrip>
+        </script>
     <body>
         <div class="fill">
             <div class="header">
