@@ -33,6 +33,16 @@ public class Especialidad implements Serializable {
     private Integer id;
     @Column(name = "descripcion")
     private String descripcion;
+    @Column(name = "visible")
+    private String visible;
+
+    public String getVisible() {
+        return visible;
+    }
+
+    public void setVisible(String visible) {
+        this.visible = visible;
+    }
     @OneToMany(mappedBy = "idEspecialidad")
     private List<MedicoEspecialidad> medicoEspecialidadList;
 
@@ -42,7 +52,18 @@ public class Especialidad implements Serializable {
     public Especialidad(Integer id) {
         this.id = id;
     }
-
+    public Especialidad(Integer id, String descripcion, String visible)
+    {
+        this.id=id;
+        this.descripcion=descripcion;
+        this.visible=visible;
+    }
+public Especialidad(Integer id, String descripcion)
+    {
+        this.id=id;
+        this.descripcion=descripcion;
+        
+    }
     public Integer getId() {
         return id;
     }

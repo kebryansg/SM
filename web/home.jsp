@@ -17,6 +17,22 @@
 
         <script src="resources/js/jquery.min.js" type="text/javascript"></script>
         <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        
+        
+        
+        <!--    desde aqui mis links --->
+        
+        <script type="text/javascript" src="resources/js/moment.js"></script>
+        <script type="text/javascript" src="resources/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript" src="resources/bootstrap/js/bootstrap-datetimepicker.js"></script>        
+        <link href="resources/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        
+        <link rel="stylesheet" href="resources/bootstrap/css/bootstrap-select.min.css">
+<script src="resources/bootstrap/js/bootstrap-select.min.js"></script>
+         <script type="text/javascript" src="resources/js/alertify.min.js"></script>
+         <script type="text/javascript" src="resources/js/alertify.js"></script>
+         <link rel="stylesheet" href="resources/css/alertify.core.css" />
+		<link rel="stylesheet" href="resources/css/alertify.default.css" />
 
     </head>
     <body>
@@ -39,7 +55,7 @@
                             <div id="collapse1" class="panel-collapse collapse in">
                                 <div class="panel-body menu-body">
                                     <div class="list-group">
-                                        <a class="list-group-item" data-url="paciente/paciente.jsp" data-title="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Paciente</a>
+                                        <a class="list-group-item" data-url="medico/especialidad.jsp" data-title="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Paciente</a>
                                         <a class="list-group-item" data-url="paciente/listPacientes.jsp" data-title="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Buscar Paciente</a>
                                     </div>
                                 </div>
@@ -90,7 +106,7 @@
                         <div id="home" class="tab-pane fade in active">
 
 
-                            <jsp:include page="paciente/listPacientes.jsp"/>
+                            <jsp:include page="medico/especialidad.jsp"/>
                             
 
                         </div>

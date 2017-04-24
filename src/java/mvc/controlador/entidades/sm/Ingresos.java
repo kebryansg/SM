@@ -6,6 +6,7 @@
 package mvc.controlador.entidades.sm;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -21,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import mvc.controlador.entidades.ip.Paciente;
 
 /**
  *
@@ -49,7 +51,7 @@ public class Ingresos implements Serializable {
     @Column(name = "sos")
     private Boolean sos;
     @Column(name = "condicionEgreso")
-    private Boolean condicionEgreso;
+    private Integer condicionEgreso;
     @Lob
     @Column(name = "definitivoEgreso")
     private String definitivoEgreso;
@@ -75,10 +77,48 @@ public class Ingresos implements Serializable {
     @ManyToOne
     private TipoIngreso idTipoIngreso;
     @OneToMany(mappedBy = "idIngreso")
+    private Integer totalIngresos;
+   
+    private Paciente unPaciente;
+   
     private List<DetalleIngresos> detalleIngresosList;
 
     public Ingresos() {
     }
+
+    public Ingresos(Integer id, Date fechaEntrada, Date fechaSalida, Date hora, Boolean sos, Integer condicionEgreso, String definitivoEgreso, String secundarioEgreso, String secundarioEgreso2, String causaExterna, String codigoDiagnosticoDefinitivo, Caso idCaso, EspecialidadEgreso idEspecialidadEgreso, TipoIngreso idTipoIngreso, Paciente unPaciente) {
+        this.id = id;
+        this.fechaEntrada = fechaEntrada;
+        this.fechaSalida = fechaSalida;
+        this.hora = hora;
+        this.sos = sos;
+        this.condicionEgreso = condicionEgreso;
+        this.definitivoEgreso = definitivoEgreso;
+        this.secundarioEgreso = secundarioEgreso;
+        this.secundarioEgreso2 = secundarioEgreso2;
+        this.causaExterna = causaExterna;
+        this.codigoDiagnosticoDefinitivo = codigoDiagnosticoDefinitivo;
+        this.idCaso = idCaso;
+        this.idEspecialidadEgreso = idEspecialidadEgreso;
+        this.idTipoIngreso = idTipoIngreso;
+        this.unPaciente = unPaciente;
+    }
+
+    public Ingresos(Date fechaEntrada, Date fechaSalida, Date hora, Boolean sos, Integer condicionEgreso, String definitivoEgreso, String secundarioEgreso, String secundarioEgreso2, String causaExterna, String codigoDiagnosticoDefinitivo, EspecialidadEgreso idEspecialidadEgreso, TipoIngreso idTipoIngreso) {
+        this.fechaEntrada = fechaEntrada;
+        this.fechaSalida = fechaSalida;
+        this.hora = hora;
+        this.sos = sos;
+        this.condicionEgreso = condicionEgreso;
+        this.definitivoEgreso = definitivoEgreso;
+        this.secundarioEgreso = secundarioEgreso;
+        this.secundarioEgreso2 = secundarioEgreso2;
+        this.causaExterna = causaExterna;
+        this.codigoDiagnosticoDefinitivo = codigoDiagnosticoDefinitivo;        
+        this.idEspecialidadEgreso = idEspecialidadEgreso;
+        this.idTipoIngreso = idTipoIngreso;
+    }
+    
 
     public Ingresos(Integer id) {
         this.id = id;
@@ -112,7 +152,7 @@ public class Ingresos implements Serializable {
         return hora;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 
@@ -124,11 +164,11 @@ public class Ingresos implements Serializable {
         this.sos = sos;
     }
 
-    public Boolean getCondicionEgreso() {
+    public Integer getCondicionEgreso() {
         return condicionEgreso;
     }
 
-    public void setCondicionEgreso(Boolean condicionEgreso) {
+    public void setCondicionEgreso(Integer condicionEgreso) {
         this.condicionEgreso = condicionEgreso;
     }
 
@@ -180,6 +220,15 @@ public class Ingresos implements Serializable {
         this.idCaso = idCaso;
     }
 
+    public Integer getTotalIngresos() {
+        return totalIngresos;
+    }
+
+    public void setTotalIngresos(Integer totalIngresos) {
+        this.totalIngresos = totalIngresos;
+    }
+    
+
     public EspecialidadEgreso getIdEspecialidadEgreso() {
         return idEspecialidadEgreso;
     }
@@ -202,6 +251,14 @@ public class Ingresos implements Serializable {
 
     public void setDetalleIngresosList(List<DetalleIngresos> detalleIngresosList) {
         this.detalleIngresosList = detalleIngresosList;
+    }
+
+    public Paciente getUnPaciente() {
+        return unPaciente;
+    }
+
+    public void setUnPaciente(Paciente unPaciente) {
+        this.unPaciente = unPaciente;
     }
 
     @Override

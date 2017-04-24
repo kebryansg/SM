@@ -8,6 +8,22 @@
         <servlet-name>sPaciente</servlet-name>
         <servlet-class>mvc.servlet.sPaciente</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>sEspecialidad</servlet-name>
+        <servlet-class>mvc.servlet.sEspecialidad</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sMedico</servlet-name>
+        <servlet-class>mvc.servlet.sMedico</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sEspecialidadEgreso</servlet-name>
+        <servlet-class>mvc.servlet.sEspecialidadEgreso</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sIngresosHospital</servlet-name>
+        <servlet-class>mvc.servlet.sIngresosHospital</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>pruebaCombo</servlet-name>
         <url-pattern>/pruebaCombo</url-pattern>
@@ -15,6 +31,23 @@
     <servlet-mapping>
         <servlet-name>sPaciente</servlet-name>
         <url-pattern>/sPaciente</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>sEspecialidad</servlet-name>
+        <url-pattern>/sEspecialidad</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sMedico</servlet-name>
+        <url-pattern>/sMedico</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sEspecialidadEgreso</servlet-name>
+        <url-pattern>/sEspecialidadEgreso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sIngresosHospital</servlet-name>
+        <url-pattern>/sIngresosHospital</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
