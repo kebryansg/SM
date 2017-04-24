@@ -35,6 +35,10 @@
 		<link rel="stylesheet" href="resources/css/alertify.default.css" />
 
     </head>
+    <script>
+        
+        alert("....");
+        </scrip>
     <body>
         <div class="fill">
             <div class="header">
