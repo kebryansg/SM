@@ -17,22 +17,22 @@
 
         <script src="resources/js/jquery.min.js" type="text/javascript"></script>
         <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        
-        
-        
-        <!--    desde aqui mis links --->
-        
+
+
+
+        <!--    desde aqui mis links -->
+
         <script type="text/javascript" src="resources/js/moment.js"></script>
         <script type="text/javascript" src="resources/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
         <script type="text/javascript" src="resources/bootstrap/js/bootstrap-datetimepicker.js"></script>        
         <link href="resources/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-        
+
         <link rel="stylesheet" href="resources/bootstrap/css/bootstrap-select.min.css">
-<script src="resources/bootstrap/js/bootstrap-select.min.js"></script>
-         <script type="text/javascript" src="resources/js/alertify.min.js"></script>
-         <script type="text/javascript" src="resources/js/alertify.js"></script>
-         <link rel="stylesheet" href="resources/css/alertify.core.css" />
-		<link rel="stylesheet" href="resources/css/alertify.default.css" />
+        <script src="resources/bootstrap/js/bootstrap-select.min.js"></script>
+        <script type="text/javascript" src="resources/js/alertify.min.js"></script>
+        <script type="text/javascript" src="resources/js/alertify.js"></script>
+        <link rel="stylesheet" href="resources/css/alertify.core.css" />
+        <link rel="stylesheet" href="resources/css/alertify.default.css" />
 
     </head>
     <script>
@@ -59,7 +59,7 @@
                             <div id="collapse1" class="panel-collapse collapse in">
                                 <div class="panel-body menu-body">
                                     <div class="list-group">
-                                        <a class="list-group-item" data-url="medico/especialidad.jsp" data-title="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Paciente</a>
+                                        <a class="list-group-item" data-url="paciente/paciente.jsp" data-title="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Paciente</a>
                                         <a class="list-group-item" data-url="paciente/listPacientes.jsp" data-title="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Buscar Paciente</a>
                                     </div>
                                 </div>
@@ -82,13 +82,34 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                        Collapsible Group 3</a>
+                                        Medicos</a>
                                 </h4>
                             </div>
                             <div id="collapse3" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <!-- Contenido -->
+                                <div class="panel-body menu-body">
+                                    <div class="list-group">
+                                        <a class="list-group-item" data-url="medico/registrarMedico.jsp" data-title="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Medico</a>
+                                        <a class="list-group-item" data-url="medico/editarMedico.jsp" data-title="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Mantenimiento</a>
+                                        <a class="list-group-item" data-url="medico/especialidad.jsp" data-title="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Especialidad</a>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                                        Ingresos</a>
+                                </h4>
+                            </div>
+                            <div id="collapse4" class="panel-collapse collapse">
+                                <div class="panel-body menu-body">
+                                    <div class="list-group">
+                                        <a class="list-group-item" data-url="ingresos/registroIngresos.jsp" data-title="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Ingreso</a>
+                                        <a class="list-group-item" data-url="ingresos/editarIngresos.jsp" data-title="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Mantenimiento</a>
+                                    </div>
+                                </div>                       
+
                             </div>
                         </div>
                     </div>
@@ -111,7 +132,7 @@
 
 
                             <jsp:include page="medico/especialidad.jsp"/>
-                            
+
 
                         </div>
                         <!--<div id="menu1" class="tab-pane fade">

@@ -13,10 +13,15 @@ function list() {
 }
 
 var $pagination = $('#pagination-demo');
+var $totalPages = 100;
 var defaultOpts = {
-    totalPages: 20,
+    totalPages: $totalPages,
     visiblePages: 10,
-    first: "Primero"
+    first: "Primero",
+     onPageClick: function (event, page) {
+     indexPag(page);
+     }
+
 };
 function indexPag(pag) {
     var cantList = $("#cantList").val();
@@ -34,13 +39,15 @@ function indexPag(pag) {
             var obj = $.parseJSON(response);
             $("#tablePaciente").html(obj.list);
             var totalPages = obj.cant;
-            var currentPage = $pagination.twbsPagination('getCurrentPage');
-            alert();
-            $pagination.twbsPagination('destroy');
-            $pagination.twbsPagination($.extend({}, defaultOpts, {
-                startPage: currentPage,
-                totalPages: totalPages
-            }));
+            if ($totalPages !== totalPages) {
+                $totalPages = totalPages;
+                var currentPage = $pagination.twbsPagination('getCurrentPage');
+                $pagination.twbsPagination('destroy');
+                $pagination.twbsPagination($.extend({}, defaultOpts, {
+                    startPage: currentPage,
+                    totalPages: totalPages
+                }));
+            }
         }
     });
 
