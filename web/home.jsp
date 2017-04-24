@@ -20,7 +20,7 @@
 
 
 
-        <!--    desde aqui mis links --->
+        <!--    desde aqui mis links -->
 
         <script type="text/javascript" src="resources/js/moment.js"></script>
         <script type="text/javascript" src="resources/bootstrap/js/bootstrap-datetimepicker.min.js"></script>

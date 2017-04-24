@@ -40,8 +40,8 @@ function indexPag(pag) {
             $("#tablePaciente").html(obj.list);
             var totalPages = obj.cant;
             if ($totalPages !== totalPages) {
+                $totalPages = totalPages;
                 var currentPage = $pagination.twbsPagination('getCurrentPage');
-                alert();
                 $pagination.twbsPagination('destroy');
                 $pagination.twbsPagination($.extend({}, defaultOpts, {
                     startPage: currentPage,
