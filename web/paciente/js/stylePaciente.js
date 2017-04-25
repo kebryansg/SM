@@ -1,3 +1,5 @@
+
+
 function change_cboProvincia() {
     $.ajax({
         type: 'Post',
@@ -9,6 +11,7 @@ function change_cboProvincia() {
         },
         success: function (response) {
             $("#cboCanton").html(response);
+            $("#cboCanton").selectpicker('refresh');
         }
 
     });
@@ -25,6 +28,7 @@ function change_cboCanton() {
         },
         success: function (response) {
             $("#cboParroquia").html(response);
+            $("#cboParroquia").selectpicker('refresh');
         }
 
     });
@@ -39,15 +43,22 @@ function change_Genero() {
 }
 
 $(document).ready(function () {
+    $("#cboProvincia").on("changed.bs.select",function(e){
+        change_cboProvincia();
+    });
+    
+    $("#cboCanton").on("changed.bs.select",function(e){
+        change_cboCanton();
+    });
 
 
-    $("#cboProvincia").change(function () {
+    /*$("#cboProvincia").change(function () {
         change_cboProvincia();
     });
 
     $("#cboCanton").change(function () {
         change_cboCanton();
-    });
+    });*/
 
 
     $("#pac_Genero").change(change_Genero);

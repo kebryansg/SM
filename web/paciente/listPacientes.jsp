@@ -50,7 +50,7 @@
 <script type="text/javascript">
     $(function () {
         $.getScript("paciente/js/paciente.js", function () {
-            list();
+            list_filter();
         });
     });
 

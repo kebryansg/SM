@@ -18,6 +18,9 @@ var defaultOpts = {
     totalPages: $totalPages,
     visiblePages: 10,
     first: "Primero",
+    next: "Siguiente",
+    last: "Ultimo",
+    prev: "Anterior",
     onPageClick: function (event, page) {
         indexPag(page);
     }
@@ -238,11 +241,14 @@ function asignarPaciente(paciente) {
         },
         success: function (response) {
             var det = $.parseJSON(response);
-            $('#cboProvincia > option[value="' + det.provincia + '"]').attr('selected', true);
+            $('#cboProvincia').selectpicker('val', det.provincia);
+            //$('#cboProvincia > option[value="' + det.provincia + '"]').attr('selected', true);
             change_cboProvincia();
-            $('#cboCanton > option[value="' + det.canton + '"]').attr('selected', true);
+            $('#cboCanton').selectpicker('val', det.canton);
+            //$('#cboCanton > option[value="' + det.canton + '"]').attr('selected', true);
             change_cboCanton();
-            $('#cboParroquia > option[value="' + paciente.idParroquia.id + '"]').attr('selected', true);
+            $('#cboParroquia').selectpicker('val', paciente.idParroquia.id);
+            //$('#cboParroquia > option[value="' + paciente.idParroquia.id + '"]').attr('selected', true);
         }
     });
 }

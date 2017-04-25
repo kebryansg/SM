@@ -188,7 +188,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Provincia *</label>
                             <div class="col-md-8">
-                                <select class="form-control" id="cboProvincia">
+                                <select class="selectpicker" data-live-search="true" id="cboProvincia">
                                     <option value="0">Seleccione una</option>
                                     <%
                                         ProvinciaDao p = new ProvinciaDaoImp();
@@ -202,7 +202,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Parroquia *</label>
                             <div class="col-md-8">
-                                <select class="form-control" id="cboParroquia">
+                                <select class="selectpicker" data-live-search="true" id="cboParroquia">
 
                                 </select>
                             </div>
@@ -213,7 +213,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Canton *</label>
                             <div class="col-md-8">
-                                <select class="form-control" id="cboCanton">
+                                <select class="selectpicker" data-live-search="true" id="cboCanton">
 
                                 </select>
                             </div>
@@ -357,4 +357,5 @@
 </div>
 <script src="paciente/js/stylePaciente.js" type="text/javascript"></script>
 <script>
+    $(".selectpicker").selectpicker().selectpicker("render");
 </script>
