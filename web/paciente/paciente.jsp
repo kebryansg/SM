@@ -8,9 +8,7 @@
 <%@page import="mvc.modelo.ipDao.ProvinciaDao"%>
 <%@page import="mvc.modelo.ipDaoImp.ProvinciaDaoImp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script src="paciente/js/stylePaciente.js" type="text/javascript"></script>
-<script src="resources/bootstrap/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
-<script src="resources/bootstrap/js/bootstrap-datetimepicker.es.js" type="text/javascript"></script>
+
 <!DOCTYPE html>
 <div class="contenedor-tabs">
     <div class="row ">
@@ -65,7 +63,6 @@
                                 <!--<input class="form-control" id="pac_FechaNac" type="text">-->
                                 <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
                                     <input class="form-control" id="pac_FechaNac" size="16" type="text" value="" readonly>
-                                    <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
 
@@ -358,18 +355,6 @@
         </div>
     </div>
 </div>
-
+<script src="paciente/js/stylePaciente.js" type="text/javascript"></script>
 <script>
-    $('.form_date').datetimepicker({
-        format: "yyyy-mm-dd",
-        language: 'es',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        pickerPosition: "bottom-left",
-        minView: 2,
-        forceParse: 0
-    });
 </script>

@@ -6,7 +6,6 @@ $("#cerrarMenu").click(function () {
 });
 
 $("#pruebaTab").click(function () {
-    //alert(); 
     $(".nav").append('<li><a data-toggle="tab" href="#menu2">Menu 2</a></li>');
 });
 
@@ -16,15 +15,15 @@ $(".close-all-tab").click(function (e) {
     $('.tab-content').html("");
 });
 
-function openModal(id){
-    $("#"+id).modal('show');
-    $.each($("#"+id+" input"), function (){
+function openModal(id) {
+    $("#" + id).modal('show');
+    $.each($("#" + id + " input"), function () {
         $(this).val("");
-    }); 
+    });
 }
 
-function closeModal(id){
-     $("#"+id).modal('toggle');
+function closeModal(id) {
+    $("#" + id).modal('toggle');
 }
 
 
@@ -47,3 +46,5 @@ function loadScript(url, callback) {
     script.src = url;
     document.getElementsByTagName('head')[0].appendChild(script);
 }
+
+

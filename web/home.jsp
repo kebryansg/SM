@@ -23,9 +23,9 @@
         <!--    desde aqui mis links -->
 
         <script type="text/javascript" src="resources/js/moment.js"></script>
-        <script type="text/javascript" src="resources/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+        <!--<script type="text/javascript" src="resources/bootstrap/js/bootstrap-datetimepicker.min.js"></script>-->
         <script type="text/javascript" src="resources/bootstrap/js/bootstrap-datetimepicker.js"></script>        
-        <link href="resources/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <script src="resources/bootstrap/js/bootstrap-datetimepicker.es.js" type="text/javascript"></script>
 
         <link rel="stylesheet" href="resources/bootstrap/css/bootstrap-select.min.css">
         <script src="resources/bootstrap/js/bootstrap-select.min.js"></script>
@@ -154,22 +154,27 @@
                 </div>
 
             </div>
-            <!--<div class="footer">
-                <label class="right">Soft @2017</label>
-            </div>-->
-
-            <!--<script src="resources/js/jquery.min.js" type="text/javascript"></script>
-            <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>-->
-            <!--<script src="resources/bootstrap/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
-            <script src="resources/bootstrap/js/bootstrap-datetimepicker.es.js" type="text/javascript"></script>-->
-            <!--<script src="resources/bootstrap/js/jquery.twbsPagination.min.js" type="text/javascript"></script>-->
-            <script src="resources/js-ui/jquery-ui.js" type="text/javascript"></script>
+            <!--<script src="resources/js-ui/jquery-ui.js" type="text/javascript"></script>-->
             <script src="resources/js/style.js" type="text/javascript"></script>
             <script src="resources/js/tabPanel.js" type="text/javascript"></script>
 
             <script>
+                
+                
                 $(function () {
                     $('.form_date').datetimepicker({
+    format: "yyyy-mm-dd",
+    language: 'es',
+    weekStart: 1,
+    todayBtn: 1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    pickerPosition: "bottom-left",
+    minView: 2,
+    forceParse: 0
+});
+                    /*$('.form_date').datetimepicker({
                         format: "yyyy-mm-dd",
                         language: 'es',
                         weekStart: 1,
@@ -181,7 +186,7 @@
                         minView: 2,
                         forceParse: 0
                     });
-                    /*$('#pagination-demo').twbsPagination({
+                    $('#pagination-demo').twbsPagination({
                      totalPages: 35,
                      visiblePages: 7,
                      //first: "Siguiente",

@@ -18,9 +18,9 @@ var defaultOpts = {
     totalPages: $totalPages,
     visiblePages: 10,
     first: "Primero",
-     onPageClick: function (event, page) {
-     indexPag(page);
-     }
+    onPageClick: function (event, page) {
+        indexPag(page);
+    }
 
 };
 function indexPag(pag) {
@@ -32,13 +32,14 @@ function indexPag(pag) {
         data: {
             filter: $("#txt_filterPaciente").val(),
             top: cantList,
-            pag: (pag * cantList) - (cantList) + 1,
+            pag: ((pag - 1) * cantList),
             op: 'list_filter'
         },
         success: function (response) {
             var obj = $.parseJSON(response);
             $("#tablePaciente").html(obj.list);
-            var totalPages = obj.cant;
+            var totalPages = obj.cant / cantList;
+            totalPages = Math.ceil(totalPages);
             if ($totalPages !== totalPages) {
                 $totalPages = totalPages;
                 var currentPage = $pagination.twbsPagination('getCurrentPage');
@@ -54,35 +55,10 @@ function indexPag(pag) {
 }
 
 function list_filter() {
+    //$totalPages = 100;
+    $pagination.twbsPagination('destroy');
     $pagination.twbsPagination(defaultOpts);
-    /*$('#pagination-demo').twbsPagination({
-     //totalPages: (obj.cant / cantList),
-     totalPages: 20,
-     visiblePages: 10,
-     first: "Primero",
-     onPageClick: function (event, page) {
-     indexPag(page);
-     }
-     });*/
-
-
-    /*var cantList = $("#cantList").val();
-     $.ajax({
-     url: 'sPaciente',
-     type: 'POST',
-     async: false,
-     data: {
-     filter: $("#txt_filterPaciente").val(),
-     top: cantList,
-     pag: 0,
-     op: 'list_filter'
-     },
-     success: function (response) {
-     var obj = $.parseJSON(response);
-     $("#tablePaciente").html(obj.list);
-     
-     }
-     });*/
+    
 }
 
 

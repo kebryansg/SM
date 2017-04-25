@@ -1,10 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 $(document).ready(function(){
     var pagina=1;
     var diagnosticos=[];
@@ -22,7 +15,7 @@ $(document).ready(function(){
     }
     function cargarTotalRegistros()
      {
-         $.post('../SM/sIngresosHospital', { 
+         $.post('sIngresosHospital', { 
              opcion : "6",    
              fechaEgreso: momentToDate($("#dtpFechaSalida").data("DateTimePicker").date(),'YYYY-MM-DD'),
              fechaIngreso:momentToDate($("#dtpFechaIngreso").data("DateTimePicker").date(),'YYYY-MM-DD'),           
@@ -60,7 +53,7 @@ $(document).ready(function(){
      {
            $.ajax({
             type: 'Post',
-            url: '../SM/sIngresosHospital',
+            url: 'sIngresosHospital',
             data: {            
                 opcion: '5',
                 fechaEgreso: momentToDate($("#dtpFechaSalida").data("DateTimePicker").date(),'YYYY-MM-DD'),
@@ -173,7 +166,7 @@ $(document).ready(function(){
                        
       });
       $('#btnActualizar').click(function(event) {
-          $.post('../SM/sIngresosHospital', {
+          $.post('sIngresosHospital', {
             
 				idIngreso : datos[0],
 				fechaIngreso: momentToDate($("#dtpFechaIngresoEditar").data("DateTimePicker").date(),'YYYY-MM-DD'),
@@ -219,7 +212,7 @@ $(document).ready(function(){
                          });
                          
                          // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-			$.post('../SM/sIngresosHospital', {
+			$.post('sIngresosHospital', {
                            
 				opcion : 8,
 				idIngreso: datos[0]                                

@@ -14,7 +14,7 @@ $(function () {
         $(this).tab('show');
         $currentTab = $(this);
     });
-    
+
     registerComposeButtonEvent();
     registerCloseEvent();
 });
@@ -28,11 +28,22 @@ function registerComposeButtonEvent() {
         var tabId = "compose" + composeCount; //this is id on tab content div where the 
         composeCount = composeCount + 1; //increment compose count
 
-        $('#TabAdm').append('<li><a href="#' + tabId + '"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>'+ $(this).attr("data-title") +'</a></li>');
+        $('#TabAdm').append('<li><a href="#' + tabId + '"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>' + $(this).attr("data-title") + '</a></li>');
         $('#ContentAdm').append('<div class="tab-pane fade" id="' + tabId + '"></div>');
-        $("#"+tabId).load($(this).attr("data-url"),function(){
-            
-            
+        $("#" + tabId).load($(this).attr("data-url"), function () {
+            $('.form_date').datetimepicker({
+                format: "yyyy-mm-dd",
+                language: 'es',
+                weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                pickerPosition: "bottom-left",
+                minView: 2,
+                forceParse: 0
+            });
+
         });
 
         //craeteNewTabAndLoadUrl("", "./SamplePage.html", "#" + tabId);
