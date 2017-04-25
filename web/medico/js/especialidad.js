@@ -132,8 +132,8 @@ $(document).ready(function(){
         totalPaginas=totalRegistros/$("#cboMostrar").val();
         totalPaginas=Math.ceil(totalPaginas); 
          
-         $('#pagination').twbsPagination('destroy');
-           var obj = $('#pagination').twbsPagination({
+         $('#pagEspecialidad').twbsPagination('destroy');
+           var obj = $('#pagEspecialidad').twbsPagination({
                totalPages: totalPaginas,
                visiblePages: 7,
                onPageClick: function (event, page) {

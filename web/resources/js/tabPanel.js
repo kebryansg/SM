@@ -1,7 +1,3 @@
-/*
- * Arreglar 
- */
-
 var currentTab;
 var composeCount = 0;
 //initilize tabs
@@ -14,21 +10,25 @@ $(function () {
         $(this).tab('show');
         $currentTab = $(this);
     });
-
     registerComposeButtonEvent();
     registerCloseEvent();
+
 });
+
+function pestañaValida(a) {
+    return $('a[name="' + $(a).attr("data-title") + '"]').length === 0;
+}
 
 //this method will demonstrate how to add tab dynamically
 function registerComposeButtonEvent() {
     /* just for this demo */
     $("a[data-url]").click(function (e) {
         e.preventDefault();
-
-        var tabId = "compose" + composeCount; //this is id on tab content div where the 
+        if(pestañaValida($(this))){
+            var tabId = "compose" + composeCount; //this is id on tab content div where the 
         composeCount = composeCount + 1; //increment compose count
 
-        $('#TabAdm').append('<li><a href="#' + tabId + '"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>' + $(this).attr("data-title") + '</a></li>');
+        $('#TabAdm').append('<li><a name="' + $(this).attr("data-title") + '" href="#' + tabId + '"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>' + $(this).attr("data-title") + '</a></li>');
         $('#ContentAdm').append('<div class="tab-pane fade" id="' + tabId + '"></div>');
         $("#" + tabId).load($(this).attr("data-url"), function () {
             $('.form_date').datetimepicker({
@@ -43,14 +43,24 @@ function registerComposeButtonEvent() {
                 minView: 2,
                 forceParse: 0
             });
-
+            $('.form_time').datetimepicker({
+                language: 'es',
+                weekStart: 1,
+                //todayBtn: 1,
+                autoclose: 1,
+                //todayHighlight: 1,
+                startView: 1,
+                minView: 0,
+                maxView: 1,
+                forceParse: 0
+            });
         });
-
-        //craeteNewTabAndLoadUrl("", "./SamplePage.html", "#" + tabId);
 
         $(this).tab('show');
         showTab(tabId);
         registerCloseEvent();
+        }
+        
     });
 
 }

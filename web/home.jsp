@@ -84,9 +84,9 @@
                             <div id="collapse3" class="panel-collapse collapse">
                                 <div class="panel-body menu-body">
                                     <div class="list-group">
-                                        <a class="list-group-item" data-url="medico/registrarMedico.jsp" data-title="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Medico</a>
-                                        <a class="list-group-item" data-url="medico/editarMedico.jsp" data-title="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Mantenimiento</a>
-                                        <a class="list-group-item" data-url="medico/especialidad.jsp" data-title="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Especialidad</a>
+                                        <a class="list-group-item" data-url="medico/registrarMedico.jsp" data-title="Registrar Medico" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Medico</a>
+                                        <a class="list-group-item" data-url="medico/editarMedico.jsp" data-title="Mantenimiento Medico" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Mantenimiento</a>
+                                        <a class="list-group-item" data-url="medico/especialidad.jsp" data-title="Especialidad" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Especialidad</a>
                                     </div>
                                 </div>
                             </div>
@@ -101,8 +101,8 @@
                             <div id="collapse4" class="panel-collapse collapse">
                                 <div class="panel-body menu-body">
                                     <div class="list-group">
-                                        <a class="list-group-item" data-url="ingresos/registroIngresos.jsp" data-title="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Ingreso</a>
-                                        <a class="list-group-item" data-url="ingresos/editarIngresos.jsp" data-title="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Mantenimiento</a>
+                                        <a class="list-group-item" data-url="ingresos/registroIngresos.jsp" data-title="Registrar Ingresos" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Ingreso</a>
+                                        <a class="list-group-item" data-url="ingresos/editarIngresos.jsp" data-title="Mantenimiento Ingresos" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Mantenimiento</a>
                                     </div>
                                 </div>                       
 

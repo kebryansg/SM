@@ -13,22 +13,17 @@
 <%@page import="mvc.modelo.smDao.MedicoDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<script src="medico/js/editarMedico.js"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-<script src="medico/js/editarMedico.js"></script>
+
 
 <script src="resources/js/style.js" type="text/javascript"></script>
 
 
 <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 
-
-
-
-<style>
-
-</style>
 <br>
 
 <div style="padding-left: 12px; padding-right: 12px " class="row">

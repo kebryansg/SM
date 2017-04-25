@@ -113,7 +113,7 @@
                         <div class="col-md-10">
                             <label class="col-md-12" for="dtpHoraIngreso">Hora Ingreso</label>
                             <div class="col-md-12">
-                                <div class='input-group date' id='dtpHoraIngreso'>
+                                <div class='input-group date form_time' id='dtpHoraIngreso' data-date="" data-date-format="hh:ii" data-link-format="hh:ii">
                                     <input id='dtpHoraIngreso' type='text' class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-time"></span>

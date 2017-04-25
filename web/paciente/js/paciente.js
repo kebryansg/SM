@@ -12,7 +12,7 @@ function list() {
     });
 }
 
-var $pagination = $('#pagination-demo');
+var $pagination = $('#pagPacientes');
 var $totalPages = 100;
 var defaultOpts = {
     totalPages: $totalPages,

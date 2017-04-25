@@ -13,8 +13,7 @@
             <div class="pull-right">
                 <div class="col-md-12">
                     <select class="form-control" id="cantList">
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                        <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -45,7 +44,7 @@
 
     <!--<input type="hidden" id="cantList" value="2">-->
 
-    <ul id="pagination-demo" class="pagination-sm"></ul>
+    <ul id="pagPacientes" class="pagination"></ul>
 </div>
 <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <script type="text/javascript">

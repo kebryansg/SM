@@ -24,7 +24,7 @@
 	}); 
      function cargarTotalRegistros()
      {
-         $.post('../SM/sMedico', { 
+         $.post('sMedico', { 
              opcion : "4",
              bandera:buscar,
              buscar:$("#txtBuscar").val()
@@ -66,7 +66,7 @@
     function cargarMedicos(pagina)
     {
         var totalRegistro=$("#cboMostrar").val();
-        $.post('../SM/sMedico', {
+        $.post('sMedico', {
             totalMostrar : totalRegistro,
             pagina: pagina,
             opcion: '2',
@@ -140,7 +140,7 @@
             });
             $.ajax({
                 type: 'Post',
-                url: '../SM/sMedico',
+                url: 'sMedico',
                 data: {
                     idMedico: datos[0],				                                
                     opcion: '1'
@@ -185,7 +185,7 @@
         
         $('#btnActualizar').click(function(event) {
             
-            $.post('../SM/sMedico', {
+            $.post('sMedico', {
 				cedula : $('#txtCedulaModal').val(),
 				primerNombre: $('#txtPrimerNombreModal').val(),
                                 segundoNombre: $('#txtSegundoNombreModal').val(),
@@ -234,7 +234,7 @@
                          });
                          
                          // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-			$.post('../SM/sMedico', {
+			$.post('sMedico', {
                            
 				idMedico : datos[0],
 				opcion: 5
