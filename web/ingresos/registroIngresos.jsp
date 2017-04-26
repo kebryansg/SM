@@ -271,7 +271,7 @@
 </form>
 <script src="ingresos/js/registroIngresos.js"></script>
 <script>
-                                        $(".selectpicker").selectpicker().selectpicker("render");
+
                                         $(function () {
                                             /*$('#dtpFechaIngreso').datetimepicker({format: 'DD/MM/YYYY'});
                                              $('#dtpFechaEgreso').datetimepicker({format: 'DD/MM/YYYY'});

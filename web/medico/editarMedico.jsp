@@ -165,7 +165,3 @@
 
 
 </form>
-
-<script>
-    $(".selectpicker").selectpicker().selectpicker("render");
-</script>

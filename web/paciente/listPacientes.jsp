@@ -12,7 +12,7 @@
             </div>
             <div class="pull-right">
                 <div class="col-md-12">
-                    <select class="form-control" id="cantList">
+                    <select class="selectpicker" data-width="80px" id="cantList">
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
@@ -25,33 +25,31 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead style="font-weight: bold;">
                             <tr>
-                                <td>Home 1</td>
-                                <td>Home 2</td>
+                                <td style="width: 12%;">Historia Clinica</td>
+                                <td>Cèdula</td>
+                                <td>Apellidos y Nombres</td>
+                                <td>Ciudad</td>
+                                <td>Domicilio</td>
+                                <td style="width: 10%;">Acciòn</td>
                             </tr>
                         </thead>
                         <tbody id="tablePaciente"></tbody>
                     </table>
                 </div>
+                <ul id="pagPacientes" class="pagination"></ul>
             </div>       
         </div>
     </div>
-
-
-
-
-    <!--<input type="hidden" id="cantList" value="2">-->
-
-    <ul id="pagPacientes" class="pagination"></ul>
+    
 </div>
 <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {
         $.getScript("paciente/js/paciente.js", function () {
-            list_filter();
+            //list_filter();
         });
     });
-
 </script>

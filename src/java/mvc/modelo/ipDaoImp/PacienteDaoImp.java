@@ -172,11 +172,12 @@ public class PacienteDaoImp implements PacienteDao {
         this.conn = con_db.open(con_db.MSSQL_IP);
         List<Paciente> list = new ArrayList<>();
         String paginacion = (top != -1)? "OFFSET " + pag + " ROWS FETCH NEXT " + top + " ROWS ONLY;" : "";
-        System.out.println("select paciente.* from paciente where nombre1 like '%" + filter + "%' or nombre2 like '%" + filter + "%' or apellido1 like '%" + filter + "%' or apellido2 like '%" + filter + "%' or cedula like '%" + filter + "%' order by id " + paginacion);
-        ResultSet rs = this.conn.query("select paciente.* from paciente where nombre1 like '%" + filter + "%' or nombre2 like '%" + filter + "%' or apellido1 like '%" + filter + "%' or apellido2 like '%" + filter + "%' or cedula like '%" + filter + "%' order by id " + paginacion);
+        //System.out.println("select historialClinico.id as historia , paciente.* from paciente inner join BD_SM.dbo.historialClinico on idPaciente = paciente.id where nombre1 like '%" + filter + "%' or nombre2 like '%" + filter + "%' or apellido1 like '%" + filter + "%' or apellido2 like '%" + filter + "%' or cedula like '%" + filter + "%' order by id " + paginacion);
+        ResultSet rs = this.conn.query("select historialClinico.id as historia , paciente.* from paciente inner join BD_SM.dbo.historialClinico on idPaciente = paciente.id where nombre1 like '%" + filter + "%' or nombre2 like '%" + filter + "%' or apellido1 like '%" + filter + "%' or apellido2 like '%" + filter + "%' or cedula like '%" + filter + "%' or historialClinico.id like '%" + filter + "%' order by id " + paginacion);
         try {
             while (rs.next()) {
                 Paciente value = new Paciente();
+                value.setHistoriaClinica(rs.getInt("historia"));
                 value.setCedula(rs.getNString("cedula"));
                 value.setNombre1(rs.getNString("nombre1"));
                 value.setNombre2(rs.getNString("nombre2"));

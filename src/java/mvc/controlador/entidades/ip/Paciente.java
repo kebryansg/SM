@@ -37,6 +37,8 @@ public class Paciente implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "historiaClinica")
+    private Integer historiaClinica;
     @Column(name = "cedula")
     private String cedula;
     @Column(name = "nombre1")
@@ -55,6 +57,14 @@ public class Paciente implements Serializable {
     private String ciudad;
     @Column(name = "estadoCivil")
     private String estadoCivil;
+
+    public Integer getHistoriaClinica() {
+        return historiaClinica;
+    }
+
+    public void setHistoriaClinica(Integer historiaClinica) {
+        this.historiaClinica = historiaClinica;
+    }
     @Column(name = "telefonoDomicilio")
     private String telefonoDomicilio;
     @Column(name = "telefonoOficina")

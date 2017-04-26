@@ -104,19 +104,10 @@ public class sPaciente extends HttpServlet {
         final DateFormat DF = new SimpleDateFormat(FORMATO_FECHA);
         Gson gson = new GsonBuilder().setDateFormat(FORMATO_FECHA).create();
         switch (op) {
-            case "list": 
-                listP = new PacienteDaoImp().list();
-                for (Paciente paciente1 : listP) {
-                    result += "<tr>";
-                    result += "<td> Historia clinica </td>";
-                    result += "<td>" + paciente1.getCedula() + "</td>";
-                    result += "<td>" + paciente1.getApellido1() + " " + paciente1.getApellido2() + "</td>";
-                    result += "<td>" + paciente1.getNombre1() + " " + paciente1.getNombre2() + "</td>";
-                    result += "<td>" + paciente1.getCiudad() + "</td>";
-                    result += "<td>" + paciente1.getDomicilio() + "</td>";
-                    result += "</tr>";
-                }
-                out.print(result);
+            case "list":
+                
+                listP = new PacienteDaoImp().list_Filter(request.getParameter("filter"), 0,-1);
+                out.print(listP.size());
                 out.flush();
                 out.close();
                 break;
@@ -124,23 +115,24 @@ public class sPaciente extends HttpServlet {
                 String filter = request.getParameter("filter");
                 int topSQL = Integer.parseInt(request.getParameter("top"));
                 int inicioSQL = Integer.parseInt(request.getParameter("pag"));
-                listP = new PacienteDaoImp().list_Filter(filter, inicioSQL, -1);
-                int cantTotal = listP.size();
-                
+
                 listP = new PacienteDaoImp().list_Filter(filter, inicioSQL, topSQL);
-                
+
                 String listString = "";
                 for (Paciente paciente1 : listP) {
-                    listString += "<tr>";
-                    listString += "<td> Historia clinica </td>";
+                    listString += "<tr class='active'>";
+                    listString += "<td>" + paciente1.getHistoriaClinica() + "</td>";
                     listString += "<td>" + paciente1.getCedula() + "</td>";
-                    listString += "<td>" + paciente1.getApellido1() + " " + paciente1.getApellido2() + "</td>";
-                    listString += "<td>" + paciente1.getNombre1() + " " + paciente1.getNombre2() + "</td>";
+                    listString += "<td>" + (paciente1.getApellido1() + " " + paciente1.getApellido2() + " " + paciente1.getNombre1() + " " + paciente1.getNombre2()).toUpperCase() + "</td>";
                     listString += "<td>" + paciente1.getCiudad() + "</td>";
                     listString += "<td>" + paciente1.getDomicilio() + "</td>";
+                    listString += "<td>";
+                    listString += "<button name='editPaciente' data-id='" + paciente1.getId() + "'  style='margin-right: 2px;' class='btn btn-primary'><span class='glyphicon glyphicon-pencil'></span> </button>";
+                    listString += "<button name='deletPaciente' data-id='" + paciente1.getId() + "' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span> </button>";
+                    listString += "</td>";
                     listString += "</tr>";
                 }
-                result = "{\"list\": \"" + listString + "\",\"cant\":\"" + cantTotal + "\"}";
+                result = "{\"list\": \"" + listString + "\"}";
                 out.print(result);
                 out.flush();
                 out.close();

@@ -54,6 +54,7 @@ function registerComposeButtonEvent() {
                 maxView: 1,
                 forceParse: 0
             });
+            $(".selectpicker").selectpicker().selectpicker("render");
         });
 
         $(this).tab('show');

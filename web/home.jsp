@@ -127,7 +127,7 @@
                         <div id="home" class="tab-pane fade in active">
 
 
-                            <jsp:include page="medico/especialidad.jsp"/>
+                            <jsp:include page="paciente/listPacientes.jsp"/>
 
 
                         </div>
