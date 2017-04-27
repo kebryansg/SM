@@ -27,10 +27,12 @@ import mvc.controlador.entidades.ip.Paciente;
 import mvc.controlador.entidades.ip.ParienteEnfermedadPaciente;
 import mvc.controlador.entidades.ip.Parientes;
 import mvc.controlador.entidades.ip.Parroquia;
+import mvc.controlador.entidades.sm.HistorialClinico;
 import mvc.modelo.ipDaoImp.ObstetricosDaoImp;
 import mvc.modelo.ipDaoImp.PacienteDaoImp;
 import mvc.modelo.ipDaoImp.ParienteEnfermedadPacienteDaoImp;
 import mvc.modelo.ipDaoImp.ParroquiaDaoImp;
+import mvc.modelo.smDaoImp.HistorialClinicoDaoImp;
 import test.test;
 
 /**
@@ -105,8 +107,8 @@ public class sPaciente extends HttpServlet {
         Gson gson = new GsonBuilder().setDateFormat(FORMATO_FECHA).create();
         switch (op) {
             case "list":
-                
-                listP = new PacienteDaoImp().list_Filter(request.getParameter("filter"), 0,-1);
+
+                listP = new PacienteDaoImp().list_Filter(request.getParameter("filter"), 0, -1);
                 out.print(listP.size());
                 out.flush();
                 out.close();
@@ -184,8 +186,12 @@ public class sPaciente extends HttpServlet {
                 } else {
                     paciente.setImagen(request.getParameter("paciente[imagen]"));
                 }
+                if (idPaciente == 0) {
+                    new HistorialClinicoDaoImp().save(new HistorialClinico("", paciente.getId()));
+                }
                 new PacienteDaoImp().save(paciente);
                 paciente.setId(idPaciente);
+                
 
                 if (!sexo) {
                     Obstetricos obstetricos = new Obstetricos(Integer.parseInt(request.getParameter("paciente[idObs]")));

@@ -1,6 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script src="paciente/js/stylePaciente.js" type="text/javascript"></script>
-
 <!DOCTYPE html>
 <div class="contenedor-tabs">
     <div class="container-fluid">
@@ -45,7 +43,7 @@
     </div>
     
 </div>
-<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
+<script src="paciente/js/styleListPaciente.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {
         $.getScript("paciente/js/paciente.js", function () {

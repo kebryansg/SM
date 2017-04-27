@@ -19,10 +19,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
 
-<script src="resources/js/style.js" type="text/javascript"></script>
+<!--<script src="resources/js/style.js" type="text/javascript"></script>-->
 
 
-<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
+<!--<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>-->
 
 <br>
 

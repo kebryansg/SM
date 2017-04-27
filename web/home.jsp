@@ -33,7 +33,9 @@
         <script type="text/javascript" src="resources/js/alertify.js"></script>
         <link rel="stylesheet" href="resources/css/alertify.core.css" />
         <link rel="stylesheet" href="resources/css/alertify.default.css" />
-
+        <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
+        <script src="resources/js/style.js" type="text/javascript"></script>
+            <script src="resources/js/tabPanel.js" type="text/javascript"></script>
     </head>
     <body>
         <div class="fill">
@@ -127,7 +129,7 @@
                         <div id="home" class="tab-pane fade in active">
 
 
-                            <jsp:include page="paciente/listPacientes.jsp"/>
+                            <jsp:include page="paciente/paciente.jsp"/>
 
 
                         </div>
@@ -154,48 +156,6 @@
                 </div>
 
             </div>
-            <!--<script src="resources/js-ui/jquery-ui.js" type="text/javascript"></script>-->
-            <script src="resources/js/style.js" type="text/javascript"></script>
-            <script src="resources/js/tabPanel.js" type="text/javascript"></script>
-
-            <script>
-                
-                
-                $(function () {
-                    $('.form_date').datetimepicker({
-    format: "yyyy-mm-dd",
-    language: 'es',
-    weekStart: 1,
-    todayBtn: 1,
-    autoclose: 1,
-    todayHighlight: 1,
-    startView: 2,
-    pickerPosition: "bottom-left",
-    minView: 2,
-    forceParse: 0
-});
-                    /*$('.form_date').datetimepicker({
-                        format: "yyyy-mm-dd",
-                        language: 'es',
-                        weekStart: 1,
-                        todayBtn: 1,
-                        autoclose: 1,
-                        todayHighlight: 1,
-                        startView: 2,
-                        pickerPosition: "bottom-left",
-                        minView: 2,
-                        forceParse: 0
-                    });
-                    $('#pagination-demo').twbsPagination({
-                     totalPages: 35,
-                     visiblePages: 7,
-                     //first: "Siguiente",
-                     onPageClick: function (event, page) {
-                     $('#page-content').text('Page ' + page);
-                     }
-                     });*/
-                });
-
-            </script>                    
+        </div>
     </body>
 </html>

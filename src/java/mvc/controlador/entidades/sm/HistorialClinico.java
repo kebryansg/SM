@@ -46,6 +46,8 @@ public class HistorialClinico implements Serializable {
     private String cedula;
     @Column(name = "cedula")
     private String apellido2;
+    @Column(name = "estado")
+    private String estado;
 
     
     @Column(name = "idPaciente")
@@ -59,6 +61,13 @@ public class HistorialClinico implements Serializable {
     @OneToMany(mappedBy = "idHistorialClinico")
     private List<Caso> casoList;
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
     public String getCedula() {
         return cedula;
     }
@@ -107,10 +116,15 @@ public class HistorialClinico implements Serializable {
         this.paciente = paciente;
     }
     public HistorialClinico() {
+        this.id = 0;
     }
 
     public HistorialClinico(Integer id) {
         this.id = id;
+    }
+    public HistorialClinico(String nada,Integer idPaciente) {
+        this.id = 0;
+        this.idPaciente = idPaciente;
     }
 
     public Integer getId() {

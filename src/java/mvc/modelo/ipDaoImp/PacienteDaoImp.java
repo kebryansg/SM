@@ -27,7 +27,7 @@ public class PacienteDaoImp implements PacienteDao {
     public List<Paciente> list() {
         this.conn = con_db.open(con_db.MSSQL_IP);
         List<Paciente> list = new ArrayList<>();
-        ResultSet rs = this.conn.query("select top 10 * from paciente");
+        ResultSet rs = this.conn.query("select top 10 * from paciente inner join BD_SM.dbo.historialClinico on idPaciente = paciente.id where estado = '1'");
         try {
             while (rs.next()) {
                 Paciente value = new Paciente();
@@ -173,7 +173,7 @@ public class PacienteDaoImp implements PacienteDao {
         List<Paciente> list = new ArrayList<>();
         String paginacion = (top != -1)? "OFFSET " + pag + " ROWS FETCH NEXT " + top + " ROWS ONLY;" : "";
         //System.out.println("select historialClinico.id as historia , paciente.* from paciente inner join BD_SM.dbo.historialClinico on idPaciente = paciente.id where nombre1 like '%" + filter + "%' or nombre2 like '%" + filter + "%' or apellido1 like '%" + filter + "%' or apellido2 like '%" + filter + "%' or cedula like '%" + filter + "%' order by id " + paginacion);
-        ResultSet rs = this.conn.query("select historialClinico.id as historia , paciente.* from paciente inner join BD_SM.dbo.historialClinico on idPaciente = paciente.id where nombre1 like '%" + filter + "%' or nombre2 like '%" + filter + "%' or apellido1 like '%" + filter + "%' or apellido2 like '%" + filter + "%' or cedula like '%" + filter + "%' or historialClinico.id like '%" + filter + "%' order by id " + paginacion);
+        ResultSet rs = this.conn.query("select historialClinico.id as historia , paciente.* from paciente inner join BD_SM.dbo.historialClinico on idPaciente = paciente.id where estado = '1' and (nombre1 like '%" + filter + "%' or nombre2 like '%" + filter + "%' or apellido1 like '%" + filter + "%' or apellido2 like '%" + filter + "%' or cedula like '%" + filter + "%' or historialClinico.id like '%" + filter + "%') order by id " + paginacion);
         try {
             while (rs.next()) {
                 Paciente value = new Paciente();

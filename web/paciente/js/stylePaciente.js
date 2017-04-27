@@ -1,5 +1,3 @@
-
-
 function change_cboProvincia() {
     $.ajax({
         type: 'Post',
@@ -13,7 +11,6 @@ function change_cboProvincia() {
             $("#cboCanton").html(response);
             $("#cboCanton").selectpicker('refresh');
         }
-
     });
 }
 
@@ -51,16 +48,6 @@ $(document).ready(function () {
         change_cboCanton();
     });
 
-
-    /*$("#cboProvincia").change(function () {
-        change_cboProvincia();
-    });
-
-    $("#cboCanton").change(function () {
-        change_cboCanton();
-    });*/
-
-
     $("#pac_Genero").change(change_Genero);
 
     $("#btnAddPhoto").click(function () {
@@ -93,32 +80,24 @@ $(document).ready(function () {
 
     $("#savePaciente").click(function () {
         $.getScript("paciente/js/paciente.js", function () {
-            var id = $("#savePaciente").attr("data-id");
+            /*var id = $("#savePaciente").attr("data-id");
             if (id === "0") {
                 save();
             } else {
                 editSave();
-            }
+            }*/
+            edit();
 
         });
     });
 
     $("#cancelPaciente").click(function () {
         $.getScript("paciente/js/paciente.js", function () {
-            edit();
+            //edit();
+            limpiar();
         });
     });
 
 
-    $("#txt_filterPaciente").keyup(function () {
-        $.getScript("paciente/js/paciente.js", function () {
-            list_filter();
-        });
-    });
-
-    $("#cantList").change(function () {
-        $.getScript("paciente/js/paciente.js", function () {
-            list_filter();
-        });
-    });
+    
 });

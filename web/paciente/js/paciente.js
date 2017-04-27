@@ -71,7 +71,7 @@ function edit() {
         type: 'POST',
         async: false,
         data: {
-            id: 6,
+            id: 59,
             op: 'edit'
         },
         success: function (response) {
@@ -253,3 +253,8 @@ function asignarPaciente(paciente) {
     });
 }
 
+function limpiar(){
+    $($currentTab.attr("href")).load("paciente/paciente.jsp", function(){
+        ini();
+    });
+}
