@@ -7,16 +7,15 @@ package mvc.controlador.entidades.ip;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,7 +25,7 @@ import javax.persistence.TemporalType;
  * @author kebryan
  */
 @Entity
-@Table(name = "obstetricos")
+@Table(name = "obstetricos", catalog = "bd_ip", schema = "dbo")
 @NamedQueries({
     @NamedQuery(name = "Obstetricos.findAll", query = "SELECT o FROM Obstetricos o")})
 public class Obstetricos implements Serializable {
@@ -58,8 +57,9 @@ public class Obstetricos implements Serializable {
     @Lob
     @Column(name = "observaciones")
     private String observaciones;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idObstetricos")
-    private List<Paciente> pacienteList;
+    @JoinColumn(name = "idPaciente", referencedColumnName = "id")
+    @ManyToOne
+    private Paciente idPaciente;
 
     public Obstetricos() {
     }
@@ -156,12 +156,12 @@ public class Obstetricos implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public List<Paciente> getPacienteList() {
-        return pacienteList;
+    public Paciente getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setPacienteList(List<Paciente> pacienteList) {
-        this.pacienteList = pacienteList;
+    public void setIdPaciente(Paciente idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     @Override

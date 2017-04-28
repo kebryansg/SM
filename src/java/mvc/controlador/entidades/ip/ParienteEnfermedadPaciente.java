@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author kebryan
  */
 @Entity
-@Table(name = "pariente_enfermedad_paciente")
+@Table(name = "pariente_enfermedad_paciente", catalog = "bd_ip", schema = "dbo")
 @NamedQueries({
     @NamedQuery(name = "ParienteEnfermedadPaciente.findAll", query = "SELECT p FROM ParienteEnfermedadPaciente p")})
 public class ParienteEnfermedadPaciente implements Serializable {

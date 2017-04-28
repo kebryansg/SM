@@ -51,12 +51,41 @@ public class Medico implements Serializable {
     private String telefonoMovil;
     @Column(name = "email")
     private String email;
+     @Column(name = "visible")
+    private int visible;
+
+    public int getVisible() {
+        return visible;
+    }
+
+    public void setVisible(int visible) {
+        this.visible = visible;
+    }
     @Column(name = "cedula")
     private String cedula;
     @OneToMany(mappedBy = "idMedico")
     private List<MedicoEspecialidad> medicoEspecialidadList;
 
     public Medico() {
+    }
+    public Medico(int id)
+    {
+        this.id=id;
+    }
+    public Medico(String nombre1, String nombre2, String apellidos1, String apellidos2,String domicilio,String ciudad, String telefonoDomicilio,String telefonoOficina, String telefonoMovil, String email, String cedula, int visible)
+    {
+        this.nombre1=nombre1;
+        this.nombre2=nombre2;
+        this.apellidos1=apellidos1;
+        this.apellidos2=apellidos2;
+        this.domicilio=domicilio;
+        this.ciudad=ciudad;
+        this.telefonoDomicilio=telefonoDomicilio;
+        this.telefonoOficina=telefonoOficina;
+        this.telefonoMovil=telefonoMovil;
+        this.email=email;
+        this.cedula=cedula;
+        this.visible=visible;
     }
 
     public Medico(Integer id) {

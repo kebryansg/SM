@@ -41,6 +41,11 @@ public class EspecialidadEgreso implements Serializable {
     public EspecialidadEgreso() {
     }
 
+    public EspecialidadEgreso(Integer id, String descripcion) {
+        this.id = id;
+        this.descripcion = descripcion;
+    }
+
     public EspecialidadEgreso(Integer id) {
         this.id = id;
     }

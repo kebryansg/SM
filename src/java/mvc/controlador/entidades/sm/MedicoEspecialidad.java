@@ -47,6 +47,16 @@ public class MedicoEspecialidad implements Serializable {
     public MedicoEspecialidad() {
     }
 
+    /**
+     *
+     * @param medico
+     * @param especialidad
+     */
+    public MedicoEspecialidad(Medico medico, Especialidad especialidad) {
+       this.idEspecialidad=especialidad;
+       this.idMedico=medico;
+    }
+
     public MedicoEspecialidad(Integer id) {
         this.id = id;
     }

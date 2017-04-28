@@ -15,6 +15,7 @@ import mvc.controlador.entidades.ip.Parroquia;
 public interface ParroquiaDao {
     public List<Parroquia> list(int idCanton);
     public Parroquia edit(int id);
+    public String detParroquia (int id);
     public boolean save(Parroquia value);
     public boolean delete(int id);
 }

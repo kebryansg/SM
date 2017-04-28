@@ -1,7 +1,3 @@
-/*
- * Arreglar 
- */
-
 var currentTab;
 var composeCount = 0;
 //initilize tabs
@@ -14,30 +10,64 @@ $(function () {
         $(this).tab('show');
         $currentTab = $(this);
     });
-    
     registerComposeButtonEvent();
     registerCloseEvent();
+
 });
+
+function pestañaValida(a) {
+    return $('a[name="' + $(a).attr("data-title") + '"]').length === 0;
+}
 
 //this method will demonstrate how to add tab dynamically
 function registerComposeButtonEvent() {
     /* just for this demo */
     $("a[data-url]").click(function (e) {
         e.preventDefault();
+        if (pestañaValida($(this))) {
+            var tabId = "compose" + composeCount; //this is id on tab content div where the 
+            composeCount = composeCount + 1; //increment compose count
 
-        var tabId = "compose" + composeCount; //this is id on tab content div where the 
-        composeCount = composeCount + 1; //increment compose count
+            $('#TabAdm').append('<li><a name="' + $(this).attr("data-title") + '" href="#' + tabId + '"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>' + $(this).attr("data-title") + '</a></li>');
+            $('#ContentAdm').append('<div class="tab-pane fade" id="' + tabId + '"></div>');
+            $("#" + tabId).load($(this).attr("data-url"), function () {
+                ini();
+            });
+            $currentTab = $('#TabAdm a[href="#' + tabId + '"]');
 
-        $('.nav-tabs').append('<li><a href="#' + tabId + '"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>'+ $(this).attr("data-url") +'</a></li>');
-        $('.tab-content').append('<div class="tab-pane fade" id="' + tabId + '"><h3>'+$(this).attr("data-url")+'</h3></div>');
+            $(this).tab('show');
+            showTab(tabId);
+            registerCloseEvent();
+        }
 
-        //craeteNewTabAndLoadUrl("", "./SamplePage.html", "#" + tabId);
-
-        $(this).tab('show');
-        showTab(tabId);
-        registerCloseEvent();
     });
 
+}
+function ini() {
+    $('.form_date').datetimepicker({
+        format: "yyyy-mm-dd",
+        language: 'es',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        pickerPosition: "bottom-left",
+        minView: 2,
+        forceParse: 0
+    });
+    $('.form_time').datetimepicker({
+        language: 'es',
+        weekStart: 1,
+        //todayBtn: 1,
+        autoclose: 1,
+        //todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
+    $(".selectpicker").selectpicker().selectpicker("render");
 }
 
 //this method will register event on close icon on the tab..
@@ -56,6 +86,7 @@ function registerCloseEvent() {
 //shows the tab with passed content div id..paramter tabid indicates the div where the content resides
 function showTab(tabId) {
     $('#TabAdm a[href="#' + tabId + '"]').tab('show');
+
 }
 //return current active tab
 function getCurrentTab() {

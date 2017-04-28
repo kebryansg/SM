@@ -14,7 +14,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,7 +27,7 @@ import javax.persistence.TemporalType;
  * @author kebryan
  */
 @Entity
-@Table(name = "paciente")
+@Table(name = "paciente", catalog = "bd_ip", schema = "dbo")
 @NamedQueries({
     @NamedQuery(name = "Paciente.findAll", query = "SELECT p FROM Paciente p")})
 public class Paciente implements Serializable {
@@ -38,12 +37,18 @@ public class Paciente implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "historiaClinica")
+    private Integer historiaClinica;
     @Column(name = "cedula")
     private String cedula;
     @Column(name = "nombre1")
     private String nombre1;
     @Column(name = "nombre2")
     private String nombre2;
+    @Column(name = "apellido1")
+    private String apellido1;
+    @Column(name = "apellido2")
+    private String apellido2;
     @Column(name = "domicilio")
     private String domicilio;
     @Column(name = "nacionalidad")
@@ -52,6 +57,14 @@ public class Paciente implements Serializable {
     private String ciudad;
     @Column(name = "estadoCivil")
     private String estadoCivil;
+
+    public Integer getHistoriaClinica() {
+        return historiaClinica;
+    }
+
+    public void setHistoriaClinica(Integer historiaClinica) {
+        this.historiaClinica = historiaClinica;
+    }
     @Column(name = "telefonoDomicilio")
     private String telefonoDomicilio;
     @Column(name = "telefonoOficina")
@@ -67,29 +80,33 @@ public class Paciente implements Serializable {
     @Column(name = "fechaNacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
-    @Lob
-    @Column(name = "foto")
-    private byte[] foto;
     @Column(name = "etnia")
     private Integer etnia;
     @Column(name = "discapacidad")
     private Integer discapacidad;
+    @Column(name = "imagen")
+    private String imagen;
+    @OneToMany(mappedBy = "idPaciente")
+    private List<Obstetricos> obstetricosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
     private List<ParienteEnfermedadPaciente> parienteEnfermedadPacienteList;
-    @JoinColumn(name = "idObstetricos", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Obstetricos idObstetricos;
     @JoinColumn(name = "idParroquia", referencedColumnName = "id")
     @ManyToOne
     private Parroquia idParroquia;
 
     public Paciente() {
-        this.id = 0;
     }
 
     public Paciente(Integer id) {
         this.id = id;
     }
+    public Paciente(String cedula, String nombre1, String nombre2, String apellido1, String apellido2) {
+           this.cedula = cedula;
+           this.nombre1 = nombre1;
+           this.nombre2 = nombre2;
+           this.apellido1 = apellido1;
+           this.apellido2 = apellido2;
+       }
 
     public Integer getId() {
         return id;
@@ -121,6 +138,22 @@ public class Paciente implements Serializable {
 
     public void setNombre2(String nombre2) {
         this.nombre2 = nombre2;
+    }
+
+    public String getApellido1() {
+        return apellido1;
+    }
+
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    public String getApellido2() {
+        return apellido2;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
     }
 
     public String getDomicilio() {
@@ -211,14 +244,6 @@ public class Paciente implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
-
     public Integer getEtnia() {
         return etnia;
     }
@@ -235,20 +260,28 @@ public class Paciente implements Serializable {
         this.discapacidad = discapacidad;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public List<Obstetricos> getObstetricosList() {
+        return obstetricosList;
+    }
+
+    public void setObstetricosList(List<Obstetricos> obstetricosList) {
+        this.obstetricosList = obstetricosList;
+    }
+
     public List<ParienteEnfermedadPaciente> getParienteEnfermedadPacienteList() {
         return parienteEnfermedadPacienteList;
     }
 
     public void setParienteEnfermedadPacienteList(List<ParienteEnfermedadPaciente> parienteEnfermedadPacienteList) {
         this.parienteEnfermedadPacienteList = parienteEnfermedadPacienteList;
-    }
-
-    public Obstetricos getIdObstetricos() {
-        return idObstetricos;
-    }
-
-    public void setIdObstetricos(Obstetricos idObstetricos) {
-        this.idObstetricos = idObstetricos;
     }
 
     public Parroquia getIdParroquia() {

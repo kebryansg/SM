@@ -14,7 +14,9 @@ public abstract  class C_BD {
     protected String[] params;
     protected Connection conexion;
     abstract Connection open();
-    
+     public Connection getConexion() {
+        return conexion;
+    }
     public ResultSet query(String query)
     {
         Statement st;
