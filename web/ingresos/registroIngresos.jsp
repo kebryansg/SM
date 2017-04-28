@@ -18,9 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
 <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 
-<div class="tab-content">
-
-    <div class="tab-pane fade in active" id="ip" style="padding-top: 10px;">
+<div class="contenedor-tabs">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">                                    
                 <div class="row">                                            
@@ -205,7 +204,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Búsqueda de Pacientes</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" >
                     <div style="padding-left: 12px; padding-right: 12px " class="row">
                         <div class="col-lg-12">
 
@@ -239,7 +238,7 @@
                                     <thead>
 
                                     </thead>
-                                    <tbody>
+                                    <tbody >
 
 
                                     </tbody>

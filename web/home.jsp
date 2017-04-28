@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="resources/css/alertify.default.css" />
         <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
         <script src="resources/js/style.js" type="text/javascript"></script>
-            <script src="resources/js/tabPanel.js" type="text/javascript"></script>
+        <script src="resources/js/tabPanel.js" type="text/javascript"></script>
     </head>
     <body>
         <div class="fill">

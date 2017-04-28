@@ -1,3 +1,18 @@
+function deletPaciente(id) {
+    $.ajax({
+        url: 'sPaciente',
+        data: {
+            op: 'delete',
+            id: id
+        },
+        async: false,
+        type: 'POST',
+        success: function (data) {
+            alertify.success("Registros Eliminado");
+        }
+    });
+}
+
 function list() {
     $.ajax({
         url: 'sPaciente',
@@ -35,33 +50,41 @@ function indexPag(pag) {
 }
 
 function list_filter() {
-    var $totalPages = 0;
-    $.ajax({
-        url: 'sPaciente',
-        type: 'POST',
-        async: false,
-        data: {
-            op: 'list',
-            filter: $("#txt_filterPaciente").val()
-        },
-        success: function (response) {
-            $totalPages = response / $("#cantList").val();
-            $totalPages = Math.ceil($totalPages);
-        }
-    });
-    var defaultOpts = {
-        totalPages: $totalPages,
-        visiblePages: 10,
-        first: "Primero",
-        next: "Siguiente",
-        last: "Ultimo",
-        prev: "Anterior",
-        onPageClick: function (event, page) {
-            indexPag(page);
-        }
-    };
-    $pagination.twbsPagination('destroy');
-    $pagination.twbsPagination(defaultOpts);
+    if ($("#txt_filterPaciente").val() === "") {
+        indexPag(1);
+        $pagination.twbsPagination('destroy');
+    } else {
+        var $totalPages = 0;
+        $.ajax({
+            url: 'sPaciente',
+            type: 'POST',
+            async: false,
+            data: {
+                op: 'list',
+                filter: $("#txt_filterPaciente").val()
+            },
+            success: function (response) {
+                $totalPages = response / $("#cantList").val();
+                $totalPages = Math.ceil($totalPages);
+            }
+        });
+        var defaultOpts = {
+            totalPages: $totalPages,
+            visiblePages: 10,
+            first: "Primero",
+            next: "Siguiente",
+            last: "Ultimo",
+            prev: "Anterior",
+            onPageClick: function (event, page) {
+                indexPag(page);
+            }
+        };
+        $pagination.twbsPagination('destroy');
+        $pagination.twbsPagination(defaultOpts);
+    }
+
+
+
 }
 
 
@@ -253,8 +276,8 @@ function asignarPaciente(paciente) {
     });
 }
 
-function limpiar(){
-    $($currentTab.attr("href")).load("paciente/paciente.jsp", function(){
+function limpiar() {
+    $($currentTab.attr("href")).load("paciente/paciente.jsp", function () {
         ini();
     });
 }

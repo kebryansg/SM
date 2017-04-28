@@ -47,7 +47,7 @@
 <script type="text/javascript">
     $(function () {
         $.getScript("paciente/js/paciente.js", function () {
-            //list_filter();
+            indexPag(1);
         });
     });
 </script>

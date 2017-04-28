@@ -6,23 +6,14 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
+<!--<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-<script type="text/javascript">
-    $(function () {
-        /*$('#dtpFechaIngreso').datetimepicker({format: 'DD/MM/YYYY'});
-        $('#dtpFechaSalida').datetimepicker({format: 'DD/MM/YYYY'});
-        $('#dtpHoraIngreso').datetimepicker({format: 'LT'});
-        $('#dtpFechaIngresoEditar').datetimepicker({format: 'YYYY/MM/DD'});
-        $('#dtpFechaSalidaEditar').datetimepicker({format: 'YYYY/MM/DD'});*/
 
-    });
-</script>
 <script type="text/javascript" src="ingresos/js/editarIngresos.js"></script>
 <br>
-<div class="row">
-    <div class="col-md-12">
+<div class="contenedor-tabs">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
                 <div class="row">
@@ -52,7 +43,8 @@
         </div>
         <span class="label label-default"></span>
         <br>
-        <div class="table-responsive">
+        <div class="row">
+            <div class="table-responsive">
             <table id="tablaIngresos" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
@@ -65,7 +57,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="container">
+        </div>   
+        <div class="row">
             <nav aria-label="Page navigation">
                 <ul class="pagination" id="pagination"></ul>
             </nav>

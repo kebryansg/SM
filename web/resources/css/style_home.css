@@ -1,7 +1,11 @@
 .pruebacss{
     display: none;
 }
-
+.h-scroll {
+    height: 300px; /* %-height of the viewport */
+    position: fixed;
+    overflow-y: scroll;
+}
 
 .disabledTab {
     pointer-events: none;

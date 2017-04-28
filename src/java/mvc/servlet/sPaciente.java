@@ -106,6 +106,9 @@ public class sPaciente extends HttpServlet {
         final DateFormat DF = new SimpleDateFormat(FORMATO_FECHA);
         Gson gson = new GsonBuilder().setDateFormat(FORMATO_FECHA).create();
         switch (op) {
+            case "delete": 
+                new HistorialClinicoDaoImp().delete(Integer.parseInt(request.getParameter("id")));
+                break;
             case "list":
 
                 listP = new PacienteDaoImp().list_Filter(request.getParameter("filter"), 0, -1);

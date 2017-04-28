@@ -99,7 +99,7 @@ public class HistorialClinicoDaoImp implements HistorialClinicoDao {
         try {
             sql = "UPDATE [dbo].[historialClinico]\n"
                     + "   SET [estado] = '0'\n"
-                    + " WHERE id = '" + id + "'";
+                    + " WHERE [idPaciente] = '" + id + "'";
             conn.execute(sql);
             System.out.println(sql);
             return true;
