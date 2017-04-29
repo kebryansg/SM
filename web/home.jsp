@@ -19,7 +19,6 @@
         <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
 
-
         <!--    desde aqui mis links -->
 
         <script type="text/javascript" src="resources/js/moment.js"></script>
@@ -129,7 +128,7 @@
                         <div id="home" class="tab-pane fade in active">
 
 
-                            <jsp:include page="paciente/paciente.jsp"/>
+                            <jsp:include page="paciente/listPacientes.jsp"/>
 
 
                         </div>

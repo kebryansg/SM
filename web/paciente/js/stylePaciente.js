@@ -8,7 +8,7 @@ function change_cboProvincia() {
             op: 'cantones'
         },
         success: function (response) {
-            $("#cboCanton").html(response);
+            $("#cboCanton").append(response);
             $("#cboCanton").selectpicker('refresh');
         }
     });
@@ -24,7 +24,7 @@ function change_cboCanton() {
             op: 'parroquias'
         },
         success: function (response) {
-            $("#cboParroquia").html(response);
+            $("#cboParroquia").append(response);
             $("#cboParroquia").selectpicker('refresh');
         }
 
@@ -80,21 +80,20 @@ $(document).ready(function () {
 
     $("#savePaciente").click(function () {
         $.getScript("paciente/js/paciente.js", function () {
-            /*var id = $("#savePaciente").attr("data-id");
+            var id = $("#savePaciente").attr("data-id");
             if (id === "0") {
                 save();
             } else {
                 editSave();
-            }*/
-            edit();
-
+            }
         });
     });
 
     $("#cancelPaciente").click(function () {
         $.getScript("paciente/js/paciente.js", function () {
             //edit();
-            limpiar();
+            //limpiar();
+            validar();
         });
     });
 

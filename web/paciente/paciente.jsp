@@ -35,26 +35,27 @@
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">Cedula *</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" id="pac_Cedula" maxlength="10" id="inputUserName" placeholder="Cedula">
+                                    <input validate="text" type="text" class="form-control" id="pac_Cedula" maxlength="10" id="inputUserName" placeholder="Cedula">
+
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-sm-3">Nombres *</label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" id="pac_primerNombre" placeholder="Primer nombre">
+                                    <input type="text" class="form-control" validate="text" id="pac_primerNombre" placeholder="Primer nombre">
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" id="pac_segundoNombre" placeholder="Segundo nombre">
+                                    <input type="text" class="form-control" validate="text" id="pac_segundoNombre" placeholder="Segundo nombre">
                                 </div>
 
                             </div>
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-sm-3">Apellidos *</label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" id="pac_primerApellido" placeholder="Primer apellido">
+                                    <input type="text" validate="text" class="form-control" id="pac_primerApellido" placeholder="Primer apellido">
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" id="pac_segundoApellido" placeholder="Segundo apellido">
+                                    <input type="text" validate="text" class="form-control" id="pac_segundoApellido" placeholder="Segundo apellido">
                                 </div>
                             </div>
 
@@ -63,7 +64,7 @@
                                 <div class="col-md-8">
                                     <!--<input class="form-control" id="pac_FechaNac" type="text">-->
                                     <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
-                                        <input class="form-control" id="pac_FechaNac" size="16" type="text" value="" readonly>
+                                        <input class="form-control" validate="date" id="pac_FechaNac" size="16" type="text" value="" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
 
@@ -89,7 +90,8 @@
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">Nacionalidad *</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" id="pac_nacionalidad">
+                                    <select class="form-control" validate="select" id="pac_nacionalidad">
+                                        <option value="0">Seleccione</option>
                                         <option value="1">Ecuatoriano</option>
                                         <option value="2">Extranjero</option>
                                     </select>
@@ -98,19 +100,20 @@
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">Tef. Casa *</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" maxlength="10" id="pac_TelCasa" placeholder="Tef. Casa">
+                                    <input type="text" validate="text" class="form-control" maxlength="10" id="pac_TelCasa" placeholder="Tef. Casa">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">E-mail *</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control"  id="pac_Email" placeholder="E-mail">
+                                    <input type="email" validate="email" class="form-control"  id="pac_Email" placeholder="E-mail">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">Etnia *</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" id="pac_Etnia">
+                                    <select class="form-control" validate="select" id="pac_Etnia">
+                                        <option value="0">Seleccione</option>
                                         <option value="1">Indigena</option>
                                         <option value="2">Afroecuatoriano</option>
                                         <option value="3">Negro(a)</option>
@@ -125,7 +128,7 @@
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">Domicilio *</label>
                                 <div class="col-md-8">
-                                    <textarea class="form-control" rows="3" id="pac_Domicilio"></textarea>
+                                    <textarea class="form-control" validate="text" rows="3" id="pac_Domicilio"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -139,13 +142,14 @@
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">Cuidad *</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control"  id="pac_Ciudad" placeholder="Ciudad">
+                                    <input type="text" class="form-control" validate="text"  id="pac_Ciudad" placeholder="Ciudad">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">Estado civil *</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" id="pac_EstadoCivil">
+                                    <select class="form-control" validate="select" id="pac_EstadoCivil">
+                                        <option value="0">Seleccione</option>
                                         <option value="1">Soltero</option>
                                         <option value="2">Casado</option>
                                         <option value="3">Divorciado</option>
@@ -157,13 +161,14 @@
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">Tef. Oficina *</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" maxlength="10" id="pac_TelOficina" placeholder="Tef. Oficina">
+                                    <input type="text" class="form-control" validate="text" maxlength="10" id="pac_TelOficina" placeholder="Tef. Oficina">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">Género *</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" id="pac_Genero">
+                                    <select class="form-control" validate="select" id="pac_Genero">
+                                        <option value="0">Seleccione</option>
                                         <option value="1">Masculino</option>
                                         <option value="2">Femenino</option>
                                     </select>
@@ -172,13 +177,13 @@
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">Pais Nac. *</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control"  id="pac_PaisNac" placeholder="Pais Nacimiento">
+                                    <input type="text" class="form-control" validate="text"  id="pac_PaisNac" placeholder="Pais Nacimiento">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-3">Lugar Nac. *</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control"  id="pac_LugarNac" placeholder="Lugar Nacimiento">
+                                    <input type="text" class="form-control" validate="text"  id="pac_LugarNac" placeholder="Lugar Nacimiento">
                                 </div>
                             </div>
                         </div>
@@ -189,8 +194,8 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">Provincia *</label>
                                 <div class="col-md-8">
-                                    <select class="selectpicker" data-live-search="true" id="cboProvincia">
-                                        <option value="0">Seleccione una</option>
+                                    <select class="selectpicker" validate="select"  data-live-search="true" id="cboProvincia">
+                                        <option value="0">Seleccione</option>
                                         <%
                                             ProvinciaDao p = new ProvinciaDaoImp();
                                             List<Provincia> ps = p.list();
@@ -203,8 +208,8 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">Parroquia *</label>
                                 <div class="col-md-8">
-                                    <select class="selectpicker" data-live-search="true" id="cboParroquia">
-
+                                    <select class="selectpicker" validate="select" data-live-search="true" id="cboParroquia">
+                                        <option value="0">Seleccione</option>
                                     </select>
                                 </div>
                             </div>
@@ -214,8 +219,8 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">Canton *</label>
                                 <div class="col-md-8">
-                                    <select class="selectpicker" data-live-search="true" id="cboCanton">
-
+                                    <select class="selectpicker" validate="select" data-live-search="true" id="cboCanton">
+                                        <option value="0">Seleccione</option>
                                     </select>
                                 </div>
                             </div>
@@ -360,5 +365,5 @@
 </div>
 <script src="paciente/js/stylePaciente.js" type="text/javascript"></script>
 <script>
-    $(".selectpicker").selectpicker().selectpicker("render");
+    //$(".selectpicker").selectpicker().selectpicker("render");
 </script>

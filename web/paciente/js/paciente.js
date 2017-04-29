@@ -1,3 +1,58 @@
+function validar() {
+    $(".help-block").remove();
+
+    /* Validacion de email */
+    var validacion_email = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+    var email = $("#tabPacientes input[validate='email']");
+    if ($(email).val() === null || $(email).val() === "" || !validacion_email.test($(email).val())) {
+        $(email).closest("div").addClass("has-error");
+        $(email).after('<span id="' + $(email).attr("id") + 'help" class="help-block">Email no valido.</span');
+    } else {
+        $(email).closest("div").removeClass("has-error");
+    }
+    /* Validacion de email */
+
+    $.each($("#tabPacientes input[validate='text']"), function (index, value) {
+        if ($(value).val() === null || $(value).val() === "") {
+            $(value).closest("div").addClass("has-error");
+            $(value).after('<span id="' + $(value).attr("id") + 'help" class="help-block">Campo Vacio</span');
+        } else
+        {
+            $(value).closest("div").removeClass("has-error");
+        }
+    });
+    $.each($("#tabPacientes select[validate='select']"), function (index, value) {
+        if ($(value).val() === "0") {
+            $(value).closest("div").addClass("has-error");
+            $(value).after('<span id="' + $(value).attr("id") + 'help" class="help-block">Sin seleccionar</span');
+        } else
+        {
+            $(value).closest("div").removeClass("has-error");
+        }
+    });
+    $.each($("#tabPacientes input[validate='date']"), function (index, value) {
+        if ($(value).val() === null || $(value).val() === "") {
+            $(value).closest("div").addClass("has-error");
+            $(value).parent("div").after('<span id="' + $(value).attr("id") + 'help" style="color:#a94442;" class="help-block">Sin Fecha</span');
+        } else
+        {
+            $(value).closest("div").removeClass("has-error");
+        }
+    });
+    if ($("#pac_Genero").val() === "2") {
+        var date = $("#pac_FPP");
+        if ($(date).val() === null || $(date).val() === "") {
+            $(date).closest("div").addClass("has-error");
+            $(date).parent("div").after('<span id="' + $(date).attr("id") + 'help" style="color:#a94442;" class="help-block">Sin Fecha</span');
+        } else
+        {
+            $(date).closest("div").removeClass("has-error");
+        }
+    }
+    return $(".help-block").length === 0;
+}
+
+
 function deletPaciente(id) {
     $.ajax({
         url: 'sPaciente',
@@ -87,14 +142,13 @@ function list_filter() {
 
 }
 
-
-function edit() {
+function edit(id) {
     $.ajax({
         url: 'sPaciente',
         type: 'POST',
         async: false,
         data: {
-            id: 59,
+            id: id,
             op: 'edit'
         },
         success: function (response) {
@@ -109,7 +163,8 @@ function edit() {
 }
 
 function editSave() {
-    var newA = newAntecedentes();
+    if(validar()){
+        var newA = newAntecedentes();
     var editA = editAntecedentes();
     $.ajax({
         url: 'sPaciente',
@@ -123,27 +178,31 @@ function editSave() {
             op: 'save'
         },
         success: function (response) {
-
+            alertify.success("Paciente Modificado");
         }
     });
+    }
+    
 }
 
 function save() {
-    var newA = newAntecedentes();
-    $.ajax({
-        url: 'sPaciente',
-        type: 'POST',
-        async: false,
-        data: {
-            id: 0,
-            paciente: obtenerDatos(),
-            newAntecedentes: newA,
-            op: 'save'
-        },
-        success: function (response) {
-
-        }
-    });
+    if (validar()) {
+        var newA = newAntecedentes();
+        $.ajax({
+            url: 'sPaciente',
+            type: 'POST',
+            async: false,
+            data: {
+                id: 0,
+                paciente: obtenerDatos(),
+                newAntecedentes: newA,
+                op: 'save'
+            },
+            success: function (response) {
+                alertify.success("Paciente Registrado");
+            }
+        });
+    }
 }
 
 function obtenerDatos() {
