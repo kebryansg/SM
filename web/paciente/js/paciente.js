@@ -52,7 +52,6 @@ function validar() {
     return $(".help-block").length === 0;
 }
 
-
 function deletPaciente(id) {
     $.ajax({
         url: 'sPaciente',
@@ -163,26 +162,26 @@ function edit(id) {
 }
 
 function editSave() {
-    if(validar()){
+    if (validar()) {
         var newA = newAntecedentes();
-    var editA = editAntecedentes();
-    $.ajax({
-        url: 'sPaciente',
-        type: 'POST',
-        async: false,
-        data: {
-            id: $("#savePaciente").attr("data-id"),
-            paciente: obtenerDatos(),
-            newAntecedentes: newA,
-            editAntecedentes: editA,
-            op: 'save'
-        },
-        success: function (response) {
-            alertify.success("Paciente Modificado");
-        }
-    });
+        var editA = editAntecedentes();
+        $.ajax({
+            url: 'sPaciente',
+            type: 'POST',
+            async: false,
+            data: {
+                id: $("#savePaciente").attr("data-id"),
+                paciente: obtenerDatos(),
+                newAntecedentes: newA,
+                editAntecedentes: editA,
+                op: 'save'
+            },
+            success: function (response) {
+                alertify.success("Paciente Modificado");
+            }
+        });
     }
-    
+
 }
 
 function save() {
@@ -273,44 +272,44 @@ function editAntecedentes() {
     return ids;
 }
 
-function asignarObstetrico(obs) {
-    $("#tabObstetricia").attr("data-id", obs.id);
-    $("#pac_FPP").val(obs.fpp);
-    $("#pac_Gestacion").val(obs.gestas);
-    $("#pac_Abortos").val(obs.abortos);
-    $("#pac_Partos").val(obs.partos);
-    $("#pac_Cesareas").val(obs.cesareas);
-    $("#pac_NacidoVivo").val(obs.nacidosVivos);
-    $("#pac_NacidoMuerto").val(obs.nacidosMuertos);
-    $("#pac_HijosVivos").val(obs.hijosVivos);
-    $("#pac_HijosMuertos").val(obs.muertos);
+function asignarObstetrico(obs,id) {
+    $("#editP" + id + " #tabObstetricia").attr("data-id", obs.id);
+    $("#editP" + id + " #pac_FPP").val(obs.fpp);
+    $("#editP" + id + " #pac_Gestacion").val(obs.gestas);
+    $("#editP" + id + " #pac_Abortos").val(obs.abortos);
+    $("#editP" + id + " #pac_Partos").val(obs.partos);
+    $("#editP" + id + " #pac_Cesareas").val(obs.cesareas);
+    $("#editP" + id + " #pac_NacidoVivo").val(obs.nacidosVivos);
+    $("#editP" + id + " #pac_NacidoMuerto").val(obs.nacidosMuertos);
+    $("#editP" + id + " #pac_HijosVivos").val(obs.hijosVivos);
+    $("#editP" + id + " #pac_HijosMuertos").val(obs.muertos);
 }
 
 function asignarPaciente(paciente) {
-    $("#savePaciente").attr("data-id", paciente.id);
-    $("#pac_Cedula").val(paciente.cedula);
-    $("#pac_primerNombre").val(paciente.nombre1);
-    $("#pac_segundoNombre").val(paciente.nombre2);
-    $("#pac_primerApellido").val(paciente.apellido1);
-    $("#pac_segundoApellido").val(paciente.apellido2);
-    $("#pac_FechaNac").val(paciente.fechaNacimiento);
-    $("#pac_imagen").attr("src", paciente.imagen);
-    $("#pac_imagen").attr("edit", paciente.imagen);
-    $("#pac_TelCasa").val(paciente.telefonoDomicilio);
-    $("#pac_Email").val(paciente.email);
-    $("#pac_TelOficina").val(paciente.telefonoOficina);
-    $("#pac_PaisNac").val(paciente.paisNacimiento);
-    $("#pac_LugarNac").val(paciente.lugarNacimiento);
-    $("#pac_Domicilio").val(paciente.domicilio);
-    $("#pac_Ciudad").val(paciente.ciudad);
+    $("#editP" + paciente.id + " #savePaciente").attr("data-id", paciente.id);
+    $("#editP" + paciente.id + " #pac_Cedula").val(paciente.cedula);
+    $("#editP" + paciente.id + " #pac_primerNombre").val(paciente.nombre1);
+    $("#editP" + paciente.id + " #pac_segundoNombre").val(paciente.nombre2);
+    $("#editP" + paciente.id + " #pac_primerApellido").val(paciente.apellido1);
+    $("#editP" + paciente.id + " #pac_segundoApellido").val(paciente.apellido2);
+    $("#editP" + paciente.id + " #pac_FechaNac").val(paciente.fechaNacimiento);
+    $("#editP" + paciente.id + " #pac_imagen").attr("src", paciente.imagen);
+    $("#editP" + paciente.id + " #pac_imagen").attr("edit", paciente.imagen);
+    $("#editP" + paciente.id + " #pac_TelCasa").val(paciente.telefonoDomicilio);
+    $("#editP" + paciente.id + " #pac_Email").val(paciente.email);
+    $("#editP" + paciente.id + " #pac_TelOficina").val(paciente.telefonoOficina);
+    $("#editP" + paciente.id + " #pac_PaisNac").val(paciente.paisNacimiento);
+    $("#editP" + paciente.id + " #pac_LugarNac").val(paciente.lugarNacimiento);
+    $("#editP" + paciente.id + " #pac_Domicilio").val(paciente.domicilio);
+    $("#editP" + paciente.id + " #pac_Ciudad").val(paciente.ciudad);
     var discapacidad = paciente.discapacidad === 1 ? true : false;
-    $("#pac_Discapacidad").attr("checked", discapacidad);
+    $("#editP" + paciente.id + " #pac_Discapacidad").attr("checked", discapacidad);
     //Select
-    $('#pac_nacionalidad > option[value="' + paciente.nacionalidad + '"]').attr('selected', true);
-    $('#pac_Etnia > option[value="' + paciente.etnia + '"]').attr('selected', true);
-    $('#pac_EstadoCivil > option[value="' + paciente.estadoCivil + '"]').attr('selected', true);
+    $('#editP' + paciente.id + ' #pac_nacionalidad > option[value="' + paciente.nacionalidad + '"]').attr('selected', true);
+    $('#editP' + paciente.id + ' #pac_Etnia > option[value="' + paciente.etnia + '"]').attr('selected', true);
+    $('#editP' + paciente.id + ' #pac_EstadoCivil > option[value="' + paciente.estadoCivil + '"]').attr('selected', true);
     var sexo = paciente.sexo === true ? "1" : "2";
-    $('#pac_Genero > option[value="' + sexo + '"]').attr('selected', true);
+    $('#editP' + paciente.id + ' #pac_Genero > option[value="' + sexo + '"]').attr('selected', true);
     change_Genero();
     /* Carga y asigna provincia,canton y parroquia */
     $.ajax({
@@ -323,19 +322,19 @@ function asignarPaciente(paciente) {
         },
         success: function (response) {
             var det = $.parseJSON(response);
-            $('#cboProvincia').selectpicker('val', det.provincia);
+            $('#editP' + paciente.id + ' #cboProvincia').selectpicker('val', det.provincia);
             //$('#cboProvincia > option[value="' + det.provincia + '"]').attr('selected', true);
             change_cboProvincia();
-            $('#cboCanton').selectpicker('val', det.canton);
+            $('#editP' + paciente.id + ' #cboCanton').selectpicker('val', det.canton);
             //$('#cboCanton > option[value="' + det.canton + '"]').attr('selected', true);
             change_cboCanton();
-            $('#cboParroquia').selectpicker('val', paciente.idParroquia.id);
+            $('#editP' + paciente.id + ' #cboParroquia').selectpicker('val', paciente.idParroquia.id);
             //$('#cboParroquia > option[value="' + paciente.idParroquia.id + '"]').attr('selected', true);
         }
     });
 }
 
-function limpiar() {
+function limpiarPaciente() {
     $($currentTab.attr("href")).load("paciente/paciente.jsp", function () {
         ini();
     });
