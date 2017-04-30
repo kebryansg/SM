@@ -28,107 +28,137 @@
     <div class="container-fluid">
         <div class="row">
             <div class="form-horizontal" >
-                <div class="row" style="padding-left: 12%; padding-bottom: 12px">                   
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <label for="inputUserName" >Cedula</label>
-                        <input type="text" class="form-control"  maxlength="10" id="txtCedula" placeholder="Cedula">
+                    <div class="tab-content" id="tabMedicoRegistro">
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <div class="pull-right">
+                                    <button class="btn btn-info" id="btnCancelar">Cancelar</button>
+                                    <button class="btn btn-info" id="btnGuardar" data-id="0">Guardar</button>
+                                </div>       
+                            </div>
+                        </div>
+                         
+                    
+                <hr/>
+        <div class="row">
+            <div class="form-horizontal" >
+                <div class="row" style="padding-bottom: 12px">  
+                    <!-- Primera columna -->
+                    <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="inputUserName" class="control-label col-md-4">Cédula *</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" validate="text" id="txtCedula" maxlength="10" id="inputUserName" placeholder="Cedula">
+                                </div>
+                            </div>   
+                        
+                        <div class="form-group">                                  
+                            <label for="inputUserName" class="control-label col-md-4">Primer Nombre</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="txtPrimerNombre" validate="text" placeholder="Primer nombre">                                    
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">                                  
+                            <label for="inputUserName" class="control-label col-md-4">Primer Apellido</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="txtPrimerApellido" validate="text" placeholder="Primer apellido">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">   
+                            <label for="inputUserName" class="control-label col-md-4" >Ciudad</label>   
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" maxlength="10" validate="text" id="txtCiudad" placeholder="Ciudad">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                                <label for="inputUserName" class="control-label col-md-4">Teléf. Domicilio</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" validate="text" maxlength="10" id="txtTelefonoDomicilio" placeholder="Teléf. Domicilio">
+                                </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-4">Teléf. Movil</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" validate="text" maxlength="10" id="txtTelefonoMovil" placeholder="Teléf. Movil">
+                            </div>
+                        </div>
+                    
+                        
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <label for="inputUserName">Primer Nombre</label>
-                        <input type="text" class="form-control" id="txtPrimerNombre" placeholder="Primer nombre">                                    
+                    
+                    <!-- Fin Primera columna --> 
+                    
+                    <!-- Segunda columna -->
+                    <div class="col-md-5">
+                       <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-4">Especialidad</label>
+                            <div class="col-md-8">
+                                <select class="selectpicker" validate="select" data-live-search="true" id="cboEspecialidad" data-width="100%" multiple >
+                                <%
+                                    EspecialidadDao esp = new EspecialidadDaoImp();
+                                    List<Especialidad> list = esp.list();
+                                    for (Especialidad elem : list) {%>
+                                <option value="<%= elem.getId()%>"><%=elem.getDescripcion()%></option>
+                                <% }%>
+                                </select>
+                            </div>
+                        </div> 
+                        
+                         <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-4">Segundo Nombre</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" validate="text" id="txtSegundoNombre" placeholder="Segundo nombre">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-4">Segundo Apellido</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" validate="text"  id="txtSegundoApellido" placeholder="Segundo apellido">
+                            </div>
+                        </div>
+                                
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-4">Domicilio</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" validate="text"  id="txtDomicilio" placeholder="Domicilio">
+                            </div>
+                        </div>
+                                
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-4">Teléf. Oficina</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" validate="text"  maxlength="10" id="txtTelefonoOficina" placeholder="Teléf. Oficina">
+                            </div>
+                        </div>   
+                        
+                        <div class="form-group">
+                            <label for="inputUserName" class="control-label col-md-4">Email</label>
+                            <div class="col-md-8">
+                                <input type="email" class="form-control" maxlength="50" validate="email" id="txtEmail" placeholder="E-mail">
+                            </div>
+                        </div>  
+                                
+                                
                     </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">                                    
-                        <label for="inputUserName">Segundo Nombre</label>
-                        <input type="text" class="form-control" id="txtSegundoNombre" placeholder="Segundo nombre">
-                    </div>
+                                <!--Fin de la segunda column-->
+                    
                 </div>
+          </div>
+        </div>
+                                </div>
+           
 
-                <div class="row" style="padding-left: 12%; padding-bottom: 12px">
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">          
-                        <label for="inputUserName">Primer Apellido</label>
-                        <input type="text" class="form-control" id="txtPrimerApellido" placeholder="Primer apellido">
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">          
-                        <label for="inputUserName">Segundo Apellido</label>
-                        <input type="text" class="form-control" id="txtSegundoApellido" placeholder="Segundo apellido">
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <label for="inputUserName">Domicilio *</label>                            
-                        <input type="text" class="form-control" id="txtDomicilio" placeholder="Domicilio">
-                    </div>
-
-
+            </div>
                 </div>
-
-                <div class="row" style="padding-left: 12%; padding-bottom: 12px">
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <label for="inputUserName" >Ciudad *</label>                            
-                        <input type="text" class="form-control" maxlength="10" id="txtCiudad" placeholder="Ciudad">
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <label for="inputUserName">Teléf. Domicilio</label>                            
-                        <input type="text" class="form-control" maxlength="10" id="txtTelefonoDomicilio" placeholder="Teléf. Domicilio">
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <label for="inputUserName" >Teléf. Oficina</label>                            
-                        <input type="text" class="form-control" maxlength="10" id="txtTelefonoOficina" placeholder="Teléf. Oficina">
-                    </div>
-
-
-
-
-                </div>
-
-                <div class="row" style="padding-left: 12%; padding-bottom: 12px">
-
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <label for="inputUserName">Teléf. Movil</label>
-                        <input type="text" class="form-control" maxlength="10" id="txtTelefonoMovil" placeholder="Teléf. Movil">
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <label for="inputUserName" >E-mail*</label>                            
-                        <input type="text" class="form-control" maxlength="10" id="txtEmail" placeholder="E-mail">
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <label for="inputUserName">Especialidad *</label>                            
-                        <select class="selectpicker" data-live-search="true" id="cboEspecialidad" data-width="100%" multiple >
-                            <%
-                                EspecialidadDao esp = new EspecialidadDaoImp();
-                                List<Especialidad> list = esp.list();
-                                for (Especialidad elem : list) {%>
-                            <option value="<%= elem.getId()%>"><%=elem.getDescripcion()%></option>
-                            <% }%>
-                        </select>
-
-                    </div>
-
-
-                </div> 
             </div>
         </div>
-    </div>
-    <div class="row" style="padding-left: 12%; text-align: right;" >
-        <div class="col-xs-12">                
-            <div class="col-xs-9">                
-                <div class="form-group" >
-                    <button id="btnGuardar" type="button" class="btn btn-primary">Guardar</button>
-                    <button type="button" class="btn btn-default">Limpiar</button>
-                </div>
-            </div>            
-        </div>                    
-    </div>
-</div>
-
-
+   
 <script>
     $(".selectpicker").selectpicker().selectpicker("render");
 </script>                                  
+	
