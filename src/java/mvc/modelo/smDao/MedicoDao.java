@@ -19,5 +19,6 @@ public interface MedicoDao {
     public boolean delete (int id);
     public int id();
     public int totalRegistros(int flag, String buscar );
+    public int validarCedula(String cedula);
     
 }

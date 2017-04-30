@@ -141,6 +141,13 @@ public class sMedico extends HttpServlet {
             Integer idMedico =Integer.valueOf(request.getParameter("idMedico"));
             med.delete(idMedico);
         }
+        else if("6".equals(opcion))
+        {
+            String cedula = request.getParameter("cedula");
+            MedicoDao med= new MedicoDaoImp();
+           out.println( med.validarCedula(cedula));
+            
+        }
         //guardar
         else
         {

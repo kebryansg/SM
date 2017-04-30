@@ -201,6 +201,25 @@ C_BD conn;
             return totalRegistros;
         }
     }
+
+    @Override
+    public int validarCedula(String cedula) {
+        int total=0;
+        this.conn= con_db.open(con_db.MSSQL_SM);        
+        try
+        {            
+             ResultSet rs = this.conn.query("select count(id) as total from medico where cedula='"+cedula+"' ");
+             while(rs.next())
+             {
+                 total=rs.getInt("total");
+             }
+             return total;
+        }
+        catch(SQLException ex)
+        {
+            return total;
+        }
+    }
     
     
 }

@@ -48,7 +48,7 @@
                             <div class="form-group">
                                 <label for="inputUserName" class="control-label col-md-4">Cédula *</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" validate="text" id="txtCedula" maxlength="10" id="inputUserName" placeholder="Cedula">
+                                    <input   type="text" class="form-control" validate="text" id="txtCedula" maxlength="10" id="inputUserName" placeholder="Cedula">
                                 </div>
                             </div>   
                         
