@@ -197,6 +197,7 @@ public class EspecialidadDaoImp implements EspecialidadDao{
                     Especialidad value = new Especialidad();
                     value.setId(rs.getInt("id"));
                     value.setDescripcion(rs.getString("descripcion"));                                
+                    value.setRegistros(rs.getInt("registros"));
                     list.add(value);
 
                 }

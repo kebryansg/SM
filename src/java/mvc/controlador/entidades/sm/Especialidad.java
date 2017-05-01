@@ -35,7 +35,16 @@ public class Especialidad implements Serializable {
     private String descripcion;
     @Column(name = "visible")
     private String visible;
+     private Integer registros;
 
+    public Integer getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(Integer registros) {
+        this.registros = registros;
+    }
+     
     public String getVisible() {
         return visible;
     }

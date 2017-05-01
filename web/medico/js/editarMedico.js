@@ -145,9 +145,10 @@ function validarCedula()
              else
              {
                  buscar=1;
-                 pagina=1;
+                 
                  
              }
+              pagina=1;
              cargarMedicos(1);
 	});         
      
