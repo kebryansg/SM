@@ -69,9 +69,11 @@ public class sMedico extends HttpServlet {
             
             EspecialidadDao mediEspe= new EspecialidadDaoImp();
             String idMedico=request.getParameter("idMedico");
-             List<Especialidad> list= mediEspe.list(Integer.valueOf(idMedico));
-             List<Especialidad> especialidades= mediEspe.list();
-             
+             List<Especialidad> list= mediEspe.list(Integer.valueOf(idMedico));             
+             ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+             String json = OBJECT_MAPPER.writeValueAsString(list);
+             response.getWriter().write(json);
+             /*
               for(int i=0;i<especialidades.size();i++)
               {
                   Boolean bandera=false;
@@ -91,7 +93,7 @@ public class sMedico extends HttpServlet {
                   {
                   out.println("<option value='"+especialidades.get(i).getId()+"'>"+especialidades.get(i).getDescripcion()+"</option>");
                   }
-              }
+              }*/
         }
         //obtiene los medicos de forma paginada
         else if("2".equals(opcion))

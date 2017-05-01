@@ -230,7 +230,8 @@ function validarCedula()
         cargarMedicos(pagina);
         });
      //porque las creo de forma dinamicas    
-     $("#tablaMedico").on("click", "#botonEditar", function(){                    
+     $("#tablaMedico").on("click", "#botonEditar", function(){   
+         
             var cont=0;            
             $(this).parents("tr").find("td").each(function(){
                 datos[cont]=$(this).html();                  
@@ -252,6 +253,31 @@ function validarCedula()
              $('#txtTelefonoMovilModal').val(datos[8]);
              $('#txtEmailModal').val(datos[9]);
              $('select[id=cboEstadoModal]').val(datos[10]);
+              $.ajax({
+                type: 'Post',
+                url: 'sMedico',
+                data: {
+                    idMedico: datos[0],				                                
+                    opcion: '1'
+                },
+                async: false,
+                success:function(data){
+                    var resultado = JSON && JSON.parse(data) || $.parseJSON(data);                    
+                    
+                    for(i=0;i <resultado.length; i++)
+                    {
+                        
+                        $("#cboEspecialidades option[value="+ resultado[i].id +"]").attr("selected",true);
+                        $('.selectpicker').selectpicker('refresh');
+                    }
+                    
+                    // $("#cboEspecialidades").html(response);
+                     //$('.selectpicker').selectpicker('refresh');
+                     
+                 }
+             });
+             var id='myModal';
+             $("#"+id).modal('show');
         });
         
         $('#btnActualizar').click(function(event) {
@@ -303,7 +329,7 @@ function validarCedula()
                 idMedico : datos[0],
                 opcion: 5
             }, function(responseText) {  
-                cargarTotalRegistros();
+                cargarMedicos(pagina);
                 alertify.success("Registros Eliminado");
             });
             event.preventDefault();
