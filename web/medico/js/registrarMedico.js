@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-
+var bandera=0;
     function validar() {
    
 
@@ -46,7 +46,7 @@
 function validarText(value)
 {
     
-     if($(value).attr("id")!=="txtCedula")
+     if($(value).attr("id")!=="txtCedula" || $(value).val() === "")
      {
           var valor= "#"+$(value).attr("id") + 'help';           
           $(valor).remove();
@@ -100,14 +100,14 @@ function validarCedula()
                 $("#txtCedulahelp").remove();  
                 if(response>0)
                 {   
-                    alert("mayor");
+                    
                     $("#txtCedula").closest("div").addClass("has-error");                    
                     $("#txtCedula").after('<span id="' + $("#txtCedula").attr("id") + 'help" class="help-block">Cédula ya registrada</span');
                     
                 }
                 else 
                 {
-                    alert("menor");
+                    
                     $("#txtCedula").closest("div").removeClass("has-error");
                                        
                     
@@ -120,6 +120,7 @@ function validarCedula()
         $(':text').val('');
        // $(':email').val('');
         $('textarea').val('');
+        $("#txtEmail").val('');
     }
     limpiar();
     $('#btnGuardar').click(function(event) {

@@ -53,9 +53,17 @@ public class Medico implements Serializable {
     private String email;
      @Column(name = "visible")
     private int visible;
-
+     private int registros;
     public int getVisible() {
         return visible;
+    }
+
+    public int getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(int registros) {
+        this.registros = registros;
     }
 
     public void setVisible(int visible) {

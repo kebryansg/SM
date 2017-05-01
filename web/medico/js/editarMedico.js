@@ -5,56 +5,163 @@
  */
  $(document).ready(function(){      
      //obtengo el total de registros
+     //arreglo con las peticiones
+     var xhrRequest=[];
      var totalRegistros=0;
      var totalPaginas=0;
      var paginasVisibles=5;
      var paginaActual=0;
      var buscar=0;
+     var pagina=1;
      var datos = [];
-     var idTablaSeleccionada=-1;
+     var idTablaSeleccionada=-1;     
      var indice=-1;
      $("#txtBuscar").text("");
-     $("#cboMostrar").val(5);
-     cargarTotalRegistros();
+     $("#cboMostrar").val(5);     
+     cargarMedicos(1);
+     
+      function validar() {
+   
+
+    /* Validacion de email */
+    
+    var email = $("#tabMedicoEditar input[validate='email']");
+    $(email).blur(function(){    		               
+                validarText(email);
+	});
+   validarEmail(email);
+    /* Validacion de email */
+
+    $.each($("#tabMedicoEditar input[validate='text']"), function (index, value) {  
+       $(value).blur(function(){    		               
+                validarText(value);
+	});
+        validarText(value);
+    });
+    
+    $.each($("#myModal select[validate='select']"), function (index, value) {
+        $(value).on('change', function() { 
+             validarSelect(value);
+        });
+        
+       validarSelect(value); 
+    });
+    $.each($("#tabMedicoEditar input[validate='date']"), function (index, value) {
+        if ($(value).val() === null || $(value).val() === "") {
+            $(value).closest("div").addClass("has-error");
+            $(value).parent("div").after('<span id="' + $(value).attr("id") + 'help" style="color:#a94442;" class="help-block">Sin Fecha</span');
+        } else
+        {
+            $(value).closest("div").removeClass("has-error");
+        }
+    });
+ 
+    return $(".help-block").length === 0;
+}
+function validarText(value)
+{
+    
+     if($(value).attr("id")!=="txtCedula" || $(value).val() === "")
+     {
+          var valor= "#"+$(value).attr("id") + 'help';           
+          $(valor).remove();
+        if ($(value).val() === null || $(value).val() === "") {
+            $(value).closest("div").addClass("has-error");
+            $(value).after('<span id="' + $(value).attr("id") + 'help" class="help-block">Campo Vacio</span');
+        } else
+        {
+            $(value).closest("div").removeClass("has-error");            
+          
+        }
+    }
+}
+function validarEmail(email)  
+{
+    var validacion_email = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+     var valor= "#"+$(email).attr("id") + 'help'; 
+         $(valor).remove();
+     if ($(email).val() === null || $(email).val() === "" || !validacion_email.test($(email).val())) {
+        $(email).closest("div").addClass("has-error");
+        $(email).after('<span id="' + $(email).attr("id") + 'help" class="help-block">Email no valido.</span');
+    } else {
+        $(email).closest("div").removeClass("has-error");
+        
+    }
+}
+function validarSelect(value)
+{
+    var valor= "#"+$(value).attr("id") + 'help'; 
+         $(valor).remove();
+   if ($(value).val() === "0" || $(value).val() === null ) {
+            $(value).closest("div").addClass("has-error");
+            $(value).after('<span id="' + $(value).attr("id") + 'help" class="help-block">Sin seleccionar</span');
+        } else
+        {
+            $(value).closest("div").removeClass("has-error");
+        } 
+}
+function validarCedula()
+    {
+        
+         $.ajax({
+            type: 'Post',
+            url: 'sMedico',
+            data: {
+                cedula : $('#txtCedula').val(),                
+                opcion:'6'
+            },
+            async: false,
+            success:function(response){
+                $("#txtCedulahelp").remove();  
+                if(response>0)
+                {   
+                    
+                    $("#txtCedula").closest("div").addClass("has-error");                    
+                    $("#txtCedula").after('<span id="' + $("#txtCedula").attr("id") + 'help" class="help-block">Cédula ya registrada</span');
+                    
+                }
+                else 
+                {
+                    
+                    $("#txtCedula").closest("div").removeClass("has-error");
+                                       
+                    
+                }
+            }
+        }); 
+    }
+   
      //evento al presionar el txt buscar
-     $("#txtBuscar").keyup(function(event){		            
+     
+     $("#txtBuscar").keyup(function(event){
+         
              if($("#txtBuscar").val().length < 1) 
+             {
                  buscar=0;
+                 
+                 
+            }
+             
              else
+             {
                  buscar=1;
-             cargarTotalRegistros();    
+                 pagina=1;
+                 
+             }
+             cargarMedicos(1);
 	});         
-     function cargarTotalRegistros()
-     {
-         $.post('sMedico', { 
-             opcion : "4",
-             bandera:buscar,
-             buscar:$("#txtBuscar").val()             
-         }, function(responseText) {   
-             totalRegistros=responseText;   
-              cargarPaginacion();
-         });    
-     }
-     function cargarPaginacion()
-     {
-         totalPaginas=totalRegistros/$("#cboMostrar").val();
-         totalPaginas=Math.ceil(totalPaginas); 
-         $('#pagination').twbsPagination('destroy');
-           var obj = $('#pagination').twbsPagination({
-               totalPages: totalPaginas,
-               visiblePages: 10,
-               onPageClick: function (event, page) {
-                   console.info(page);   
-                   paginaActual=page;
-                   cargarMedicos(page);
-               }
-           });
-     }
+     
+     
     //Funcion para cargar los medicos de forma paginada
     function cargarMedicos(pagina)
     {
-        var totalRegistro=$("#cboMostrar").val();
-        $.post('sMedico', {
+        $.each(xhrRequest,function(idx, jqXHR)
+        {
+            jqXHR.abort();
+        });
+        var totalRegistro=$("#cboMostrar").val();        
+        var xhr=null;
+        xhr=$.post('sMedico', {
             totalMostrar : totalRegistro,
             pagina: pagina,
             opcion: '2',
@@ -62,7 +169,22 @@
             buscar:$("#txtBuscar").val()
         }, function(data) {   
             $('#tablaMedico tr').remove();
-            var resultado = JSON && JSON.parse(data) || $.parseJSON(data);         
+             $('#paginacionMedico').find('li').remove();
+            var resultado = JSON && JSON.parse(data) || $.parseJSON(data); 
+            var totalPaginas=resultado[0].registros/$("#cboMostrar").val();
+            totalPaginas=Math.ceil(totalPaginas); 
+            console.log(totalPaginas);
+            $("#paginacionMedico ul").append('<li><a href="#">&laquo;</a></li>');
+            for(i=0;i <totalPaginas; i++)                
+            {
+                var indice=parseInt(i)+1;
+                //<li><a href="#">1</a></li>                
+                if(indice==pagina)
+                    $("#paginacionMedico ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
+                else 
+                    $("#paginacionMedico ul ").append('<li><a href="#">'+indice+'</a></li>');
+            }
+            $("#paginacionMedico ul").append('<li><a href="#">&raquo;</a></li>');
             $('#tablaMedico thead').append("<tr>\n\<th class='col-lg-1'>No.</th>\n\
                                                 <th>Cédula</th>\n\
                                                 <th class='col-lg-2'>Apellidos</th>\n\
@@ -95,37 +217,26 @@
                                                     </td>\n\
                                                 </tr>");
             }
-        });            
+        });    
+        xhrRequest.push(xhr);
     }
-    $('#cboMostrar').on('change', function() {     
-        cargarPaginacion();
+    $('#paginacionMedico ul').click(function (e) {        
+        var a = e.target.parentNode;
+        pagina = a.innerText;        
+        cargarMedicos(pagina);
+    });
+    $('#cboMostrar').on('change', function() {   
+        pagina=1;
+        cargarMedicos(pagina);
         });
      //porque las creo de forma dinamicas    
-     $(".table-responsive").on("click", "#botonEditar", function(){                    
+     $("#tablaMedico").on("click", "#botonEditar", function(){                    
             var cont=0;            
             $(this).parents("tr").find("td").each(function(){
                 datos[cont]=$(this).html();                  
                 cont++;
             });
-            $.ajax({
-                type: 'Post',
-                url: 'sMedico',
-                data: {
-                    idMedico: datos[0],				                                
-                    opcion: '1'
-                },
-                async: false,
-                success:function(response){                    
-                     $("#cboEspecialidades").html(response);
-                     $('.selectpicker').selectpicker('refresh');
-                     var id='myModal';
-                     $("#"+id).modal('show');
-                     $.each($("#"+id+" input"), function (){
-                         $(this).val("");
-                     }); 
-                 }
-             });
-             var nombres=datos[3];
+            var nombres=datos[3];
              var apellidos=datos[2];
              var res1 = apellidos.split(" ");
              var res = nombres.split(" ");
@@ -144,36 +255,39 @@
         });
         
         $('#btnActualizar').click(function(event) {
-            $.post('sMedico', {
-                cedula : $('#txtCedulaModal').val(),
-                primerNombre: $('#txtPrimerNombreModal').val(),
-                segundoNombre: $('#txtSegundoNombreModal').val(),
-                primerApellido: $('#txtPrimerApellidoModal').val(),
-                segundoApellido: $('#txtSegundoApellidoModal').val(),
-                domicilio: $('#txtDomicilioModal').val(),
-                ciudad: $('#txtCiudadModal').val(),
-                telefonoOficina: $('#txtTelefonoOficinaModal').val(),
-                email:  $('#txtEmailModal').val(),
-                telefonoDomicilio: $('#txtTelefonoDomicilioModal').val(),
-                telefonoMovil:  $('#txtTelefonoMovilModal').val(),
-                idEspecialidad: $("#cboEspecialidades").val(),
-                visible:$("#cboEstadoModal").val(),
-                opcion:'3',
-                idMedico: datos[0]
-            }, function(responseText) {   
-                $($('#tablaMedico').find('tbody > tr')[indice]).children('td')[1].innerHTML = $('#txtCedulaModal').val();
-                $($('.table-responsive').find('tbody > tr')[indice]).children('td')[2].innerHTML = $('#txtPrimerApellidoModal').val()+' '+$('#txtSegundoApellidoModal').val();
-                $($('.table-responsive').find('tbody > tr')[indice]).children('td')[3].innerHTML = $('#txtPrimerNombreModal').val()+' '+$('#txtSegundoNombreModal').val();
-                $($('.table-responsive').find('tbody > tr')[indice]).children('td')[4].innerHTML =datos[4];
-                $($('.table-responsive').find('tbody > tr')[indice]).children('td')[5].innerHTML =datos[5];
-                $($('.table-responsive').find('tbody > tr')[indice]).children('td')[6].innerHTML =datos[6];
-                $($('.table-responsive').find('tbody > tr')[indice]).children('td')[7].innerHTML =datos[7];
-                $($('.table-responsive').find('tbody > tr')[indice]).children('td')[8].innerHTML =datos[8];
-                $($('.table-responsive').find('tbody > tr')[indice]).children('td')[9].innerHTML =datos[9];
-                $($('.table-responsive').find('tbody > tr')[indice]).children('td')[10].innerHTML =$("#cboEstadoModal").val();
-                alertify.success("Datos Actualizados correctamente");
-                var cont=0;            
-            });
+            if (validar()) {
+                $.post('sMedico', {
+                    cedula : $('#txtCedulaModal').val(),
+                    primerNombre: $('#txtPrimerNombreModal').val(),
+                    segundoNombre: $('#txtSegundoNombreModal').val(),
+                    primerApellido: $('#txtPrimerApellidoModal').val(),
+                    segundoApellido: $('#txtSegundoApellidoModal').val(),
+                    domicilio: $('#txtDomicilioModal').val(),
+                    ciudad: $('#txtCiudadModal').val(),
+                    telefonoOficina: $('#txtTelefonoOficinaModal').val(),
+                    email:  $('#txtEmailModal').val(),
+                    telefonoDomicilio: $('#txtTelefonoDomicilioModal').val(),
+                    telefonoMovil:  $('#txtTelefonoMovilModal').val(),
+                    idEspecialidad: $("#cboEspecialidades").val(),
+                    visible:$("#cboEstadoModal").val(),
+                    opcion:'3',
+                    idMedico: datos[0]
+                }, function(responseText) {   
+                    $($('#tablaMedico').find('tbody > tr')[indice]).children('td')[1].innerHTML = $('#txtCedulaModal').val();
+                    $($('.table-responsive').find('tbody > tr')[indice]).children('td')[2].innerHTML = $('#txtPrimerApellidoModal').val()+' '+$('#txtSegundoApellidoModal').val();
+                    $($('.table-responsive').find('tbody > tr')[indice]).children('td')[3].innerHTML = $('#txtPrimerNombreModal').val()+' '+$('#txtSegundoNombreModal').val();
+                    $($('.table-responsive').find('tbody > tr')[indice]).children('td')[4].innerHTML =datos[4];
+                    $($('.table-responsive').find('tbody > tr')[indice]).children('td')[5].innerHTML =datos[5];
+                    $($('.table-responsive').find('tbody > tr')[indice]).children('td')[6].innerHTML =datos[6];
+                    $($('.table-responsive').find('tbody > tr')[indice]).children('td')[7].innerHTML =datos[7];
+                    $($('.table-responsive').find('tbody > tr')[indice]).children('td')[8].innerHTML =datos[8];
+                    $($('.table-responsive').find('tbody > tr')[indice]).children('td')[9].innerHTML =datos[9];
+                    $($('.table-responsive').find('tbody > tr')[indice]).children('td')[10].innerHTML =$("#cboEstadoModal").val();
+                    alertify.success("Datos Actualizados correctamente");
+                    var cont=0;     
+                     $("#myModal").modal('toggle');
+                });
+        }
         });
         $(".table-responsive").on("click", "tr", function(){  
             indice = $(this).index();

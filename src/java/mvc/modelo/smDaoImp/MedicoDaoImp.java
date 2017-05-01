@@ -72,6 +72,7 @@ C_BD conn;
                 value.setEmail(rs.getNString("email"));
                 value.setCedula(rs.getNString("cedula"));                
                 value.setVisible(rs.getInt("visible"));
+                value.setRegistros(rs.getInt("registros"));
                 list.add(value);
                 
             }
@@ -103,7 +104,8 @@ C_BD conn;
                 value.setTelefonoOficina(rs.getNString("telefonoOficina"));
                 value.setTelefonoMovil(rs.getNString("telefonoMovil"));
                 value.setEmail(rs.getNString("email"));
-                value.setCedula(rs.getNString("cedula"));                
+                value.setCedula(rs.getNString("cedula"));               
+                
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
