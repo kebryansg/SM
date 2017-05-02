@@ -60,7 +60,16 @@ public class HistorialClinico implements Serializable {
     private Date menarca;
     @OneToMany(mappedBy = "idHistorialClinico")
     private List<Caso> casoList;
+    private int registros;
 
+    public int getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(int registros) {
+        this.registros = registros;
+    }
+    
     public String getEstado() {
         return estado;
     }

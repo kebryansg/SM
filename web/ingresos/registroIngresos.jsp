@@ -16,10 +16,19 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 
-<div class="contenedor-tabs">
+
+<div class="contenedor-tabs" id="tabIngresos">
     <div class="container-fluid">
+        <div class="row ">
+                            <div class="col-md-12">
+                                <div class="pull-right">                                    
+                                    <button class="btn btn-info" id="btnCancelar">Cancelar</button>
+                                    <button class="btn btn-info" id="btnGuardar"  data-id="0">Guardar</button>
+                                </div>       
+                            </div>
+        </div>
+        <hr/>
         <div class="row">
             <div class="col-lg-12">                                    
                 <div class="row">                                            
@@ -33,7 +42,7 @@
                                     <button id="btnCargar" type="button" class="btn btn-primary">Cargar</button>   
                                 </div>
                                 <div class="col-md-4">
-                                    <button id="btnBuscar" onclick="openModal('myModal')" type="button" class="btn btn-primary">Buscar</button>   
+                                    <button id="btnBuscar"  type="button" class="btn btn-primary">Buscar</button>   
                                 </div>
                             </div>
 
@@ -46,7 +55,7 @@
                         <div class="col-md-12">
                             <label class="col-md-12" for="txtPaciente">Paciente</label>
                             <div class="col-md-12">
-                                <input id="txtPaciente" type='text' class="form-control" />                                                            
+                                <input id="txtPaciente" readonly="" type='text' class="form-control" />                                                            
                             </div>                                                        
                         </div>
                     </div>
@@ -85,12 +94,11 @@
                         <div class="col-md-10">
                             <label class="col-md-12" for="dtpFechaIngreso">F. Ingreso</label>
                             <div class="col-md-12">
-                                <div class='input-group date form_date' id='dtpFechaIngreso'>
-                                    <input id='dtpFechaIngreso' type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
+                            <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
+                                        <input validate="date" class="form-control" id="dtpFechaIngreso" size="16" type="text" value="" readonly>
+                                        <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -98,12 +106,11 @@
                         <div class="col-md-10">
                             <label class="col-md-12" for="dtpFechaEgreso">F. Egreso</label>
                             <div class="col-md-12">
-                                <div class='input-group date form_date' id='dtpFechaEgreso'>
-                                    <input id='dtpFechaEgreso' type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
+                                <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
+                                        <input validate="date" class="form-control" id="dtpFechaEgreso" size="16" type="text" value="" readonly>
+                                        <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -112,8 +119,9 @@
                         <div class="col-md-10">
                             <label class="col-md-12" for="dtpHoraIngreso">Hora Ingreso</label>
                             <div class="col-md-12">
-                                <div class='input-group date form_time' id='dtpHoraIngreso' data-date="" data-date-format="hh:ii" data-link-format="hh:ii">
-                                    <input id='dtpHoraIngreso' type='text' class="form-control" />
+                                <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-format="hh:ii">
+                                  <input validate="date" class="form-control" id="dtpHoraIngreso" size="16" type="text" value="" readonly>
+                        	<!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-time"></span>
                                     </span>
@@ -177,11 +185,7 @@
                     <div class="form-group col-xs-10">
 
                     </div>                                       
-                    <div class="form-group col-xs-2">                                       
-                        <div class="col-md-2">
-                            <button id="btnGuardar" type="button" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </div>
+                    
                 </div>
                 </form>
 
@@ -232,7 +236,7 @@
 
                                 </div>
                             </div>
-
+                           <div style="width: 100%; height: 300px; overflow-y: scroll; overflow-x: hidden;">         
                             <div class="table-responsive">
                                 <table id="tablaPacientes" class="table table-bordered table-hover table-striped">
                                     <thead>
@@ -244,11 +248,12 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="container">
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination" id="pagination"></ul>
-                                </nav>
-                            </div>
+                           </div>
+                            <div style="text-align: right; width: 100%;" id="paginacionBuscarIngresos">
+                            <nav aria-label="Page navigation">
+                                    <ul class="pagination" id="paginacionBuscarI"></ul>
+                             </nav>
+        </div>
                         </div>
                     </div>   
 

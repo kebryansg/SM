@@ -177,7 +177,8 @@ C_BD conn;
                     value.setNombre2(rs.getString("nombre2"));
                     value.setApellido1(rs.getString("apellido1"));
                     value.setApellido2(rs.getString("apellido2"));               
-                    value.setCedula(rs.getString("cedula"));               
+                    value.setCedula(rs.getString("cedula"));  
+                    value.setRegistros(rs.getInt("registros"));   
                     list.add(value);
 
                 }

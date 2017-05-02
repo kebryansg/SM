@@ -78,7 +78,7 @@ public class Ingresos implements Serializable {
     private TipoIngreso idTipoIngreso;
     @OneToMany(mappedBy = "idIngreso")
     private Integer totalIngresos;
-   
+    
     private Paciente unPaciente;
    
     private List<DetalleIngresos> detalleIngresosList;
