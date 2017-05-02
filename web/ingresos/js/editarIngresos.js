@@ -18,40 +18,9 @@ $(document).ready(function(){
          return momentObj.format(formato);        
      }
      
-     function cargarTotalRegistros()
-     {
-         $.post('sIngresosHospital', { 
-             opcion : "6",    
-             fechaEgreso: momentToDate($("#dtpFechaSalida").data("DateTimePicker").date(),'YYYY-MM-DD'),
-             fechaIngreso:momentToDate($("#dtpFechaIngreso").data("DateTimePicker").date(),'YYYY-MM-DD'),           
-             async: false,
-         }, function(responseText) {   
-             totalRegistros=responseText;                
-             console.log(responseText);
-             if(totalRegistros==0)
-                 $('#tablaPacientes tr:not(:first-child)').remove();
-             else
-                 cargarPaginacion();
-         });    
-     }
      
-    function cargarPaginacion()
-    {
-        totalPaginas=totalRegistros/5;
-        totalPaginas=Math.ceil(totalPaginas); 
-        $('#pagination').twbsPagination('destroy');
-        var obj = $('#pagination').twbsPagination({
-            totalPages: totalPaginas,
-            visiblePages: 10,
-            onPageClick: function (event, page) {
-                console.info(page);   
-                pagina=page;
-                cargarIngresos();
-            }
-        });
-        console.info(obj.data());      
-     }
      
+   
     function cargarIngresos()
     {
         $.ajax({
@@ -59,15 +28,32 @@ $(document).ready(function(){
             url: 'sIngresosHospital',
             data: {            
                 opcion: '5',
-                fechaEgreso: momentToDate($("#dtpFechaSalida").data("DateTimePicker").date(),'YYYY-MM-DD'),
-                fechaIngreso:momentToDate($("#dtpFechaIngreso").data("DateTimePicker").date(),'YYYY-MM-DD'),
+                
+                //$("#dtpFechaIngreso").val()
+                fechaEgreso: $("#dtpFechaEgresoIngresos").val(),
+                fechaIngreso:$("#dtpFechaIngresoIngresos").val(),
                 totalMostrar:5,
                 pagina:pagina
             },
             async: false,
-            success:function(data){                                   
-                    var resultado = JSON && JSON.parse(data) || $.parseJSON(data);                                    
-                   console.log(resultado);            
+            success:function(data){  
+                console.log(data);
+                   var resultado = JSON && JSON.parse(data) || $.parseJSON(data);                                    
+                   console.log(resultado[0].registros);   
+                   $('#paginacionIngresosEditar').find('li').remove();
+                   var totalPaginas=resultado[0].registros/5;
+                   totalPaginas=Math.ceil(totalPaginas);
+                   $("#paginacionIngresosEditar ul").append('<li><a href="#">&laquo;</a></li>');
+                    for(i=0;i <totalPaginas; i++)                
+                    {
+                        var indice=parseInt(i)+1;
+                        //<li><a href="#">1</a></li>                
+                        if(indice==pagina)
+                            $("#paginacionIngresosEditar ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
+                        else 
+                            $("#paginacionIngresosEditar ul ").append('<li><a href="#">'+indice+'</a></li>');
+                    }
+                    $("#paginacionIngresosEditar ul").append('<li><a href="#">&raquo;</a></li>');
                    $('#tablaIngresos tr').remove();
                    $('#tablaIngresos thead').append("<tr>\n\
                                                         <th>No.</th>\n\
@@ -116,7 +102,9 @@ $(document).ready(function(){
                                                         <td>"+resultado[i].codigoDiagnosticoDefinitivo+"</td>\n\
                                                         <td style='width: 20%' >\n\
                                                             <button id='botonEditar' class='btn btn-primary'><span class='glyphicon glyphicon-pencil'></span> </button> \n\
+                                                            \n\
                                                             <button id='btnEliminar' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span></a></button>\n\
+                                                            \n\<button id='botonAgregar' class='btn btn-warning'></span>Medicina</button> \
                                                         </td>\n\
                                                     </tr>");
                 }
@@ -124,8 +112,15 @@ $(document).ready(function(){
         });
     
      }
+     $('#paginacionIngresosEditar ul').click(function (e) {        
+        var a = e.target.parentNode;
+        pagina = a.innerText;        
+        alert(pagina);
+        cargarIngresos();
+    });
      $('#btnBuscar').click(function(event) {               
-         cargarTotalRegistros();
+         
+         cargarIngresos();
      });  
      
      $(".table-responsive").on("click", "tr", function(){  
@@ -143,9 +138,9 @@ $(document).ready(function(){
           $('select[id=cboCondicionEgreso]').val(datos[11]);
           $('select[id=cboEspecialidadEgreso]').val(datos[6]);
           $('.selectpicker').selectpicker('refresh');
-          $('#dtpFechaIngresoEditar').data("DateTimePicker").date(datos[8]);
-          $('#dtpFechaSalidaEditar').data("DateTimePicker").date(datos[9]);             
-          $('#dtpHoraIngreso').data("DateTimePicker").date(datos[10]);
+          $('#dtpFechaIngresoIngresosModal').val(datos[8]);
+          $('#dtpFechaEgresoIngresosModal').val(datos[9]);             
+          $('#dtpHoraIngreso').val(datos[10]);
           $('#txtCodigoCie').val(datos[16]);
           $('#txtDefinitivoEgreso').val(datos[12]);
           $('#txtSecundarioEgreso').val(datos[13]);   
@@ -158,11 +153,11 @@ $(document).ready(function(){
     $('#btnActualizar').click(function(event) {
         $.post('sIngresosHospital', {
             idIngreso : datos[0],
-            fechaIngreso: momentToDate($("#dtpFechaIngresoEditar").data("DateTimePicker").date(),'YYYY-MM-DD'),
+            fechaIngreso: $('#dtpFechaIngresoIngresosModal').val(),
             idTipoIngreso: 2,
             idEspecialidadEgreso: $('#cboEspecialidadEgreso').val(),
-            fechaEgreso: momentToDate($("#dtpFechaSalidaEditar").data("DateTimePicker").date(),'YYYY-MM-DD'),
-            horaIngreso: momentToDate($("#dtpHoraIngreso").data("DateTimePicker").date(),'YYYY-MM-DD HH:MM'),
+            fechaEgreso: $('#dtpFechaEgresoIngresosModal').val(),
+            horaIngreso: $("#dtpHoraIngreso").val(),
             sos: 0,
             condicionEgreso: $("#cboCondicionEgreso").val(),
             definitivoEgreso: $("#txtDefinitivoEgreso").val(),
@@ -176,16 +171,16 @@ $(document).ready(function(){
             console.log(responseText); 
             $($('.table-responsive').find('tbody > tr')[indice]).children('td')[5].innerHTML = datos[5];
             $($('.table-responsive').find('tbody > tr')[indice]).children('td')[6].innerHTML = $('#cboEspecialidadEgreso').val();            
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[8].innerHTML = momentToDate($("#dtpFechaIngresoEditar").data("DateTimePicker").date().toString().substring(0, 10));
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[9].innerHTML = momentToDate($("#dtpFechaSalidaEditar").data("DateTimePicker").date());
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[10].innerHTML = momentToDate($("#dtpHoraIngreso").data("DateTimePicker").date());
+            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[8].innerHTML = $('#dtpFechaIngresoIngresosModal').val();
+            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[9].innerHTML = $('#dtpFechaEgresoIngresosModal').val();
+            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[10].innerHTML = $("#dtpHoraIngreso").val();
             $($('.table-responsive').find('tbody > tr')[indice]).children('td')[11].innerHTML = $("#cboCondicionEgreso").val();
             $($('.table-responsive').find('tbody > tr')[indice]).children('td')[12].innerHTML = $("#txtDefinitivoEgreso").val();
             $($('.table-responsive').find('tbody > tr')[indice]).children('td')[13].innerHTML = $("#txtSecundarioEgreso").val();
             $($('.table-responsive').find('tbody > tr')[indice]).children('td')[14].innerHTML = $("#txtSecundarioEgreso2").val();
             $($('.table-responsive').find('tbody > tr')[indice]).children('td')[15].innerHTML = $("#txtCausaExterna").val();
             $($('.table-responsive').find('tbody > tr')[indice]).children('td')[16].innerHTML = $("#txtCodigoCie").val();
-            alertify.success("Datos Registrados correctamente");
+            alertify.success("Datos Actualizados correctamente");
         });
     });
     
@@ -199,7 +194,7 @@ $(document).ready(function(){
             opcion : 8,
             idIngreso: datos[0]                                
         }, function(responseText) {  
-            cargarTotalRegistros();
+             cargarIngresos();
             alertify.success("Registro eliminado");
         });
         event.preventDefault();

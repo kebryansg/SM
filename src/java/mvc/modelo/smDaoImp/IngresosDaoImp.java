@@ -36,8 +36,7 @@ C_BD conn;
          List<Ingresos> list = new ArrayList<>();
        
           try {  
-              Integer totalIngresos=0;
-              totalIngresos=totalIngresos(fechaIngreso,fechaSalida);
+              
         Connection conexion;          
         conexion = con_db.open(con_db.MSSQL_SM).getConexion();
         CallableStatement cStmt=null;
@@ -68,7 +67,7 @@ C_BD conn;
                 value.setSecundarioEgreso2(rs.getString("secundarioEgreso2"));
                 value.setCausaExterna(rs.getString("causaExterna"));
                 value.setCodigoDiagnosticoDefinitivo(rs.getString("codigoDiagnosticoDefinitivo"));
-                value.setTotalIngresos(totalIngresos);
+                value.setRegistros(rs.getInt("registros"));
                 
                 /*.setIdPaciente(rs.getInt("idPaciente"));
                 value.setNombre1(rs.getString("nombre1"));

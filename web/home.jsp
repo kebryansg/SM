@@ -15,8 +15,8 @@
 
         <link href="resources/css/style_home.css" rel="stylesheet" type="text/css"/>
 
-        <script src="resources/js/jquery.min.js" type="text/javascript"></script>
-        <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="resources/js/jquery.min.js" type="text/javascript" async="async"></script>
+        <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript" async="async" ></script>
 
 
         <!--    desde aqui mis links -->

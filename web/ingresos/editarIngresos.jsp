@@ -8,9 +8,9 @@
 <!DOCTYPE html>
 <!--<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js" async="async" ></script>
 
-<script type="text/javascript" src="ingresos/js/editarIngresos.js"></script>
+
 <br>
 <div class="contenedor-tabs">
     <div class="container-fluid">
@@ -20,21 +20,19 @@
                     <div class="col-md-12">
                         <label for="inputName" style="padding-top: 10px" class="control-label col-xs-1">Ingreso</label>
                         <div class="col-md-3">
-                            <div class='input-group date form_date' id='dtpFechaIngreso'>
-                                <input id='dtpFechaIngreso' type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
+                             <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
+                                            <input validate="date" class="form-control" id="dtpFechaIngresoIngresos" size="16" type="text" value="" readonly>
+                                            <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                             </div>
                         </div>
                         <label for="inputName" style="padding-top: 10px" class="control-label col-xs-1">Salida</label>
                         <div class="col-md-3">
-                            <div class='input-group date form_date' id='dtpFechaSalida'>
-                                <input id='dtpFechaSalida' type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
+                            <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
+                                            <input validate="date" class="form-control" id="dtpFechaEgresoIngresos" size="16" type="text" value="" readonly>
+                                            <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                             </div>
                         </div>
                         <button id="btnBuscar" type="button" class="btn btn-primary">Buscar</button>   
                     </div>                    
@@ -43,8 +41,10 @@
         </div>
         <span class="label label-default"></span>
         <br>
+        <div style="width: 100%; height: 300px; overflow-y: scroll; overflow-x: hidden;">
         <div class="row">
-            <div class="table-responsive">
+            <div class="col-xs-12">
+            <div class="table-responsive" style="margin: 0 auto; text-align:left">
             <table id="tablaIngresos" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
@@ -56,13 +56,15 @@
 
                 </tbody>
             </table>
+            </div>
         </div>
-        </div>   
-        <div class="row">
-            <nav aria-label="Page navigation">
-                <ul class="pagination" id="pagination"></ul>
-            </nav>
-        </div>
+        </div>  
+            </div>
+        <div style="text-align: right; width: 100%;" id="paginacionIngresosEditar">
+                    <ul class="pagination" >
+                
+                    </ul>
+         </div>
     </div>
 </div>
 
@@ -122,14 +124,13 @@
                             <div class="row">
                                 <div class="form-group col-xs-3">
                                     <div class="col-md-12">
-                                        <label class="col-md-12" for="dtpFechaIngreso">F. Ingreso</label>
+                                        <label class="col-md-12" for="dtpFechaIngresoModal">F. Ingreso</label>
                                         <div class="col-md-12">
-                                            <div class='input-group date' id='dtpFechaIngresoEditar'>
-                                                <input id='dtpFechaIngresoEditar' type='text' class="form-control" />
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
+                                                <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
+                                            <input validate="date" class="form-control" id="dtpFechaIngresoIngresosModal" size="16" type="text" value="" readonly>
+                                            <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -137,12 +138,11 @@
                                     <div class="col-md-12">
                                         <label class="col-md-12" for="dtpFechaEgreso">F. Egreso</label>
                                         <div class="col-md-12">
-                                            <div class='input-group date' id='dtpFechaSalidaEditar'>
-                                                <input id='dtpFechaSalidaEditar' type='text' class="form-control" />
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
+                                            <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
+                                        <input validate="date" class="form-control" id="dtpFechaEgresoIngresosModal" size="16" type="text" value="" readonly>
+                                        <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -151,12 +151,13 @@
                                     <div class="col-md-12">
                                         <label class="col-md-12" for="dtpHoraIngreso">Hora Ingreso</label>
                                         <div class="col-md-12">
-                                            <div class='input-group date' id='dtpHoraIngreso'>
-                                                <input id='dtpHoraIngreso' type='text' class="form-control" />
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-time"></span>
-                                                </span>
-                                            </div>
+                                            <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-format="hh:ii">
+                                  <input validate="date" class="form-control" id="dtpHoraIngreso" size="16" type="text" value="" readonly>
+                        	<!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                    </span>
+                                </div>
                                         </div>
                                     </div>
                                 </div>
@@ -244,3 +245,4 @@
         </div>
     </div>
 </div>
+<script src="ingresos/js/editarIngresos.js" type="text/javascript" async="async"></script>
