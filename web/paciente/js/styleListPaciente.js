@@ -1,44 +1,56 @@
-$(function () {
-    $("#txt_filterPaciente").keyup(function () {
-        $.getScript("paciente/js/paciente.js", function () {
-            list_filter();
-        });
+$("#ContentAdm").on("change", "#cantList", function () {
+    $.getScript("paciente/js/paciente.js", function () {
+        list_filter();
     });
-
-    $("#cantList").change(function () {
-        $.getScript("paciente/js/paciente.js", function () {
-            list_filter();
-        });
+});
+$("#ContentAdm").on("keyup", "#txt_filterPaciente", function () {
+    $.getScript("paciente/js/paciente.js", function () {
+        list_filter();
     });
-    $("#tablePaciente").on("click", "button[name='editPaciente']", function () {
-        var title = "Modificar Paciente";
-        var id = $(this).attr("data-id");
-        var tabId = "compose" + composeCount;
-        composeCount = composeCount + 1;
+});
+$("#ContentAdm").on("click", "#tablePaciente button[name='deletPaciente']", function () {
 
-        $('#TabAdm').append('<li><a name="' + title + '" href="#' + tabId + '"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>' + title + '</a></li>');
-        $('#ContentAdm').append('<div class="tab-pane fade" id="' + tabId + '"><div id="editP' + id + '"></div></div>');
-        $('#editP' + id).load("paciente/paciente.jsp", function () {
-            ini();
-            $.getScript("paciente/js/paciente.js", function () {
-                edit(id);
+    var id = $(this).attr("data-id");
+    $.getScript("paciente/js/paciente.js", function () {
+        deletPaciente(id);
+        list_filter();
+    });
+});
+
+$("#ContentAdm").on("click", "#tablePaciente button[name='editPaciente']", function () {
+    var title = "Modificar Paciente";
+    var id = $(this).attr("data-id");
+    var tabId = "compose" + composeCount;
+    composeCount = composeCount + 1;
+
+    $('#TabAdm').append('<li><a name="' + title + '" href="#' + tabId + '"><button class="close closeTab" type="button" ><i class="fa fa-close"></i></button>' + title + '</a></li>');
+    $('#ContentAdm').append('<div class="tab-pane fade" id="' + tabId + '"><div id="editP' + id + '"></div></div>');
+    $('#editP' + id).load("paciente/paciente.jsp", function () {
+        ini();
+        $.getScript("paciente/js/paciente.js", function () {
+            
+            
+            $.each($("#editP" + id + " #tabPacientes_a a"), function (index, value) {
+                var idHref = $(value).attr("href");
+                $(value).attr("href", idHref + id);
             });
+            $.each($("#editP" + id + " #tabPacientes .tab-pane"), function (index, value) {
+                var ids = $(value).attr("id");
+                $(value).attr("id", ids + id);
+            });
+            
+            
+            edit(id);
+            
+            
+            /*$("#editP" + id + " #savePaciente").click(function () {
+             editSave(id);
+             });*/
         });
-        $currentTab = $('#TabAdm a[href="#' + tabId + '"]');
-
-        $(this).tab('show');
-        showTab(tabId);
-        registerCloseEvent();
     });
+    $currentTab = $('#TabAdm a[href="#' + tabId + '"]');
 
-    $("#tablePaciente").on("click", "button[name='deletPaciente']", function () {
-        var id = $(this).attr("data-id");
-        $.getScript("paciente/js/paciente.js", function () {
-            deletPaciente(id);
-            list_filter();
-        });
-    });
-
-
-
+    $(this).tab('show');
+    showTab(tabId);
+    registerCloseEvent();
 });

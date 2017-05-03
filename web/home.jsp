@@ -36,14 +36,14 @@
         <script src="resources/js/style.js" type="text/javascript"></script>
         <script src="resources/js/tabPanel.js" type="text/javascript"></script>
     </head>
-        <body>
+    <body>
         <div class="fill">
             <div class="header">
                 <h1 class="text-center">Sistema Medico</h1>
-
+                
             </div>
             <div class="body">
-
+<button class="btn btn-danger" id="pestaña" >Pestaña actual</button>
                 <div class="menu-lateral">
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-default">
@@ -156,5 +156,7 @@
 
             </div>
         </div>
+        <script type="text/javascript" src="paciente/js/styleListPaciente.js"></script>
+        <script type="text/javascript" src="paciente/js/stylePaciente.js"></script>
     </body>
 </html>

@@ -90,7 +90,7 @@ function showTab(tabId) {
 }
 //return current active tab
 function getCurrentTab() {
-    return currentTab;
+    return $currentTab;
 }
 
 //This function will create a new tab here and it will load the url content in tab content div.
