@@ -43,7 +43,7 @@
     </div>
     
 </div>
-<script src="paciente/js/styleListPaciente.js" type="text/javascript"></script>
+<!--<script src="paciente/js/styleListPaciente.js" type="text/javascript"></script>-->
 <script type="text/javascript">
     $(function () {
         $.getScript("paciente/js/paciente.js", function () {

@@ -106,7 +106,7 @@ public class sPaciente extends HttpServlet {
         final DateFormat DF = new SimpleDateFormat(FORMATO_FECHA);
         Gson gson = new GsonBuilder().setDateFormat(FORMATO_FECHA).create();
         switch (op) {
-            case "delete": 
+            case "delete":
                 new HistorialClinicoDaoImp().delete(Integer.parseInt(request.getParameter("id")));
                 break;
             case "list":
@@ -194,7 +194,6 @@ public class sPaciente extends HttpServlet {
                 }
                 new PacienteDaoImp().save(paciente);
                 paciente.setId(idPaciente);
-                
 
                 if (!sexo) {
                     Obstetricos obstetricos = new Obstetricos(Integer.parseInt(request.getParameter("paciente[idObs]")));
@@ -225,9 +224,12 @@ public class sPaciente extends HttpServlet {
 
                 if (Integer.parseInt(request.getParameter("id")) != 0) {
                     String[] parientes_enfermedad_edit = request.getParameterValues("editAntecedentes[]");
-                    for (String value : parientes_enfermedad_edit) {
-                        new ParienteEnfermedadPacienteDaoImp().delete(Integer.parseInt(value));
+                    if (parientes_enfermedad_edit != null) {
+                        for (String value : parientes_enfermedad_edit) {
+                            new ParienteEnfermedadPacienteDaoImp().delete(Integer.parseInt(value));
+                        }
                     }
+
                 }
                 break;
         }

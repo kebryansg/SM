@@ -83,12 +83,14 @@ public class pruebaCombo extends HttpServlet {
         switch (op) {
             case "cantones":
                 List<Canton> cantones = new CantonDaoImp().list(Integer.parseInt(request.getParameter("id")));
+                out.println("<option value=\"0\">Seleccione</option>");
                 for (Canton canton : cantones) {
                     out.println("<option value='" + canton.getId() + "'>" + canton.getDescripcion() + "</option>");
                 }
                 break;
             case "parroquias":
                 List<Parroquia> parroquias = new ParroquiaDaoImp().list(Integer.parseInt(request.getParameter("id")));
+                out.println("<option value=\"0\">Seleccione</option>");
                 for (Parroquia parroquia : parroquias) {
                     out.println("<option value='" + parroquia.getId() + "'>" + parroquia.getDescripcion() + "</option>");
                 }
