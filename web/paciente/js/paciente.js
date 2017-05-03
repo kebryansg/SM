@@ -169,14 +169,14 @@ function editSave(id) {
     if (true) {
         var newA = newAntecedentes(id);
         var editA = editAntecedentes(id);
-        alert(obtenerDatos(id));
+        var paciente = obtenerDatos(id);
         $.ajax({
             url: 'sPaciente',
             type: 'POST',
             async: false,
             data: {
                 id: id,
-                paciente: obtenerDatos(id),
+                paciente: paciente,
                 newAntecedentes: newA,
                 editAntecedentes: editA,
                 op: 'save'
@@ -316,7 +316,7 @@ function asignarPaciente(paciente) {
     $('#editP' + paciente.id + ' #pac_EstadoCivil > option[value="' + paciente.estadoCivil + '"]').attr('selected', true);
     var sexo = paciente.sexo === true ? "1" : "2";
     $('#editP' + paciente.id + ' #pac_Genero > option[value="' + sexo + '"]').attr('selected', true);
-    change_Genero();
+    change_Genero($('#editP' + paciente.id + ' #pac_Genero'));
 
     /* Carga y asigna provincia,canton y parroquia */
     $.ajax({
@@ -332,10 +332,10 @@ function asignarPaciente(paciente) {
 
             $('#editP' + paciente.id + ' #cboProvincia').selectpicker('val', det.provincia);
             //$('#cboProvincia > option[value="' + det.provincia + '"]').attr('selected', true);
-            change_cboProvincia();
+            change_cboProvincia($('#editP' + paciente.id + ' #cboProvincia'));
             $('#editP' + paciente.id + ' #cboCanton').selectpicker('val', det.canton);
             //$('#cboCanton > option[value="' + det.canton + '"]').attr('selected', true);
-            change_cboCanton();
+            change_cboCanton($('#editP' + paciente.id + ' #cboCanton'));
             $('#editP' + paciente.id + ' #cboParroquia').selectpicker('val', paciente.idParroquia.id);
             //$('#cboParroquia > option[value="' + paciente.idParroquia.id + '"]').attr('selected', true);
         }

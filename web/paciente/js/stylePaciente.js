@@ -94,6 +94,17 @@ $("#ContentAdm").on("change", "#file_imagen", function (evt) {
     }
 });
 
+$("#ContentAdm").on("click", "#savePaciente", function () {
+    var id = $(this).attr("data-id");
+    $.getScript("paciente/js/paciente.js", function () {
+        if (id === "0") {
+            save();
+        } else {
+            editSave(id);
+        }
+    });
+});
+
 $(document).ready(function () {
 
 
