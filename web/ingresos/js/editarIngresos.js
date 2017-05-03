@@ -5,13 +5,15 @@
  */
 $(document).ready(function(){
     var pagina=1;
-    var diagnosticos=[];
-    var totalRegistros=0;
-     var totalPaginas=0;
+    var diagnosticos=[];    
      var datos=[];
+     var medicinas=[];
      var indice=0;
+     var idMedicamento=0;
+     var idIngreso=0;
      $('.dropdown-toggle').dropdown();
      $('[data-toggle="tooltip"]').tooltip();  
+     var bandera=0;
      ocultarModal();
      function ocultarModal()
      {
@@ -38,17 +40,6 @@ $(document).ready(function(){
 	        });
          
      }
-     
-     function momentToDate(varMoment, formato)
-     {
-         var dateObj = new Date(varMoment);
-         var momentObj = moment(dateObj);
-         return momentObj.format(formato);        
-     }
-     
-     
-     
-   
     function cargarIngresos()
     {
         $.ajax({
@@ -77,7 +68,7 @@ $(document).ready(function(){
                         var indice=parseInt(i)+1;
                         //<li><a href="#">1</a></li>                
                         if(indice==pagina)
-                            $("#paginacionIngresosEditar ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
+                            $("#paginacionIngresosEditar ul").append('<li ><a href="#">'+indice+'</a></li>');
                         else 
                             $("#paginacionIngresosEditar ul ").append('<li><a href="#">'+indice+'</a></li>');
                     }
@@ -112,7 +103,7 @@ $(document).ready(function(){
                             res = diagnosticos[i];
                         if(i==4)
                             valor="btn-group dropup";
-                        $('#tablaIngresos').append("<tr class='active'>\n\
+                        $('#tablaIngresos').append("<tr >\n\
                                                         <td>"+resultado[i].id+"</td>\n\
                                                         <td>"+resultado[i].unPaciente.cedula+"</td>\n\
                                                         <td>"+resultado[i].unPaciente.nombre1+ ' '+resultado[i].unPaciente.nombre2+"</td>\n\
@@ -152,29 +143,18 @@ $(document).ready(function(){
      }
      $('#paginacionIngresosEditar ul').click(function (e) {        
         var a = e.target.parentNode;
-        pagina = a.innerText;        
-        
+        pagina = a.innerText;                
         cargarIngresos();
     });
-     $('#btnBuscar').click(function(event) {               
-         
+    
+     $('#btnBuscar').click(function(event) {                        
          cargarIngresos();
-     });  
-     
+     });       
      $(".table-responsive").on("click", "tr", function(){  
          indice = $(this).index();
       });
-       $(".table-responsive").on("click", "#btnEditarMedicamento", function(){  
-          var cont=0;    
-          $(this).parents("tr").find("td").each(function(){
-              datos[cont]=$(this).html();   
-              cont++;
-          });
-          var id='medicinas';
-          $("#"+id).modal('show');
-          
-      });
-      $(".table-responsive").on("click", "#botonEditar", function(){  
+      //editar ingreso
+   $(".table-responsive").on("click", "#botonEditar", function(){  
           var cont=0;    
           $(this).parents("tr").find("td").each(function(){
               datos[cont]=$(this).html();   
@@ -196,16 +176,23 @@ $(document).ready(function(){
           var id='myModal';
           $("#"+id).modal('show');
       });
+      //agregar medicamento
       $(".table-responsive").on("click", "#opAgregarMedicina", function(){
+         idMedicamento=0;
           var cont=0;    
           $(this).parents("tr").find("td").each(function(){
               datos[cont]=$(this).html();   
               cont++;
           });
           var id='medicinas';
+          $.each($("#"+id+" input"), function (){
+            $(this).val("");
+            
+        }); 
+        $("#dtpFechaMedicamentoIngresosModal").val('');
           $("#"+id).modal('show');
       });
-      
+      //editar medicina
       $(".table-responsive").on("click", "#opMantenimientoMedicina", function(){
           var cont=0;    
           $(this).parents("tr").find("td").each(function(){
@@ -225,18 +212,20 @@ $(document).ready(function(){
                                                 <th class='col-lg-1'>Lni</th>\n\
                                                   <th class='col-lg-1'>Fin</th>\n\
                                                 <th >Administración de medicamentos y tratamientos</th>\n\
-                                                <th class='col-lg-2'>Acción</th>\n\
+                                                <th style='display:none;></th>\n\
+                                                <th class='col-lg-3'>Acción</th>\n\
                                               </tr>");
                for(i=0;i <resultado.length; i++)
                 {
                     $('#tablaMedicamentos').append("<tr>\n\                                                            \n\
                                                     <td style='display:none;'>"+resultado[i].id+"</td>\n\
-                                                    <td>"+resultado[i].fecha+"</td>\n\
+                                                    \n\<td>"+resultado[i].fecha+"</td>\n\
                                                     \n\<td>"+resultado[i].hor+"</td>\n\
                                                     \n\ \n\<td>"+resultado[i].lni+"</td>\n\
                                                     \n\ \n\<td>"+resultado[i].fin+"</td>\n\
                                                     \n\ \n\<td>"+resultado[i].medicamentoTratamiento+"</td>\n\
-                                                    <td style='width: 10%' ><button id='btnEditarMedicamento' class='btn btn-primary' '><span class='glyphicon glyphicon-pencil'></span> </button>\n\
+                                                    \n\<td style='display:none;'>"+resultado[i].ingreso.id+"</td>\
+                                                    <td style='width: 12%' ><button id='btnEditarMedicamento' class='btn btn-primary' '><span class='glyphicon glyphicon-pencil'></span> </button>\n\
                                                         <button id='btnEliminar' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span></a></button>\n\
                                                     </td>\n\
                                                 </tr>");
@@ -253,15 +242,16 @@ $(document).ready(function(){
           $("#"+id).modal('show');
       });
       //btnAgregarMedicamentos
-      $('#btnAgregarMedicamentos').click(function(event) {
+      $('#btnAgregarMedicamentos').click(function(event) {          
           $.post('sIngresosHospital', {
-            idIngreso : datos[0],
+            idIngreso : idIngreso,
             fechaMedicamento: $('#dtpFechaMedicamentoIngresosModal').val(),
             hor: $('#txtHor').val(),
             lni: $('#txtLni').val(),
             fin: $('#txtFin').val(),  
             medicamentoTratamiento:$('#txtMedicamentos').val(),
-            opcion:'9'                                
+            opcion:'9',
+            idMedicamento:idMedicamento
         }, function(responseText) {               
             alertify.success("Datos registrados correctamente");
         });
@@ -316,5 +306,26 @@ $(document).ready(function(){
         event.preventDefault();
         $(this).closest('tr').remove();
     });
+    
+       //editar Medicamento
+       $(".table-responsive").on("click", "#btnEditarMedicamento", function(){  
+          var cont=0;    
+          $(this).parents("tr").find("td").each(function(){
+              medicinas[cont]=$(this).html();               
+              cont++;
+              
+          });
+          idMedicamento=medicinas[0];
+          idIngreso=medicinas[6];
+          var id='medicinas';
+           $('#dtpFechaMedicamentoIngresosModal').val(medicinas[1]);
+           $('#txtHor').val(medicinas[2]);
+           $('#txtLni').val(medicinas[3]);
+           $('#txtFin').val(medicinas[4]);
+           $('#txtMedicamentos').val(medicinas[5]);
+           $("#"+id).modal('show');
+          
+      });
+      
 });
     
