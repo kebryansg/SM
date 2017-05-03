@@ -27,6 +27,7 @@ import mvc.modelo.smDaoImp.MedicoDaoImp;
 import org.codehaus.jackson.map.ObjectMapper;
 import java.util.List;
 import mvc.controlador.entidades.sm.Caso;
+import mvc.controlador.entidades.sm.Medicamento;
 
 
 /**
@@ -230,6 +231,30 @@ public class sIngresosHospital extends HttpServlet {
             Integer idIngresos =Integer.valueOf(request.getParameter("idIngreso"));
             IngresosDao ingr= new IngresosDaoImp();
             ingr.Delete(idIngresos);
+        }
+        //registrar medicamento
+        else if("9".equals(opcion))
+        {
+            try
+            {
+             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");    
+            String medicamento =request.getParameter("medicamentoTratamiento");
+            Date fechaMedicamento = sdf.parse(request.getParameter("fechaMedicamento"));
+            String hor= request.getParameter("hor");
+            String lni= request.getParameter("lni");
+            String fin= request.getParameter("fin");
+            Integer idIngresos =Integer.valueOf(request.getParameter("idIngreso"));
+            
+            IngresosDao ingr= new IngresosDaoImp();
+            Medicamento medicamentos = new Medicamento(0,medicamento,new java.sql.Date(fechaMedicamento.getTime()),hor,lni,fin, new Ingresos(idIngresos));
+            ingr.guardarMedicamento(medicamentos);
+            
+            
+            
+            }
+            catch(Exception ex)
+            {
+            }
         }
 
     }

@@ -73,8 +73,7 @@ $(document).ready(function(){
                                                         <th style='display:none;' class='col-lg-1'>S. Egreso 2</th>\n\
                                                         <th style='display:none;' class='col-lg-1'>C. Externa</th>\n\
                                                         <th class='col-lg-1'>Cód.</th>\n\
-                                                        <th >Acción.</th>\n\
-                                                    </tr>");
+                                                        <th >Acción.</th></tr>");
                     for(i=0;i <resultado.length; i++)
                     {
                         diagnosticos[i]=resultado[i].definitivoEgreso;
@@ -100,11 +99,11 @@ $(document).ready(function(){
                                                         <td style='display:none;'>"+resultado[i].secundarioEgreso2+"</td>\n\
                                                         <td style='display:none;'>"+resultado[i].causaExterna+"</td>\n\
                                                         <td>"+resultado[i].codigoDiagnosticoDefinitivo+"</td>\n\
-                                                        <td style='width: 20%' >\n\
+                                                        <td style='width: 18%' >\n\
                                                             <button id='botonEditar' class='btn btn-primary'><span class='glyphicon glyphicon-pencil'></span> </button> \n\
                                                             \n\
                                                             <button id='btnEliminar' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span></a></button>\n\
-                                                            \n\<button id='botonAgregar' class='btn btn-warning'></span>Medicina</button> \
+                                                            \n\<button id='bntMedicinas' class='btn btn-warning'></span>Medicina</button> \
                                                         </td>\n\
                                                     </tr>");
                 }
@@ -149,7 +148,29 @@ $(document).ready(function(){
           var id='myModal';
           $("#"+id).modal('show');
       });
-      
+      $(".table-responsive").on("click", "#bntMedicinas", function(){
+          var cont=0;    
+          $(this).parents("tr").find("td").each(function(){
+              datos[cont]=$(this).html();   
+              cont++;
+          });
+          var id='medicinas';
+          $("#"+id).modal('show');
+      });
+      //btnAgregarMedicamentos
+      $('#btnAgregarMedicamentos').click(function(event) {
+          $.post('sIngresosHospital', {
+            idIngreso : datos[0],
+            fechaMedicamento: $('#dtpFechaMedicamentoIngresosModal').val(),
+            hor: $('#txtHor').val(),
+            lni: $('#txtLni').val(),
+            fin: $('#txtFin').val(),  
+            medicamentoTratamiento:$('#txtMedicamentos').val(),
+            opcion:'9'                                
+        }, function(responseText) {               
+            alertify.success("Datos registrados correctamente");
+        });
+      });
     $('#btnActualizar').click(function(event) {
         $.post('sIngresosHospital', {
             idIngreso : datos[0],

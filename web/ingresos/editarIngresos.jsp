@@ -245,4 +245,113 @@
         </div>
     </div>
 </div>
+                                            
+                                            
+<!--Modal medicinas -->
+<div class="modal fade" id="medicinas" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">          
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Medicamentos</h4>
+            </div>
+            <div class="modal-body">
+                <div class="tab-pane fade in active" id="ip" style="padding-top: 10px;">
+                    <div class="row">
+                        <div class="col-lg-12">                                    
+
+
+                           <div class="row">
+                                <div class="form-group col-xs-6">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12" for="dtpFechaIngresoModal">Fecha</label>
+                                        <div class="col-md-12">
+                                                <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
+                                            <input validate="date" class="form-control" id="dtpFechaMedicamentoIngresosModal" size="16" type="text" value="" readonly>
+                                            <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-6">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12" for="dtpFechaEgreso">Hor</label>
+                                        <div class="col-md-12">
+                                                    <input id='txtHor' type='text' class="form-control" />                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                             <div class="row">
+                                  <div class="form-group col-xs-6">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12" for="dtpHoraIngreso">Lni</label>
+                                        <div class="col-md-12">
+                                            
+                                                    <input id='txtLni' type='text' class="form-control" /> 
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-6">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12" for="dtpHoraIngreso">Fin</label>
+                                        <div class="col-md-12">
+                                            
+                                                <input id='txtFin' type='text' class="form-control" />                                                                
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12" for="txtDefinitivoEgreso">Administración de medicamentos y tratamientos</label>
+                                        <div class="col-md-12">
+                                            <textarea id="txtMedicamentos" rows="3" class="form-control" placeholder=""></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-10">
+
+                                </div>                                       
+                                
+                            </div>
+                            </form>
+
+
+                        </div>
+
+
+
+
+                    </div>
+                </div> 
+
+
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <div class="form-group col-xs-2">                                       
+                                    <div class="col-md-2">
+                                        <button id="btnAgregarMedicamentos" type="button" onclick="closeModal('medicinas')" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="ingresos/js/editarIngresos.js" type="text/javascript" async="async"></script>

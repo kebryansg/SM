@@ -20,6 +20,7 @@ import mvc.controlador.entidades.sm.Caso;
 import mvc.controlador.entidades.sm.EspecialidadEgreso;
 import mvc.controlador.entidades.sm.HistorialClinico;
 import mvc.controlador.entidades.sm.Ingresos;
+import mvc.controlador.entidades.sm.Medicamento;
 import mvc.controlador.entidades.sm.Medico;
 import mvc.controlador.entidades.sm.TipoIngreso;
 import mvc.modelo.smDao.IngresosDao;
@@ -272,6 +273,32 @@ C_BD conn;
         }
 
     }
+
+    @Override
+    public boolean guardarMedicamento(Medicamento value) {
+        String sql="";
+        this.conn= con_db.open(con_db.MSSQL_SM);
+        try 
+        {   
+            //Insert
+           if(value.getId()==0)
+            {
+                sql="INSERT INTO medicamentos(medicamentoTratamiento, fecha, Hor, Lni, Fin, idIngresos) values('"+value.getMedicamentoTratamiento()+"','"+value.getFecha()+"','"+value.getHor()+"','"+value.getLni()+"','"+value.getFin()+"','"+value.getIngreso().getId()+"')";
+            }
+            //Update
+            else
+            {
+                //sql="UPDATE especialidad SET descripcion='";
+            }
+            this.conn.execute(sql);
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
+    }
+    
     
     
 }
