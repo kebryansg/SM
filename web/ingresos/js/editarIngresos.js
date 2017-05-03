@@ -114,7 +114,7 @@ $(document).ready(function(){
      $('#paginacionIngresosEditar ul').click(function (e) {        
         var a = e.target.parentNode;
         pagina = a.innerText;        
-        alert(pagina);
+        
         cargarIngresos();
     });
      $('#btnBuscar').click(function(event) {               
