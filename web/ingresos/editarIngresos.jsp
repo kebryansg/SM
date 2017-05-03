@@ -354,4 +354,80 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="mantenimientoMedicina" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">          
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Mantenimiento Medicamentos</h4>
+            </div>
+            <div class="modal-body">
+                <div class="tab-pane fade in active" id="ip" style="padding-top: 10px;">
+                    <div class="row">
+                        <div class="col-lg-12">                                    
+                               <div style="width: 100%; height: 300px; overflow-y: scroll; overflow-x: hidden;">         
+                                    <div class="table-responsive">
+                                        <table id="tablaMedicamentos" class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-lg-1">id</th>
+                                                    <th class="col-lg-1">Fecha</th>
+                                                    <th>Hor</th>
+                                                    <th class="col-lg-1">Lni</th>
+                                                    <th class="col-lg-1">Fin</th>
+                                                    <th class="col-lg-1">Administración de medicamentos y tratamientos</th>
+
+                                                </tr>
+
+                                            </thead>
+                                            <tbody >
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            <div style="text-align: right; width: 100%;" id="paginacionBuscarIngresos">
+                            <nav aria-label="Page navigation">
+                                    <ul class="pagination" id="paginacionBuscarI"></ul>
+                             </nav>
+                    </div>        
+
+                            
+                            <div class="row">
+                                <div class="form-group col-xs-10">
+
+                                </div>                                       
+                                <div class="form-group col-xs-2">                                       
+                                    <div class="col-md-2">
+                                        <button id="btnActualizar" type="button" onclick="closeModal('myModal')" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+
+
+                        </div>
+
+
+
+
+                    </div>
+                </div> 
+
+
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+                                            
+               
+
 <script src="ingresos/js/editarIngresos.js" type="text/javascript" async="async"></script>

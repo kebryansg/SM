@@ -298,6 +298,28 @@ C_BD conn;
             return false;
         }
     }
+
+    @Override
+    public List<Medicamento> list(int idIngreso) {
+        List<Medicamento> list = new ArrayList<>();
+
+              try {  
+                  
+                this.conn= con_db.open(con_db.MSSQL_SM); 
+                ResultSet rs = this.conn.query("SELECT * FROM MEDICAMENTOS where idIngresos='"+idIngreso+"'");
+                while (rs.next()) {
+                    Medicamento value = new Medicamento(rs.getInt("id"),rs.getString("medicamentoTratamiento"),rs.getDate("fecha"),rs.getString("Hor"),rs.getString("Lni"),rs.getString("Fin"), new Ingresos(rs.getInt("idIngresos")));                    
+                    list.add(value);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            } finally {
+                //this.conn.close();
+            }
+
+            return list;
+    }
+    
     
     
     

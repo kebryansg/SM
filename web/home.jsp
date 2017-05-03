@@ -15,8 +15,8 @@
 
         <link href="resources/css/style_home.css" rel="stylesheet" type="text/css"/>
 
-        <script src="resources/js/jquery.min.js" type="text/javascript" async="async"></script>
-        <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript" async="async" ></script>
+        <script src="resources/js/jquery.min.js" type="text/javascript" ></script>
+        <script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"  ></script>
 
 
         <!--    desde aqui mis links -->
@@ -43,7 +43,7 @@
                 
             </div>
             <div class="body">
-<button class="btn btn-danger" id="pestaña" >Pestaña actual</button>
+
                 <div class="menu-lateral">
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-default">

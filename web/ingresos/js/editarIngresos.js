@@ -10,7 +10,35 @@ $(document).ready(function(){
      var totalPaginas=0;
      var datos=[];
      var indice=0;
+     $('.dropdown-toggle').dropdown();
      $('[data-toggle="tooltip"]').tooltip();  
+     ocultarModal();
+     function ocultarModal()
+     {
+         $('.modal').on({ 
+	            'show.bs.modal': function() {
+	                var idx = $('.modal:visible').length;
+	                $(this).css('z-index', 1040 + (10 * idx));
+	            },
+	            'shown.bs.modal': function() {
+	                var idx = ($('.modal:visible').length) - 1; // raise backdrop after animation.
+	                $('.modal-backdrop').not('.stacked')
+	                .css('z-index', 1039 + (10 * idx))
+	                .addClass('stacked');
+	            },
+	            'hidden.bs.modal': function() {
+	                if ($('.modal:visible').length > 0) {
+	                    // restore the modal-open class to the body element, so that scrolling works
+	                    // properly after de-stacking a modal.
+	                    setTimeout(function() {
+	                        $(document.body).addClass('modal-open');
+	                    }, 0);
+	                }
+	            }
+	        });
+         
+     }
+     
      function momentToDate(varMoment, formato)
      {
          var dateObj = new Date(varMoment);
@@ -74,6 +102,7 @@ $(document).ready(function(){
                                                         <th style='display:none;' class='col-lg-1'>C. Externa</th>\n\
                                                         <th class='col-lg-1'>Cód.</th>\n\
                                                         <th >Acción.</th></tr>");
+                var valor="btn-group";
                     for(i=0;i <resultado.length; i++)
                     {
                         diagnosticos[i]=resultado[i].definitivoEgreso;
@@ -81,6 +110,8 @@ $(document).ready(function(){
                             var res = diagnosticos[i].substring(0, 17)+'...';
                         else
                             res = diagnosticos[i];
+                        if(i==4)
+                            valor="btn-group dropup";
                         $('#tablaIngresos').append("<tr class='active'>\n\
                                                         <td>"+resultado[i].id+"</td>\n\
                                                         <td>"+resultado[i].unPaciente.cedula+"</td>\n\
@@ -99,12 +130,20 @@ $(document).ready(function(){
                                                         <td style='display:none;'>"+resultado[i].secundarioEgreso2+"</td>\n\
                                                         <td style='display:none;'>"+resultado[i].causaExterna+"</td>\n\
                                                         <td>"+resultado[i].codigoDiagnosticoDefinitivo+"</td>\n\
-                                                        <td style='width: 18%' >\n\
+                                                        <td style='width: 20%' >\n\
                                                             <button id='botonEditar' class='btn btn-primary'><span class='glyphicon glyphicon-pencil'></span> </button> \n\
                                                             \n\
                                                             <button id='btnEliminar' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span></a></button>\n\
-                                                            \n\<button id='bntMedicinas' class='btn btn-warning'></span>Medicina</button> \
-                                                        </td>\n\
+\n\
+                                                            <div class='"+valor+"'>\n\
+                                                            \n\<button id='btnMedicinas' type='button' class='btn btn-warning dropdown-toggle' data-toggle='dropdown'>Medicinas <span class='caret'></span></button>\
+                                                               <ul class='dropdown-menu' role='menu'>\n\
+                                                                    <li id='opAgregarMedicina'><a href='#'>Agregar</a></li>\n\
+                                                                    <li id='opMantenimientoMedicina'><a href='#'>Editar</a></li>     \n\
+                                                                    \n\
+                                                               </ul>\n\
+                                                            </div>\n\
+</td>\n\
                                                     </tr>");
                 }
             }
@@ -125,7 +164,16 @@ $(document).ready(function(){
      $(".table-responsive").on("click", "tr", function(){  
          indice = $(this).index();
       });
-      
+       $(".table-responsive").on("click", "#btnEditarMedicamento", function(){  
+          var cont=0;    
+          $(this).parents("tr").find("td").each(function(){
+              datos[cont]=$(this).html();   
+              cont++;
+          });
+          var id='medicinas';
+          $("#"+id).modal('show');
+          
+      });
       $(".table-responsive").on("click", "#botonEditar", function(){  
           var cont=0;    
           $(this).parents("tr").find("td").each(function(){
@@ -148,13 +196,60 @@ $(document).ready(function(){
           var id='myModal';
           $("#"+id).modal('show');
       });
-      $(".table-responsive").on("click", "#bntMedicinas", function(){
+      $(".table-responsive").on("click", "#opAgregarMedicina", function(){
           var cont=0;    
           $(this).parents("tr").find("td").each(function(){
               datos[cont]=$(this).html();   
               cont++;
           });
           var id='medicinas';
+          $("#"+id).modal('show');
+      });
+      
+      $(".table-responsive").on("click", "#opMantenimientoMedicina", function(){
+          var cont=0;    
+          $(this).parents("tr").find("td").each(function(){
+              datos[cont]=$(this).html();   
+              cont++;
+          });
+           $.post('sIngresosHospital', {
+               idIngreso : datos[0],
+               opcion: 10
+           }, function(data) { 
+               var resultado = JSON && JSON.parse(data) || $.parseJSON(data); 
+               $('#tablaMedicamentos tr').remove();
+               $('#tablaMedicamentos thead').append("<tr>\n\
+                                                <th style='display:none;' class='col-lg-1'>id</th>\n\
+                                                <th class='col-lg-1'>Fecha</th>\n\
+                                                <th>Hor</th>\n\
+                                                <th class='col-lg-1'>Lni</th>\n\
+                                                  <th class='col-lg-1'>Fin</th>\n\
+                                                <th >Administración de medicamentos y tratamientos</th>\n\
+                                                <th class='col-lg-2'>Acción</th>\n\
+                                              </tr>");
+               for(i=0;i <resultado.length; i++)
+                {
+                    $('#tablaMedicamentos').append("<tr>\n\                                                            \n\
+                                                    <td style='display:none;'>"+resultado[i].id+"</td>\n\
+                                                    <td>"+resultado[i].fecha+"</td>\n\
+                                                    \n\<td>"+resultado[i].hor+"</td>\n\
+                                                    \n\ \n\<td>"+resultado[i].lni+"</td>\n\
+                                                    \n\ \n\<td>"+resultado[i].fin+"</td>\n\
+                                                    \n\ \n\<td>"+resultado[i].medicamentoTratamiento+"</td>\n\
+                                                    <td style='width: 10%' ><button id='btnEditarMedicamento' class='btn btn-primary' '><span class='glyphicon glyphicon-pencil'></span> </button>\n\
+                                                        <button id='btnEliminar' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span></a></button>\n\
+                                                    </td>\n\
+                                                </tr>");
+                }
+           
+       });
+           
+          var cont=0;    
+          $(this).parents("tr").find("td").each(function(){
+              datos[cont]=$(this).html();   
+              cont++;
+          });
+          var id='mantenimientoMedicina';
           $("#"+id).modal('show');
       });
       //btnAgregarMedicamentos

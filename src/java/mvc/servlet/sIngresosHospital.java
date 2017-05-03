@@ -256,6 +256,23 @@ public class sIngresosHospital extends HttpServlet {
             {
             }
         }
+        else if("10".equals(opcion))
+        {
+            try
+            {
+                Integer idIngresos =Integer.valueOf(request.getParameter("idIngreso"));
+                IngresosDao ingr= new IngresosDaoImp();
+                
+                List<Medicamento> list= ingr.list(idIngresos); 
+             ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+             String json = OBJECT_MAPPER.writeValueAsString(list);
+             response.getWriter().write(json);
+                
+            }
+            catch(Exception ex)
+            {
+            }
+        }
 
     }
 
