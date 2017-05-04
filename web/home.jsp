@@ -43,7 +43,7 @@
                 
             </div>
             <div class="body">
-<button class="btn btn-danger" id="pestaña" >Pestaña actual</button>
+<!--<button class="btn btn-danger" id="pestaña" >Pestaña actual</button>-->
                 <div class="menu-lateral">
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-default">

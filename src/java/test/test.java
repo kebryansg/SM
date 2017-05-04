@@ -35,7 +35,7 @@ public class test {
         int id = 0;
         C_BD conn = con_db.open(con_db.MSSQL_IP);
         try {
-            ResultSet rs = conn.query("select max(id) id from " + tabla);
+            ResultSet rs = conn.query("select IDENT_CURRENT('"+ tabla +"') id");
             while (rs.next()) {
                 id = rs.getInt("id");
             }

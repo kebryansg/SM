@@ -1,18 +1,16 @@
-function validar() {
+function validar(id) {
     $(".help-block").remove();
 
-    /* Validacion de email */
-    var validacion_email = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+    /*var validacion_email = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
     var email = $("#tabPacientes input[validate='email']");
     if ($(email).val() === null || $(email).val() === "" || !validacion_email.test($(email).val())) {
         $(email).closest("div").addClass("has-error");
         $(email).after('<span id="' + $(email).attr("id") + 'help" class="help-block">Email no valido.</span');
     } else {
         $(email).closest("div").removeClass("has-error");
-    }
-    /* Validacion de email */
+    }*/
 
-    $.each($("#tabPacientes input[validate='text']"), function (index, value) {
+    $.each($("#optionPaciente[data-id='" + id + "'] #tabPacientes input[validate='text']"), function (index, value) {
         if ($(value).val() === null || $(value).val() === "") {
             $(value).closest("div").addClass("has-error");
             $(value).after('<span id="' + $(value).attr("id") + 'help" class="help-block">Campo Vacio</span');
@@ -21,7 +19,7 @@ function validar() {
             $(value).closest("div").removeClass("has-error");
         }
     });
-    $.each($("#tabPacientes select[validate='select']"), function (index, value) {
+    $.each($("#optionPaciente[data-id='" + id + "'] #tabPacientes select[validate='select']"), function (index, value) {
         if ($(value).val() === "0") {
             $(value).closest("div").addClass("has-error");
             $(value).after('<span id="' + $(value).attr("id") + 'help" class="help-block">Sin seleccionar</span');
@@ -30,7 +28,7 @@ function validar() {
             $(value).closest("div").removeClass("has-error");
         }
     });
-    $.each($("#tabPacientes input[validate='date']"), function (index, value) {
+    $.each($(" #optionPaciente[data-id='" + id + "']#tabPacientes input[validate='date']"), function (index, value) {
         if ($(value).val() === null || $(value).val() === "") {
             $(value).closest("div").addClass("has-error");
             $(value).parent("div").after('<span id="' + $(value).attr("id") + 'help" style="color:#a94442;" class="help-block">Sin Fecha</span');
@@ -39,8 +37,8 @@ function validar() {
             $(value).closest("div").removeClass("has-error");
         }
     });
-    if ($("#pac_Genero").val() === "2") {
-        var date = $("#pac_FPP");
+    if ($("#optionPaciente[data-id='" + id + "'] #pac_Genero").val() === "2") {
+        var date = $("#optionPaciente[data-id='" + id + "'] #pac_FPP");
         if ($(date).val() === null || $(date).val() === "") {
             $(date).closest("div").addClass("has-error");
             $(date).parent("div").after('<span id="' + $(date).attr("id") + 'help" style="color:#a94442;" class="help-block">Sin Fecha</span');
@@ -49,7 +47,7 @@ function validar() {
             $(date).closest("div").removeClass("has-error");
         }
     }
-    return $(".help-block").length === 0;
+    return $("#optionPaciente[data-id='" + id + "'] .help-block").length === 0;
 }
 
 function deletPaciente(id) {
@@ -165,7 +163,7 @@ function edit(id) {
 
 function editSave(id) {
     //var id = $("#savePaciente").attr("data-id");
-    //if (validar()) {
+    //if (validar(id)) {
     if (true) {
         var newA = newAntecedentes(id);
         var editA = editAntecedentes(id);
@@ -189,8 +187,8 @@ function editSave(id) {
 }
 
 function save() {
-    //if (validar()) {
-    if (true) {
+    if (validar(0)) {
+    //if (true) {
         var newA = newAntecedentes(0);
         $.ajax({
             url: 'sPaciente',
@@ -206,6 +204,9 @@ function save() {
                 alertify.success("Paciente Registrado");
             }
         });
+    }
+    else{
+        alertify.success("Inconvenientes..!");
     }
 }
 

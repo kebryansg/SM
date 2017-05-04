@@ -189,8 +189,8 @@ public class sPaciente extends HttpServlet {
                 } else {
                     paciente.setImagen(request.getParameter("paciente[imagen]"));
                 }
-                if (idPaciente == 0) {
-                    new HistorialClinicoDaoImp().save(new HistorialClinico("", paciente.getId()));
+                if (paciente.getId() == 0) {
+                    new HistorialClinicoDaoImp().save(new HistorialClinico("", idPaciente));
                 }
                 new PacienteDaoImp().save(paciente);
                 paciente.setId(idPaciente);
