@@ -15,12 +15,16 @@ $(function () {
         $('.nav-tabs li').remove();
         $('.tab-content').html("");
     });
-    $("#pestaña").click(function(){
+    $("#pestaña").click(function () {
         var pestaña = $(getCurrentTab()).attr("href");
-        
+
         alert($(pestaña + " #optionPaciente").attr("data-id"));
     });
+    $("#ContentAdm").on("keyup", ".solo-numero", function () {
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
+    });
 });
+
 
 
 

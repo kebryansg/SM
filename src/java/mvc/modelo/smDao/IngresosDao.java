@@ -10,6 +10,7 @@ import java.util.List;
 import mvc.controlador.entidades.ip.Paciente;
 import mvc.controlador.entidades.sm.HistorialClinico;
 import mvc.controlador.entidades.sm.Ingresos;
+import mvc.controlador.entidades.sm.Medicamento;
 
 
 /**
@@ -24,6 +25,8 @@ public interface IngresosDao {
     public List<Ingresos> listIngresos(int numeroPaginas, int totalRegistro,Date fechaIngreso, Date fechaSalida) ;
     public int totalIngresos(Date fechaIngreso, Date fechaSalida);
     public boolean Delete(int id);
+    public boolean guardarMedicamento(Medicamento value);
+    public List<Medicamento> list(int idRegistro);
     
     
     

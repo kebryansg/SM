@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <label for="inputUserName" class="control-label col-md-3">Cedula *</label>
                                     <div class="col-md-8">
-                                        <input validate="text" type="text" class="form-control" id="pac_Cedula" maxlength="10" id="inputUserName" placeholder="Cedula">
+                                        <input validate="text" type="text" class="form-control solo-numero" id="pac_Cedula" maxlength="10" id="inputUserName" placeholder="Cedula">
 
                                     </div>
                                 </div>

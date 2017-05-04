@@ -125,7 +125,7 @@ public class sPaciente extends HttpServlet {
 
                 String listString = "";
                 for (Paciente paciente1 : listP) {
-                    listString += "<tr class='active'>";
+                    listString += "<tr>";
                     listString += "<td>" + paciente1.getHistoriaClinica() + "</td>";
                     listString += "<td>" + paciente1.getCedula() + "</td>";
                     listString += "<td>" + (paciente1.getApellido1() + " " + paciente1.getApellido2() + " " + paciente1.getNombre1() + " " + paciente1.getNombre2()).toUpperCase() + "</td>";

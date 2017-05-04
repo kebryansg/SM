@@ -80,6 +80,7 @@ function registerCloseEvent() {
         $(this).parent().parent().remove(); //remove li of tab
         $(tabContentId).remove(); //remove respective tab content
         $('#TabAdm a:last').tab('show'); // Select first tab
+        $currentTab = $('#TabAdm a:last');
     });
 }
 

@@ -20,6 +20,7 @@ import mvc.controlador.entidades.sm.Caso;
 import mvc.controlador.entidades.sm.EspecialidadEgreso;
 import mvc.controlador.entidades.sm.HistorialClinico;
 import mvc.controlador.entidades.sm.Ingresos;
+import mvc.controlador.entidades.sm.Medicamento;
 import mvc.controlador.entidades.sm.Medico;
 import mvc.controlador.entidades.sm.TipoIngreso;
 import mvc.modelo.smDao.IngresosDao;
@@ -36,8 +37,7 @@ C_BD conn;
          List<Ingresos> list = new ArrayList<>();
        
           try {  
-              Integer totalIngresos=0;
-              totalIngresos=totalIngresos(fechaIngreso,fechaSalida);
+              
         Connection conexion;          
         conexion = con_db.open(con_db.MSSQL_SM).getConexion();
         CallableStatement cStmt=null;
@@ -68,7 +68,7 @@ C_BD conn;
                 value.setSecundarioEgreso2(rs.getString("secundarioEgreso2"));
                 value.setCausaExterna(rs.getString("causaExterna"));
                 value.setCodigoDiagnosticoDefinitivo(rs.getString("codigoDiagnosticoDefinitivo"));
-                value.setTotalIngresos(totalIngresos);
+                value.setRegistros(rs.getInt("registros"));
                 
                 /*.setIdPaciente(rs.getInt("idPaciente"));
                 value.setNombre1(rs.getString("nombre1"));
@@ -273,6 +273,54 @@ C_BD conn;
         }
 
     }
+
+    @Override
+    public boolean guardarMedicamento(Medicamento value) {
+        String sql="";
+        this.conn= con_db.open(con_db.MSSQL_SM);
+        try 
+        {   
+            //Insert
+           if(value.getId()==0)
+            {
+                sql="INSERT INTO medicamentos(medicamentoTratamiento, fecha, Hor, Lni, Fin, idIngresos) values('"+value.getMedicamentoTratamiento()+"','"+value.getFecha()+"','"+value.getHor()+"','"+value.getLni()+"','"+value.getFin()+"','"+value.getIngreso().getId()+"')";
+            }
+            //Update
+            else
+            {
+                //sql="UPDATE especialidad SET descripcion='";
+            }
+            this.conn.execute(sql);
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Medicamento> list(int idIngreso) {
+        List<Medicamento> list = new ArrayList<>();
+
+              try {  
+                  
+                this.conn= con_db.open(con_db.MSSQL_SM); 
+                ResultSet rs = this.conn.query("SELECT * FROM MEDICAMENTOS where idIngresos='"+idIngreso+"'");
+                while (rs.next()) {
+                    Medicamento value = new Medicamento(rs.getInt("id"),rs.getString("medicamentoTratamiento"),rs.getDate("fecha"),rs.getString("Hor"),rs.getString("Lni"),rs.getString("Fin"), new Ingresos(rs.getInt("idIngresos")));                    
+                    list.add(value);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            } finally {
+                //this.conn.close();
+            }
+
+            return list;
+    }
+    
+    
     
     
 }

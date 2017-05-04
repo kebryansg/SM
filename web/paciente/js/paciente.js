@@ -1,14 +1,14 @@
 function validar(id) {
-    $(".help-block").remove();
+    $("#optionPaciente[data-id='" + id + "'] .help-block").remove();
 
     /*var validacion_email = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
-    var email = $("#tabPacientes input[validate='email']");
-    if ($(email).val() === null || $(email).val() === "" || !validacion_email.test($(email).val())) {
-        $(email).closest("div").addClass("has-error");
-        $(email).after('<span id="' + $(email).attr("id") + 'help" class="help-block">Email no valido.</span');
-    } else {
-        $(email).closest("div").removeClass("has-error");
-    }*/
+     var email = $("#tabPacientes input[validate='email']");
+     if ($(email).val() === null || $(email).val() === "" || !validacion_email.test($(email).val())) {
+     $(email).closest("div").addClass("has-error");
+     $(email).after('<span id="' + $(email).attr("id") + 'help" class="help-block">Email no valido.</span');
+     } else {
+     $(email).closest("div").removeClass("has-error");
+     }*/
 
     $.each($("#optionPaciente[data-id='" + id + "'] #tabPacientes input[validate='text']"), function (index, value) {
         if ($(value).val() === null || $(value).val() === "") {
@@ -162,9 +162,7 @@ function edit(id) {
 }
 
 function editSave(id) {
-    //var id = $("#savePaciente").attr("data-id");
-    //if (validar(id)) {
-    if (true) {
+    if (validar(id)) {
         var newA = newAntecedentes(id);
         var editA = editAntecedentes(id);
         var paciente = obtenerDatos(id);
@@ -181,14 +179,17 @@ function editSave(id) {
             },
             success: function (response) {
                 alertify.success("Paciente Modificado");
+                $(getCurrentTab()).find(".closeTab").click();
             }
         });
+    } else {
+        alertify.success("Inconvenientes..!");
     }
 }
 
 function save() {
     if (validar(0)) {
-    //if (true) {
+        //if (true) {
         var newA = newAntecedentes(0);
         $.ajax({
             url: 'sPaciente',
@@ -202,10 +203,11 @@ function save() {
             },
             success: function (response) {
                 alertify.success("Paciente Registrado");
+                limpiarPaciente();
+
             }
         });
-    }
-    else{
+    } else {
         alertify.success("Inconvenientes..!");
     }
 }
@@ -344,7 +346,7 @@ function asignarPaciente(paciente) {
 }
 
 function limpiarPaciente() {
-    $($currentTab.attr("href")).load("paciente/paciente.jsp", function () {
+    $($(getCurrentTab()).attr("href")).load("paciente/paciente.jsp", function () {
         ini();
     });
 }

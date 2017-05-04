@@ -104,35 +104,14 @@ $("#ContentAdm").on("click", "#savePaciente", function () {
         }
     });
 });
-
-$(document).ready(function () {
-
-
-
-
-
-
-
-
-    $("#optionPaciente #savePaciente").click(function () {
-        /* $.getScript("paciente/js/paciente.js", function () {
-         var id = $("#savePaciente").attr("data-id");
-         if (id === "0") {
-         save();
-         } else {
-         editSave();
-         }
-         });*/
-    });
-
-    $("#cancelPaciente").click(function () {
-        $.getScript("paciente/js/paciente.js", function () {
-            //edit();
-            //limpiar();
-            validar();
-        });
-    });
-
-
-
+$("#ContentAdm").on("click", "#cancelPaciente", function () {
+    var id = pestañaActive();
+    
+    if(id === "0"){
+        limpiarPaciente();
+    }
+    else{
+      $(getCurrentTab()).find(".closeTab").click();  
+    }
+    
 });

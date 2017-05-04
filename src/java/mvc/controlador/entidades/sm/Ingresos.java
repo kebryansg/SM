@@ -78,6 +78,15 @@ public class Ingresos implements Serializable {
     private TipoIngreso idTipoIngreso;
     @OneToMany(mappedBy = "idIngreso")
     private Integer totalIngresos;
+    private int registros;
+
+    public int getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(int registros) {
+        this.registros = registros;
+    }
     
     private Paciente unPaciente;
    
