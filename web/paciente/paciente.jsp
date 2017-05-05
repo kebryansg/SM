@@ -38,7 +38,7 @@
                                         <div class="form-group">
                                             <label for="inputUserName" class="control-label col-md-3">Cedula *</label>
                                             <div class="col-md-8">
-                                                <input validate="text" type="text" class="form-control solo-numero" id="pac_Cedula" maxlength="10" id="inputUserName" placeholder="Cedula">
+                                                <input validate="cedula" type="text" class="form-control solo-numero" id="pac_Cedula" maxlength="10" id="inputUserName" placeholder="Cedula">
 
                                             </div>
                                         </div>
@@ -113,7 +113,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputUserName" class="control-label col-md-3">E-mail *</label>
+                                            <label for="inputUserName" class="control-label col-md-3">E-mail </label>
                                             <div class="col-md-8">
                                                 <input type="email" validate="email" class="form-control"  id="pac_Email" placeholder="E-mail">
                                             </div>
