@@ -18,7 +18,8 @@ $(function () {
     $("#pestaña").click(function () {
         var pestaña = $(getCurrentTab()).attr("href");
 
-        alert($(pestaña + " #optionPaciente").attr("data-id"));
+        //alert($(pestaña + " #optionPaciente").attr("data-id"));
+        //alert(pestaña);
     });
     $("#ContentAdm").on("keypress", ".solo-numero", function (e) {
         var key = window.Event ? e.which : e.keyCode;
