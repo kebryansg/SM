@@ -16,17 +16,26 @@
         </div>
         <hr/>
         <div class="row">
-            <div style="bottom: -10px;" class="col-xs-2 col-md-2">Registros por páginas:</div>
-            <div class="col-xs-1 col-md-1">
-                <select class="selectpicker" id="cboMostrar" data-width="80px">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                </select>
+            <div class="pull-right">
+                <div class="col-md-12">
+                    <input class="form-control" id="txtBuscar" placeholder="Buscar">
+                </div>
             </div>
-            <div class="col-xs-2 col-md-2"><input type="text" class="form-control" id="txtBuscar"  placeholder="Buscar"></div>
-        </div>
+            <div class="pull-left">
+                <div class="col-md-12">
+                    <div class="form-inline">
+                        <label for="txt_filterPaciente" class="control-label">Mostrar</label>
+                        <select class="selectpicker" data-width="80px" id="cboMostrar">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>    
         <br>
         <div style="width: 100%; height: 300px; overflow-y: scroll; overflow-x: hidden;">
         <div class="row">

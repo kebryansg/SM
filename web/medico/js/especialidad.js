@@ -151,15 +151,15 @@ $(document).ready(function(){
             $('#especialidades thead').append("<tr>\n\
                                                 <th class='col-lg-1'>No.</th>\n\
                                                 <th class='col-lg-9'>Descripción</th>\n\
-                                                <th>Opción</th>\n\
+                                                <th class='col-lg-2'>Opción</th>\n\
                                               </tr>");
               
             for(i=0;i <resultado.length; i++)
             {
-                $('#especialidades').append("<tr class='active'>\n\                                                            \n\
+                $('#especialidades').append("<tr>\n\
                                                 <td>"+resultado[i].id+"</td>\n\
                                                 <td>"+resultado[i].descripcion+"</td>\n\
-                                                <td style='width: 5px' ><button id='botonEditar' class='btn btn-primary' onclick='openModal('myModal')'><span class='glyphicon glyphicon-pencil'></span> </button>\n\
+                                                <td style='width: 3px' ><button id='botonEditar' class='btn btn-primary' onclick='openModal('myModal')'><span class='glyphicon glyphicon-pencil'></span> </button>\n\
                                                     <button id='btnEliminar' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span></a></button>\n\
                                                 </td>\n\
                                             </tr>");

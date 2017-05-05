@@ -55,30 +55,29 @@ font-weight:bold;
             <div class="col-lg-12">
                 <div class="tab-content"  >
                 <br>
-                
                 <div class="row">
-                    <div class="col-md-8">
-                    <div class="form-group">
-                        <label class="control-label col-xs-4">Registros por páginas:</label>
-                        <div style="padding-left: -10px" class="col-xs-2">
-                            <select class="form-control" id="cboMostrar" >
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-xs-3">
-                            <input type="text" class="form-control" id="txtBuscar" placeholder="Buscar">
-                        </div>
-                        
-                        
-                    </div>
-                        
+            <div class="pull-right">
+                <div class="col-md-12">
+                    <input class="form-control" id="txtBuscar" placeholder="Buscar">
+                </div>
+            </div>
+            <div class="pull-left">
+                <div class="col-md-12">
+                    <div class="form-inline">
+                        <label for="txt_filterPaciente" class="control-label">Mostrar</label>
+                        <select class="selectpicker" data-width="80px" id="cboMostrar">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                        </select>
                     </div>
                 </div>
-                <hr/>
+
+            </div>
+        </div>    
+                
+               <hr/>
                 <!--<div class="row" style="padding-bottom: 1%; text-align: right;" >
                     <div class="col-xs-12 col-sm-12 col-md-12"> 
                         <div class="col-xs-12 col-sm-12 col-md-3"> 

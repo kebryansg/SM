@@ -212,8 +212,8 @@ $(document).ready(function(){
                                                 <th class='col-lg-1'>Lni</th>\n\
                                                   <th class='col-lg-1'>Fin</th>\n\
                                                 <th >Administración de medicamentos y tratamientos</th>\n\
-                                                <th style='display:none;></th>\n\
-                                                <th class='col-lg-3'>Acción</th>\n\
+                                                <th style='display:none;'></th>\n\
+                                                <th class='col-lg-1'>Acción</th>\n\
                                               </tr>");
                for(i=0;i <resultado.length; i++)
                 {

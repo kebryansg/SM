@@ -200,7 +200,7 @@ function validarCedula()
                                                 <th class='col-lg-1'>Acci&oacute;n</th>");
             for(i=0;i <resultado.length; i++)
             {
-                $('#tablaMedico').append("<tr class='active'>\n\
+                $('#tablaMedico').append("<tr>\n\
                                                     <td style='width: 1%' >"+resultado[i].id+"</td>\n\
                                                     <td>"+resultado[i].cedula+"</td>\n\
                                                     <td>"+resultado[i].apellidos1+ ' '+resultado[i].apellidos2+"</td>\n\
