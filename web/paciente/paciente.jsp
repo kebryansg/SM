@@ -101,13 +101,48 @@
                                 <div class="form-group">
                                     <label for="inputUserName" class="control-label col-md-3">Tef. Casa *</label>
                                     <div class="col-md-8">
-                                        <input type="text" validate="text" class="form-control" maxlength="10" id="pac_TelCasa" placeholder="Tef. Casa">
+                                        <input type="text" validate="text" class="form-control solo-numero" maxlength="10" id="pac_TelCasa" placeholder="Tef. Casa">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputUserName" class="control-label col-md-3">Movil *</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control solo-numero" validate="text" maxlength="10" id="pac_TelOficina" placeholder="Movil">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputUserName" class="control-label col-md-3">E-mail *</label>
                                     <div class="col-md-8">
                                         <input type="email" validate="email" class="form-control"  id="pac_Email" placeholder="E-mail">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputUserName" class="control-label col-md-3">Domicilio *</label>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control" validate="text" rows="3" id="pac_Domicilio"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputUserName" class="control-label col-md-3">Discapacidad *</label>
+                                    <div class="col-md-8">
+                                        <label><input type="checkbox" value="" id="pac_Discapacidad"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label for="inputUserName" class="control-label col-md-3">Estado civil *</label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" validate="select" id="pac_EstadoCivil">
+                                            <option value="0">Seleccione</option>
+                                            <option value="1">Soltero</option>
+                                            <option value="2">Casado</option>
+                                            <option value="3">Divorciado</option>
+                                            <option value="4">Viudo</option>
+                                            <option value="5">Union libre</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -127,45 +162,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputUserName" class="control-label col-md-3">Domicilio *</label>
-                                    <div class="col-md-8">
-                                        <textarea class="form-control" validate="text" rows="3" id="pac_Domicilio"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputUserName" class="control-label col-md-3">Discapacidad *</label>
-                                    <div class="col-md-8">
-                                        <label><input type="checkbox" value="" id="pac_Discapacidad"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="inputUserName" class="control-label col-md-3">Cuidad *</label>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" validate="text"  id="pac_Ciudad" placeholder="Ciudad">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputUserName" class="control-label col-md-3">Estado civil *</label>
-                                    <div class="col-md-8">
-                                        <select class="form-control" validate="select" id="pac_EstadoCivil">
-                                            <option value="0">Seleccione</option>
-                                            <option value="1">Soltero</option>
-                                            <option value="2">Casado</option>
-                                            <option value="3">Divorciado</option>
-                                            <option value="4">Viudo</option>
-                                            <option value="5">Union libre</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputUserName" class="control-label col-md-3">Tef. Oficina *</label>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" validate="text" maxlength="10" id="pac_TelOficina" placeholder="Tef. Oficina">
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label for="inputUserName" class="control-label col-md-3">Género *</label>
                                     <div class="col-md-8">
                                         <select class="form-control" validate="select" id="pac_Genero">
@@ -173,6 +169,12 @@
                                             <option value="1">Masculino</option>
                                             <option value="2">Femenino</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputUserName" class="control-label col-md-3">Cuidad *</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" validate="text"  id="pac_Ciudad" placeholder="Ciudad">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -228,7 +230,37 @@
                             </div>
 
                         </div>
-
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputUserName" class="control-label col-md-3">Nombre Contacto</label>
+                                    <div class="col-md-5">
+                                        <input class="form-control" id="pac_nombreContacto"  type="text" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputUserName" class="control-label col-md-3">Movil contacto</label>
+                                    <div class="col-md-5">
+                                        <input class="form-control solo-numero" id="pac_movilContacto"  type="text" maxlength="10">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Parentezco</label>
+                                    <div class="col-md-8">
+                                        <select class="selectpicker" validate="select" data-live-search="true" id="cboParentezco">
+                                            <option value="0">Seleccione</option>
+                                            <option value="1">Padre</option>
+                                            <option value="2">Madre</option>
+                                            <option value="3">Hermano</option>
+                                            <option value="4">Otro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

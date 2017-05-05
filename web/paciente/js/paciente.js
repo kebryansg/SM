@@ -237,6 +237,9 @@ function obtenerDatos(id) {
         provincia: $("#optionPaciente[data-id='" + id + "'] #cboProvincia").val(),
         parroquia: $("#optionPaciente[data-id='" + id + "'] #cboParroquia").val(),
         canton: $("#optionPaciente[data-id='" + id + "'] #cboCanton").val(),
+        nombreContacto: $("#optionPaciente[data-id='" + id + "'] #pac_nombreContacto").val(),
+        movilContacto: $("#optionPaciente[data-id='" + id + "'] #pac_movilContacto").val(),
+        parentezco: $("#optionPaciente[data-id='" + id + "'] #cboParentezco").val(),
         //Obstetricia
         idObs: $("#optionPaciente[data-id='" + id + "'] #tabObstetricia").attr("data-id"),
         fpp: $("#optionPaciente[data-id='" + id + "'] #pac_FPP").val(),
@@ -251,6 +254,7 @@ function obtenerDatos(id) {
 
     };
     return paciente;
+    alert($("#optionPaciente[data-id='" + id + "'] #cboParentezco").val());
 }
 
 function newAntecedentes(id) {
@@ -310,6 +314,11 @@ function asignarPaciente(paciente) {
     $("#editP" + paciente.id + " #pac_LugarNac").val(paciente.lugarNacimiento);
     $("#editP" + paciente.id + " #pac_Domicilio").val(paciente.domicilio);
     $("#editP" + paciente.id + " #pac_Ciudad").val(paciente.ciudad);
+    
+    $("#editP" + paciente.id + " #pac_nombreContacto").val(paciente.nombreContacto);
+    $("#editP" + paciente.id + " #pac_movilContacto").val(paciente.movilContacto);
+    $("#editP" + paciente.id + " #cboParentezco").selectpicker("val",paciente.parentezco);
+    
     var discapacidad = paciente.discapacidad === 1 ? true : false;
     $("#editP" + paciente.id + " #pac_Discapacidad").attr("checked", discapacidad);
 

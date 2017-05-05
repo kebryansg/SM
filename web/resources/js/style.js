@@ -20,8 +20,9 @@ $(function () {
 
         alert($(pestaña + " #optionPaciente").attr("data-id"));
     });
-    $("#ContentAdm").on("keyup", ".solo-numero", function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
+    $("#ContentAdm").on("keypress", ".solo-numero", function (e) {
+        var key = window.Event ? e.which : e.keyCode;
+        return (key >= 48 && key <= 57);
     });
 });
 
