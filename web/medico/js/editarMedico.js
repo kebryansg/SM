@@ -27,7 +27,7 @@ function validar(id) {
     validarEmail(email);
     /* Validacion de email */
     //$.each($("#tabMedicoEditar input[validate='text']"), function (index, value) {  
-    $.each($("#optionEditarMedico[data-id='" + id + "'] #tabMedicoEditar input[validate='text']"), function (index, value) {    
+    $.each($("#optionEditarMedico[data-id='" + id + "'] input[validate='text']"), function (index, value) {    
         $(value).blur(function(){
             validarText(value);
         });

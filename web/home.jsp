@@ -70,8 +70,10 @@
                                 </h4>
                             </div>
                             <div id="collapse2" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <!-- Contenido -->
+                                <div class="panel-body menu-body">
+                                    <div class="list-group">
+                                        <a class="list-group-item" data-url="consulta/newConsulta.jsp" data-title="Registrar Médico" href="#"><!--<i class="fa fa-user fa-fw" aria-hidden="true"></i>-->&nbsp; Registrar Consulta</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -128,7 +130,7 @@
                         <div id="home" class="tab-pane fade in active">
 
 
-                            <jsp:include page="paciente/paciente.jsp"/>
+                            <jsp:include page="consulta/newConsulta.jsp"/>
 
 
                         </div>
