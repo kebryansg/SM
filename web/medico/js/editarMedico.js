@@ -16,8 +16,8 @@ var pagina=1;
 var datos = [];
 var idTablaSeleccionada=-1;     
 var indice=-1;
-$("#txtBuscar").text("");
-$("#cboMostrar").val(5);     
+$("#tabMedicoEditar #txtBuscar").text("");
+$("#tabMedicoEditar #cboMostrar").val(5);     
 cargarMedicos(1);
 function validar(id) {
     var email = $("#tabMedicoEditar input[validate='email']");
@@ -26,22 +26,22 @@ function validar(id) {
     });
     validarEmail(email);
     /* Validacion de email */
-    //$.each($("#tabMedicoEditar input[validate='text']"), function (index, value) {  
-    $.each($("#optionEditarMedico[data-id='" + id + "'] #tabMedicoEditar input[validate='text']"), function (index, value) {    
+    $.each($("#tabMedicoEditar input[validate='text']"), function (index, value) {  
+   // $.each($("#optionEditarMedico[data-id='" + id + "'] #tabMedicoEditar input[validate='text']"), function (index, value) {    
         $(value).blur(function(){
             validarText(value);
         });
         validarText(value);
     });
-    //$.each($("#myModal select[validate='select']"), function (index, value) {
-    $.each($("#optionEditarMedico[data-id='" + id + "'] #tabMedicoEditar select[validate='select']"), function (index, value) {        
+    $.each($("#tabMedicoEditar select[validate='select']"), function (index, value) {
+    //$.each($("#optionEditarMedico[data-id='" + id + "'] #tabMedicoEditar select[validate='select']"), function (index, value) {        
         $(value).on('change', function() { 
             validarSelect(value);
         });
         validarSelect(value); 
     });
-    //$.each($("#tabMedicoEditar input[validate='date']"), function (index, value) {
-    $.each($("#optionEditarMedico[data-id='" + id + "'] #tabMedicoEditar select[validate='date']"), function (index, value) {
+    $.each($("#tabMedicoEditar input[validate='date']"), function (index, value) {
+    //$.each($("#optionEditarMedico[data-id='" + id + "'] #tabMedicoEditar select[validate='date']"), function (index, value) {
         if ($(value).val() === null || $(value).val() === "") {
             $(value).closest("div").addClass("has-error");
             $(value).parent("div").after('<span id="' + $(value).attr("id") + 'help" style="color:#a94442;" class="help-block">Sin Fecha</span');
@@ -50,7 +50,7 @@ function validar(id) {
             $(value).closest("div").removeClass("has-error");
         }
     });
-    return $("#optionEditarMedico[data-id='" + id + "'] .help-block").length === 0;
+    return $("#tabMedicoEditar .help-block").length === 0;
 }
 function validarText(value)
 {
@@ -93,7 +93,10 @@ function validarSelect(value)
         $(value).closest("div").removeClass("has-error");
     } 
 }
-
+function remover(value)
+{
+    $(value).closest("div").removeClass("has-error");
+}
 function validarCedula()
 {
     $.ajax({
@@ -118,8 +121,8 @@ function validarCedula()
         }
     }); 
 }
-$("#txtBuscar").keyup(function(event){
-    if($("#txtBuscar").val().length < 1) 
+$("#tabMedicoEditar #txtBuscar").keyup(function(event){
+    if($("#tabMedicoEditar #txtBuscar").val().length < 1) 
     {
         buscar=0;
     }
@@ -137,32 +140,32 @@ function cargarMedicos(pagina)
     {
         jqXHR.abort();
     });
-    var totalRegistro=$("#cboMostrar").val();
+    var totalRegistro=$("#tabMedicoEditar #cboMostrar").val();
     var xhr=null;
     xhr=$.post('sMedico', {
         totalMostrar : totalRegistro,
         pagina: pagina,
         opcion: '2',
         bandera:buscar,
-        buscar:$("#txtBuscar").val()
+        buscar:$("#tabMedicoEditar #txtBuscar").val()
     }, function(data) {   
-        $('#tablaMedico tr').remove();
-        $('#paginacionMedico').find('li').remove();
+        $('#tabMedicoEditar #tablaMedico tr').remove();
+        $('#tabMedicoEditar #paginacionMedico').find('li').remove();
         var resultado = JSON && JSON.parse(data) || $.parseJSON(data); 
         var totalPaginas=resultado[0].registros/$("#cboMostrar").val();
         totalPaginas=Math.ceil(totalPaginas); 
         console.log(totalPaginas);
-        $("#paginacionMedico ul").append('<li><a href="#">&laquo;</a></li>');
+        $("#tabMedicoEditar #paginacionMedico ul").append('<li><a href="#">&laquo;</a></li>');
         for(i=0;i <totalPaginas; i++)                
         {
             var indice=parseInt(i)+1;
             if(indice==pagina)
-                $("#paginacionMedico ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
+                $("#tabMedicoEditar #paginacionMedico ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
             else 
-                $("#paginacionMedico ul ").append('<li><a href="#">'+indice+'</a></li>');
+                $("#tabMedicoEditar #paginacionMedico ul ").append('<li><a href="#">'+indice+'</a></li>');
         }
-        $("#paginacionMedico ul").append('<li><a href="#">&raquo;</a></li>');
-        $('#tablaMedico thead').append("<tr>\n\<th class='col-lg-1'>No.</th>\n\                                                <th>Cédula</th>\n\
+        $("#tabMedicoEditar #paginacionMedico ul").append('<li><a href="#">&raquo;</a></li>');
+        $('#tabMedicoEditar #tablaMedico thead').append("<tr>\n\<th class='col-lg-1'>No.</th>\n\                                                <th>Cédula</th>\n\
                                                <th class='col-lg-2'>Apellidos</th>\n\
                                                <th class='col-lg-2'>Nombres</th>\n\
                                                <th class='col-lg-2'>Domicilio</th>\n\
@@ -175,7 +178,7 @@ function cargarMedicos(pagina)
                                                <th class='col-lg-1'>Acci&oacute;n</th>");
         for(i=0;i <resultado.length; i++)
         {
-            $('#tablaMedico').append("<tr>\n\
+            $('#tabMedicoEditar #tablaMedico').append("<tr>\n\
                                                <td style='width: 1%' >"+resultado[i].id+"</td>\n\
                                                <td>"+resultado[i].cedula+"</td>\n\
                                                <td>"+resultado[i].apellidos1+ ' '+resultado[i].apellidos2+"</td>\n\
@@ -197,21 +200,21 @@ function cargarMedicos(pagina)
     xhrRequest.push(xhr);
 }
 
-$('#paginacionMedico ul').click(function (e) {
+$('#tabMedicoEditar #paginacionMedico ul').click(function (e) {
     var a = e.target.parentNode;
     pagina = a.innerText;        
     cargarMedicos(pagina);
 });
 
-$('#cboMostrar').on('change', function() {   
+$('#tabMedicoEditar #cboMostrar').on('change', function() {   
     pagina=1;
     cargarMedicos(pagina);
 });
 //porque las creo de forma dinamicas    
-$("#tablaMedico").on("click", "#botonEditar", function(){   
+$("#tabMedicoEditar #tablaMedico").on("click", "#botonEditar", function(){   
     var cont=0;
     $(this).parents("tr").find("td").each(function(){
-        datos[cont]=$(this).html();
+        datos[cont]=$(this).html();        
         cont++;
     });
     var nombres=datos[3];
@@ -242,16 +245,27 @@ $("#tablaMedico").on("click", "#botonEditar", function(){
             var resultado = JSON && JSON.parse(data) || $.parseJSON(data);
             for(i=0;i <resultado.length; i++)
             {
-                $("#cboEspecialidades option[value="+ resultado[i].id +"]").attr("selected",true);
-                $('.selectpicker').selectpicker('refresh');
+                $("#tabMedicoEditar #cboEspecialidades option[value="+ resultado[i].id +"]").attr("selected",true);
+                $('#tabMedicoEditar .selectpicker').selectpicker('refresh');
             }
         }
     });
-    $(".help-block").remove();
+    $.each($("#tabMedicoEditar input[validate='text']"), function (index, value) {  
+        remover(value);
+    });
+     var email = $("#tabMedicoEditar input[validate='email']");
+     remover(email);
+     $.each($("#tabMedicoEditar input[validate='date']"), function (index, value) {
+        remover(value);
+     });
+     $.each($("#tabMedicoEditar select[validate='select']"), function (index, value) {
+         remover(value) ;
+     });
+    $("#tabMedicoEditar .help-block").remove();
     var id='myModal';
     $("#"+id).modal('show');
 });
-$('#btnActualizar').click(function(event) {
+$('#tabMedicoEditar #btnActualizar').click(function(event) {
     if (validar(1)) {
         $.post('sMedico', {
             cedula : $('#txtCedulaModal').val(),
@@ -271,26 +285,26 @@ $('#btnActualizar').click(function(event) {
             idMedico: datos[0]
         }, function(responseText) {   
             $($('#tablaMedico').find('tbody > tr')[indice]).children('td')[1].innerHTML = $('#txtCedulaModal').val();
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[2].innerHTML = $('#txtPrimerApellidoModal').val()+' '+$('#txtSegundoApellidoModal').val();
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[3].innerHTML = $('#txtPrimerNombreModal').val()+' '+$('#txtSegundoNombreModal').val();
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[4].innerHTML =datos[4];
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[5].innerHTML =datos[5];
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[6].innerHTML =datos[6];
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[7].innerHTML =datos[7];
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[8].innerHTML =datos[8];
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[9].innerHTML =datos[9];
-            $($('.table-responsive').find('tbody > tr')[indice]).children('td')[10].innerHTML =$("#cboEstadoModal").val();
+            $($('#tabMedicoEditar .table-responsive').find('tbody > tr')[indice]).children('td')[2].innerHTML = $('#txtPrimerApellidoModal').val()+' '+$('#txtSegundoApellidoModal').val();
+            $($('#tabMedicoEditar .table-responsive').find('tbody > tr')[indice]).children('td')[3].innerHTML = $('#txtPrimerNombreModal').val()+' '+$('#txtSegundoNombreModal').val();
+            $($('#tabMedicoEditar .table-responsive').find('tbody > tr')[indice]).children('td')[4].innerHTML =datos[4];
+            $($('#tabMedicoEditar .table-responsive').find('tbody > tr')[indice]).children('td')[5].innerHTML =datos[5];
+            $($('#tabMedicoEditar .table-responsive').find('tbody > tr')[indice]).children('td')[6].innerHTML =datos[6];
+            $($('#tabMedicoEditar .table-responsive').find('tbody > tr')[indice]).children('td')[7].innerHTML =datos[7];
+            $($('#tabMedicoEditar .table-responsive').find('tbody > tr')[indice]).children('td')[8].innerHTML =datos[8];
+            $($('#tabMedicoEditar .table-responsive').find('tbody > tr')[indice]).children('td')[9].innerHTML =datos[9];
+            $($('#tabMedicoEditar .table-responsive').find('tbody > tr')[indice]).children('td')[10].innerHTML =$("#cboEstadoModal").val();
             alertify.success("Datos Actualizados correctamente");
             var cont=0;     
-            $("#myModal").modal('toggle');
+            $("#tabMedicoEditar #myModal").modal('toggle');
         });
     }
 });
 
-$(".table-responsive").on("click", "tr", function(){  
+$("#tabMedicoEditar .table-responsive").on("click", "tr", function(){  
     indice = $(this).index();
 });
-$('.table-responsive').on("click", "#btnEliminar", function(event){ 
+$('#tabMedicoEditar .table-responsive').on("click", "#btnEliminar", function(event){ 
     var cont=0;
     $(this).parents("tr").find("td").each(function(){
         datos[cont]=$(this).html();   
