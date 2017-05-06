@@ -87,7 +87,7 @@ function validarSelect(value)
 }
 function validarCedula()
     {
-        
+        alert($(getCurrentTab()).attr("href"));
          $.ajax({
             type: 'Post',
             url: 'sMedico',

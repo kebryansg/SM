@@ -86,7 +86,7 @@
                                 <div class="panel-body menu-body">
                                     <div class="list-group">
                                         <a class="list-group-item" data-url="medico/registrarMedico.jsp" data-title="Registrar Médico" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar Medico</a>
-                                        <a class="list-group-item" data-url="medico/editarMedico.jsp" data-title="Mantenimiento Médico" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Mantenimiento</a>
+                                        <a class="list-group-item"  data-url="medico/editarMedico.jsp" data-title="Mantenimiento Médico" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Mantenimiento</a>
                                         <a class="list-group-item" data-url="medico/especialidad.jsp" data-title="Especialidades" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Especialidad</a>
                                     </div>
                                 </div>
