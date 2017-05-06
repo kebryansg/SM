@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function(){
-    var datos = [];
-    var totalRegistros=0;
-    var totalPaginas=0;
-    var pagina=1;
-    var buscar=0;    
-    var indice=0;
-    var xhrRequest=[];
-    function validaciones()
-    {
-        $(".help-block").remove();
-        $.each($("#tbEspecialidad input[validate='text']"), function (index, value) {
+
+var datos = [];
+var totalRegistros=0;
+var totalPaginas=0;
+var pagina=1;
+var buscar=0;    
+var indice=0;
+var xhrRequest=[];
+function validaciones()
+{
+    $("#tbEspecialidad .help-block").remove();
+    $.each($("#tbEspecialidad input[validate='text']"), function (index, value) {
         if ($(value).val() === null || $(value).val() === "") {
             $(value).closest("div").addClass("has-error");
             $(value).after('<span id="' + $(value).attr("id") + 'help" class="help-block">Campo Vacio</span');
@@ -22,44 +22,44 @@ $(document).ready(function(){
         {
             $(value).closest("div").removeClass("has-error");
         }
-        return $(".help-block").length === 0;
+        return $("#tbEspecialidad .help-block").length === 0;
     });
-        
-    }
-    $("#cboMostrar").val(5);   
-    $('#cboMostrar').on('change', function() {    
-         pagina=1;
-        cargarEspecialidades(pagina,buscar);        
-    });    
-    $("#txtBuscar").keyup(function(event){		            
-        if($("#txtBuscar").val().length < 1) 
-            buscar=0;
-        else
-            buscar=1;
-         pagina=1;
+}
+ $("#tbEspecialidad #cboMostrar").val(5);   
+ $('#tbEspecialidad #cboMostrar').on('change', function() {    
+     pagina=1;
+     cargarEspecialidades(pagina,buscar);        
+ });    
+ 
+$("#tbEspecialidad #txtBuscar").keyup(function(event){		            
+    if($("#tbEspecialidad #txtBuscar").val().length < 1) 
+        buscar=0;
+    else
+        buscar=1;
+    pagina=1;
         cargarEspecialidades(pagina,buscar);   
     }); 
     cargarEspecialidades(pagina,buscar);
     
-    $(".table-responsive").on("click", "#botonEditar", function(){           
+    $("#tbEspecialidad .table-responsive").on("click", "#botonEditar", function(){           
         var cont=0;            
         $(this).parents("tr").find("td").each(function(){
             datos[cont]=$(this).html();   
             cont++;
         });
-        $('.modal-title').text('Editar Especialidad');
+        $('#tbEspecialidad .modal-title').text('Editar Especialidad');
         var id='myModal';
         $("#"+id).modal('show');
         $.each($("#"+id+" input"), function (){
             $(this).val("");
         }); 
         
-        $('#recipient-name').val(datos[1]);
+        $('#tbEspecialidad #recipient-name').val(datos[1]);
     });
     
-    $('#btnAgregar').click(function(event) {
+    $('#tbEspecialidad #btnAgregar').click(function(event) {
         datos[0]=0;
-        $('.modal-title').text('Agregar Especialidad');
+        $('#tbEspecialidad .modal-title').text('Agregar Especialidad');
         var id='myModal';
         $("#"+id).modal('show');
         $.each($("#"+id+" input"), function (){
@@ -68,13 +68,13 @@ $(document).ready(function(){
        // $('#recipient-name').val(datos[1]);
     });
     
-    $(".table-responsive").on("click", "tr", function(){  
+    $("#tbEspecialidad .table-responsive").on("click", "tr", function(){  
         indice = $(this).index();        
       });
       
-    $('#btnActualizar').click(function(event) {
-        if (validaciones()) {
-            var descripcionEspecialidadVar = $('#recipient-name').val();
+    $('#tbEspecialidad #btnActualizar').click(function(event) {
+        /*if (validaciones()) {
+            var descripcionEspecialidadVar = $('#tbEspecialidad #recipient-name').val();
             var idEspecialidadVar = datos[0];
             $.post('sEspecialidad', {
                 descripcionEspecialidad : descripcionEspecialidadVar,
@@ -89,14 +89,15 @@ $(document).ready(function(){
                 else
                 {
                     alertify.success("Especialidad Modificada");
-                    $($('.table-responsive').find('tbody > tr')[indice]).children('td')[1].innerHTML = $('#recipient-name').val();
+                    $($('#tbEspecialidad .table-responsive').find('tbody > tr')[indice]).children('td')[1].innerHTML = $('#recipient-name').val();
                 }
                 $("#myModal").modal('toggle');
             });
-    }
+    }*/
+        alert("modificando");
     });
     
-    $('.table-responsive').on("click", "#btnEliminar", function(event){ 
+    $('#tbEspecialidad .table-responsive').on("click", "#btnEliminar", function(event){ 
         var cont=0;
         $(this).parents("tr").find("td").each(function(){
             datos[cont]=$(this).html();   
@@ -119,7 +120,7 @@ $(document).ready(function(){
    
     function cargarEspecialidades(pagina,esBuscar)
     {
-        var totalRegistro=$("#cboMostrar").val();
+        var totalRegistro=$("#tbEspecialidad #cboMostrar").val();
         $.each(xhrRequest,function(idx, jqXHR)
         {
             jqXHR.abort();
@@ -133,22 +134,22 @@ $(document).ready(function(){
             buscar:$("#txtBuscar").val()
         }, function(data) {   
             var resultado = JSON && JSON.parse(data) || $.parseJSON(data); 
-            var totalPaginas=resultado[0].registros/$("#cboMostrar").val();
+            var totalPaginas=resultado[0].registros/$("#tbEspecialidad #cboMostrar").val();
             totalPaginas=Math.ceil(totalPaginas);
-            $('#paginacionEspecialidad').find('li').remove();
-            $("#paginacionEspecialidad ul").append('<li><a href="#">&laquo;</a></li>');
+            $('#tbEspecialidad #paginacionEspecialidad').find('li').remove();
+            $("#tbEspecialidad #paginacionEspecialidad ul").append('<li><a href="#">&laquo;</a></li>');
             for(i=0;i <totalPaginas; i++)                
             {
                 var indice=parseInt(i)+1;
                 //<li><a href="#">1</a></li>                
                 if(indice==pagina)
-                    $("#paginacionEspecialidad ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
+                    $("#tbEspecialidad #paginacionEspecialidad ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
                 else 
-                    $("#paginacionEspecialidad ul ").append('<li><a href="#">'+indice+'</a></li>');
+                    $("#tbEspecialidad #paginacionEspecialidad ul ").append('<li><a href="#">'+indice+'</a></li>');
             }
-            $("#paginacionEspecialidad ul").append('<li><a href="#">&raquo;</a></li>');
-            $('#especialidades tr').remove();
-            $('#especialidades thead').append("<tr>\n\
+            $("#tbEspecialidad #paginacionEspecialidad ul").append('<li><a href="#">&raquo;</a></li>');
+            $('#tbEspecialidad #especialidades tr').remove();
+            $('#tbEspecialidad #especialidades thead').append("<tr>\n\
                                                 <th class='col-lg-1'>No.</th>\n\
                                                 <th class='col-lg-9'>Descripción</th>\n\
                                                 <th class='col-lg-2'>Opción</th>\n\
@@ -156,7 +157,7 @@ $(document).ready(function(){
               
             for(i=0;i <resultado.length; i++)
             {
-                $('#especialidades').append("<tr>\n\
+                $('#tbEspecialidad #especialidades').append("<tr>\n\
                                                 <td>"+resultado[i].id+"</td>\n\
                                                 <td>"+resultado[i].descripcion+"</td>\n\
                                                 <td style='width: 3px' ><button id='botonEditar' class='btn btn-primary' onclick='openModal('myModal')'><span class='glyphicon glyphicon-pencil'></span> </button>\n\
@@ -167,10 +168,10 @@ $(document).ready(function(){
         });        
         xhrRequest.push(xhr);
     }
-    $('#paginacionEspecialidad ul').click(function (e) {        
+    $('#tbEspecialidad #paginacionEspecialidad ul').click(function (e) {        
         var a = e.target.parentNode;
         pagina = a.innerText;        
         cargarEspecialidades(pagina,buscar);
     });
-});
+
 
