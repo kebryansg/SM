@@ -36,6 +36,9 @@ function openModal(id) {
         $(this).val("");
     });
 }
+function openModal_Clean(id) {
+    $("#" + id).modal('show');
+}
 
 function closeModal(id) {
     $("#" + id).modal('toggle');
