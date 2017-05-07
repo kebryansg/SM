@@ -64,7 +64,7 @@
                         <div style="text-align: right; width: 100%;" id="paginacionMedico">
                             <ul class="pagination" ></ul>
                         </div>
-                    </div>
+                    
                     <!--Formulario ventana modal-->
                     <form class="form-horizontal" id="myForm">
                         <div class="modal fade" id="myModal" role="dialog">
@@ -167,3 +167,4 @@
         </div>
     </div>
 </div>
+                                                </div>

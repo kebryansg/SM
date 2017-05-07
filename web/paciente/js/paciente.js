@@ -150,30 +150,47 @@ function list() {
         }
     });
 }
+function td_tr_seleccionar(tbody) {
+    $.each($(tbody).find("tr"), function (index, tr) {
+        var id = $(tr).attr("data-id");
+        $(tr).find("td:last").html("");
+        $(tr).find("td:last").html('<button name="SeleccionarPaciente" class="btn btn-info">Seleccionar</button>');
 
-var $pagination = $('#pagPacientes');
-function indexPag(pag) {
-    var cantList = $("#cantList").val();
+    });
+}
+
+function indexPag(pag, totalList, txt_filter) {
+    
+    var cantList = totalList;
     $.ajax({
         url: 'sPaciente',
         type: 'POST',
         async: false,
         data: {
-            filter: $("#txt_filterPaciente").val(),
+            filter: txt_filter,
             top: cantList,
             pag: ((pag - 1) * cantList),
             op: 'list_filter'
         },
         success: function (response) {
             var obj = $.parseJSON(response);
-            $("#tablePaciente").html(obj.list);
+            var tablePaciente = $(pestañaGlobal()).find("#tablePaciente");
+            $(tablePaciente).html(obj.list);
+            if($(tablePaciente).attr("modal") === "1"){
+                td_tr_seleccionar(tablePaciente);
+            }
+            
         }
     });
 }
 
 function list_filter() {
-    if ($("#txt_filterPaciente").val() === "") {
-        indexPag(1);
+
+    var $pagination = $(pestañaGlobal()).find('#pagPacientes');
+    var txt_filter = $(pestañaGlobal()).find("#txt_filterPaciente").val();
+    var cantList = $(pestañaGlobal()).find("#cantList").val();
+    if (txt_filter === "") {
+        indexPag(1, cantList, txt_filter);
         $pagination.twbsPagination('destroy');
     } else {
         var $totalPages = 0;
@@ -183,10 +200,10 @@ function list_filter() {
             async: false,
             data: {
                 op: 'list',
-                filter: $("#txt_filterPaciente").val()
+                filter: txt_filter
             },
             success: function (response) {
-                $totalPages = response / $("#cantList").val();
+                $totalPages = response / cantList;
                 $totalPages = Math.ceil($totalPages);
             }
         });
@@ -198,7 +215,7 @@ function list_filter() {
             last: "Ultimo",
             prev: "Anterior",
             onPageClick: function (event, page) {
-                indexPag(page);
+                indexPag(page, cantList, txt_filter);
             }
         };
         $pagination.twbsPagination('destroy');

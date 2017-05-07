@@ -18,6 +18,8 @@ $("#ContentAdm").on("click", "#tablePaciente button[name='deletPaciente']", func
 });
 
 $("#ContentAdm").on("click", "#tablePaciente button[name='editPaciente']", function () {
+    alert($(this).attr("data-id"));
+    
     var title = "Modificar Paciente";
     var id = $(this).attr("data-id");
     if ($('#editP' + id).length === 0) {

@@ -6,8 +6,6 @@
 
 var bandera=0;
     function validar() {
-   
-
     /* Validacion de email */
     
     var email = $("#tabMedicoRegistro input[validate='email']");
@@ -41,7 +39,7 @@ var bandera=0;
         }
     });
  
-    return $(".help-block").length === 0;
+    return $("#tabMedicoRegistro .help-block").length === 0;
 }
 function validarText(value)
 {
@@ -87,28 +85,28 @@ function validarSelect(value)
 }
 function validarCedula()
     {
-        alert($(getCurrentTab()).attr("href"));
+       
          $.ajax({
             type: 'Post',
             url: 'sMedico',
             data: {
-                cedula : $('#txtCedula').val(),                
+                cedula : $('#tabMedicoRegistro #txtCedula').val(),                
                 opcion:'6'
             },
             async: false,
             success:function(response){
-                $("#txtCedulahelp").remove();  
+                $("#tabMedicoRegistro #txtCedulahelp").remove();  
                 if(response>0)
                 {   
                     
-                    $("#txtCedula").closest("div").addClass("has-error");                    
-                    $("#txtCedula").after('<span id="' + $("#txtCedula").attr("id") + 'help" class="help-block">Cédula ya registrada</span');
+                    $("#tabMedicoRegistro #txtCedula").closest("div").addClass("has-error");                    
+                    $("#tabMedicoRegistro #txtCedula").after('<span id="' + $("#txtCedula").attr("id") + 'help" class="help-block">Cédula ya registrada</span');
                     
                 }
                 else 
                 {
                     
-                    $("#txtCedula").closest("div").removeClass("has-error");
+                    $("#tabMedicoRegistro #txtCedula").closest("div").removeClass("has-error");
                                        
                     
                 }
@@ -117,30 +115,30 @@ function validarCedula()
     }
     function limpiar()
     {
-        $(':text').val('');
+        $('#tabMedicoRegistro :text').val('');
        // $(':email').val('');
-        $('textarea').val('');
-        $("#txtEmail").val('');
+        $('#tabMedicoRegistro textarea').val('');
+        $("#tabMedicoRegistro #txtEmail").val('');
     }
     limpiar();
-    $('#btnGuardar').click(function(event) {
+    $('#tabMedicoRegistro #btnGuardar').click(function(event) {
         if (validar()) {
         $.ajax({
             type: 'Post',
             url: 'sMedico',
             data: {
-                cedula : $('#txtCedula').val(),
-                primerNombre: $('#txtPrimerNombre').val(),
-                segundoNombre: $('#txtSegundoNombre').val(),
-                primerApellido: $('#txtPrimerApellido').val(),
-                segundoApellido: $('#txtSegundoApellido').val(),
-                domicilio: $('#txtDomicilio').val(),
-                ciudad: $('#txtCiudad').val(),
-                telefonoOficina: $('#txtTelefonoOficina').val(),
-                email: $('#txtEmail').val(),
-                telefonoDomicilio: $('#txtTelefonoDomicilio').val(),
-                telefonoMovil: $('#txtTelefonoMovil').val(),
-                idEspecialidad: $("#cboEspecialidad").val(),
+                cedula : $('#tabMedicoRegistro #txtCedula').val(),
+                primerNombre: $('#tabMedicoRegistro #txtPrimerNombre').val(),
+                segundoNombre: $('#tabMedicoRegistro #txtSegundoNombre').val(),
+                primerApellido: $('#tabMedicoRegistro #txtPrimerApellido').val(),
+                segundoApellido: $('#tabMedicoRegistro #txtSegundoApellido').val(),
+                domicilio: $('#tabMedicoRegistro #txtDomicilio').val(),
+                ciudad: $('#tabMedicoRegistro #txtCiudad').val(),
+                telefonoOficina: $('#tabMedicoRegistro #txtTelefonoOficina').val(),
+                email: $('#tabMedicoRegistro #txtEmail').val(),
+                telefonoDomicilio: $('#tabMedicoRegistro #txtTelefonoDomicilio').val(),
+                telefonoMovil: $('#tabMedicoRegistro #txtTelefonoMovil').val(),
+                idEspecialidad: $("#tabMedicoRegistro #cboEspecialidad").val(),
                 visible:'1',
                 opcion:'0'
             },

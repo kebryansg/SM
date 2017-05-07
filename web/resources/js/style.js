@@ -1,3 +1,8 @@
+function pestañaGlobal() {
+    var pestaña = $(getCurrentTab()).attr("href");
+    var div = $(pestaña);
+    return div;
+}
 $(function () {
     $("#cerrarMenu").click(function () {
         $(".menu-lateral").toggleClass("close-menu");

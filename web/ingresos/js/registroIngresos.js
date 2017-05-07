@@ -85,7 +85,6 @@ function validarDateIngresos(value)
         }
 }
 $('#btnBuscar').click(function (event) {
-
     cargarPacientes(pagina,buscar);
 });
 $('#cboMostrar').on('change', function () {
@@ -199,7 +198,7 @@ $('#btnCargar').click(function (event) {
             }
         });        
         xhrRequest.push(xhr);
-        var id='myModal';
+        var id='myModalIngreso';
              $("#"+id).modal('show');
     }
     
@@ -220,7 +219,7 @@ $('#btnCargar').click(function (event) {
         $("#txtPaciente").val(datos[3]+' '+datos[4]);
         $('#txtCedula').closest("div").removeClass("has-error");
          $("#txtCedulahelp").remove();  
-        closeModal("myModal");
+        closeModal("myModalIngreso");
     });
     
     $('#btnGuardar').click(function(event) {   
