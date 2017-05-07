@@ -67,7 +67,7 @@
                     
                     <!--Formulario ventana modal-->
                     <form class="form-horizontal" id="myForm">
-                        <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal fade" id="modalEditarMedico" role="dialog">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">

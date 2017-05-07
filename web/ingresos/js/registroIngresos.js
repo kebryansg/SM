@@ -161,7 +161,7 @@ $('#btnCargar').click(function (event) {
             buscar:$("#txtBuscar").val()
         }, function(data) {  
             $('#paginacionBuscarIngresos').find('li').remove();
-           
+           $('#tablaPacientes tr').remove();
             var resultado = JSON && JSON.parse(data) || $.parseJSON(data); 
             var totalPaginas=resultado[0].registros/$("#cboMostrar").val();
             totalPaginas=Math.ceil(totalPaginas);
@@ -176,7 +176,7 @@ $('#btnCargar').click(function (event) {
                     $("#paginacionBuscarIngresos ul ").append('<li><a href="#">'+indice+'</a></li>');
             }
             $("#paginacionBuscarIngresos ul").append('<li><a href="#">&raquo;</a></li>');
-            $('#tablaPacientes tr').remove();
+            
             $('#tablaPacientes thead').append("<tr>\n\
                                                 <th style='display: none'></th>\n\
                                                 <th class='col-lg-1'>No.</th>\n\

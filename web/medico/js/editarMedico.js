@@ -262,7 +262,7 @@ $("#tabMedicoEditar #tablaMedico").on("click", "#botonEditar", function(){
          remover(value) ;
      });
     $("#tabMedicoEditar .help-block").remove();
-    var id='myModal';
+    var id='modalEditarMedico';
     $("#"+id).modal('show');
 });
 $('#tabMedicoEditar #btnActualizar').click(function(event) {
