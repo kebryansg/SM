@@ -6,8 +6,6 @@
 
 var bandera=0;
     function validar() {
-   
-
     /* Validacion de email */
     
     var email = $("#tabMedicoRegistro input[validate='email']");
@@ -41,7 +39,7 @@ var bandera=0;
         }
     });
  
-    return $("tabMedicoRegistro .help-block").length === 0;
+    return $("#tabMedicoRegistro .help-block").length === 0;
 }
 function validarText(value)
 {
@@ -87,28 +85,28 @@ function validarSelect(value)
 }
 function validarCedula()
     {
-        alert($(getCurrentTab()).attr("href"));
+       
          $.ajax({
             type: 'Post',
             url: 'sMedico',
             data: {
-                cedula : $('tabMedicoRegistro #txtCedula').val(),                
+                cedula : $('#tabMedicoRegistro #txtCedula').val(),                
                 opcion:'6'
             },
             async: false,
             success:function(response){
-                $("tabMedicoRegistro #txtCedulahelp").remove();  
+                $("#tabMedicoRegistro #txtCedulahelp").remove();  
                 if(response>0)
                 {   
                     
-                    $("tabMedicoRegistro #txtCedula").closest("div").addClass("has-error");                    
-                    $("tabMedicoRegistro #txtCedula").after('<span id="' + $("#txtCedula").attr("id") + 'help" class="help-block">Cédula ya registrada</span');
+                    $("#tabMedicoRegistro #txtCedula").closest("div").addClass("has-error");                    
+                    $("#tabMedicoRegistro #txtCedula").after('<span id="' + $("#txtCedula").attr("id") + 'help" class="help-block">Cédula ya registrada</span');
                     
                 }
                 else 
                 {
                     
-                    $("tabMedicoRegistro #txtCedula").closest("div").removeClass("has-error");
+                    $("#tabMedicoRegistro #txtCedula").closest("div").removeClass("has-error");
                                        
                     
                 }
@@ -135,12 +133,12 @@ function validarCedula()
                 primerApellido: $('#tabMedicoRegistro #txtPrimerApellido').val(),
                 segundoApellido: $('#tabMedicoRegistro #txtSegundoApellido').val(),
                 domicilio: $('#tabMedicoRegistro #txtDomicilio').val(),
-                ciudad: $('tabMedicoRegistro #txtCiudad').val(),
-                telefonoOficina: $('tabMedicoRegistro #txtTelefonoOficina').val(),
-                email: $('tabMedicoRegistro #txtEmail').val(),
-                telefonoDomicilio: $('tabMedicoRegistro #txtTelefonoDomicilio').val(),
-                telefonoMovil: $('tabMedicoRegistro #txtTelefonoMovil').val(),
-                idEspecialidad: $("tabMedicoRegistro #cboEspecialidad").val(),
+                ciudad: $('#tabMedicoRegistro #txtCiudad').val(),
+                telefonoOficina: $('#tabMedicoRegistro #txtTelefonoOficina').val(),
+                email: $('#tabMedicoRegistro #txtEmail').val(),
+                telefonoDomicilio: $('#tabMedicoRegistro #txtTelefonoDomicilio').val(),
+                telefonoMovil: $('#tabMedicoRegistro #txtTelefonoMovil').val(),
+                idEspecialidad: $("#tabMedicoRegistro #cboEspecialidad").val(),
                 visible:'1',
                 opcion:'0'
             },
