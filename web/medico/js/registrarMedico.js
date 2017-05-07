@@ -119,6 +119,12 @@ function validarCedula()
        // $(':email').val('');
         $('#tabMedicoRegistro textarea').val('');
         $("#tabMedicoRegistro #txtEmail").val('');
+        $('#tabMedicoRegistro .selectpicker').selectpicker('deselectAll');
+        $.each($("#tabMedicoEditar select[validate='select']"), function (index, value) {
+            $(value).closest("div").removeClass("has-error");
+     });
+    $("#tabMedicoRegistro .help-block").remove();
+
     }
     limpiar();
     $('#tabMedicoRegistro #btnGuardar').click(function(event) {

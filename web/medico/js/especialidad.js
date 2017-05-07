@@ -73,6 +73,7 @@ $(document).ready(function(){
       });
       
     $('#btnActualizar').click(function(event) {
+        alert("ingreso");
         if (validaciones()) {
             var descripcionEspecialidadVar = $('#recipient-name').val();
             var idEspecialidadVar = datos[0];
