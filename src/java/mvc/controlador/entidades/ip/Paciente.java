@@ -86,6 +86,20 @@ public class Paciente implements Serializable {
     private Integer discapacidad;
     @Column(name = "imagen")
     private String imagen;
+    
+    @Column(name = "nombreContacto")
+    private String nombreContacto;
+    @Column(name = "movilContacto")
+    private String movilContacto;
+    @Column(name = "parentezco")
+    private String parentezco;
+
+    
+    
+    
+    
+    
+    
     @OneToMany(mappedBy = "idPaciente")
     private List<Obstetricos> obstetricosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
@@ -290,6 +304,30 @@ public class Paciente implements Serializable {
 
     public void setIdParroquia(Parroquia idParroquia) {
         this.idParroquia = idParroquia;
+    }
+    
+    public String getNombreContacto() {
+        return nombreContacto;
+    }
+
+    public void setNombreContacto(String nombreContacto) {
+        this.nombreContacto = nombreContacto;
+    }
+
+    public String getMovilContacto() {
+        return movilContacto;
+    }
+
+    public void setMovilContacto(String movilContacto) {
+        this.movilContacto = movilContacto;
+    }
+
+    public String getParentezco() {
+        return parentezco;
+    }
+
+    public void setParentezco(String parentezco) {
+        this.parentezco = parentezco;
     }
 
     @Override

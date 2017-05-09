@@ -176,6 +176,11 @@ public class sPaciente extends HttpServlet {
                 paciente.setDiscapacidad(request.getParameter("paciente[discapacidad]").equals("true") ? 1 : 0);
                 paciente.setCiudad(request.getParameter("paciente[ciudad]"));
                 paciente.setEstadoCivil(request.getParameter("paciente[estadoCivil]"));
+                
+                paciente.setNombreContacto(request.getParameter("paciente[nombreContacto]"));
+                paciente.setMovilContacto(request.getParameter("paciente[movilContacto]"));
+                paciente.setParentezco(request.getParameter("paciente[parentezco]"));
+                
                 paciente.setTelefonoOficina(request.getParameter("paciente[telOficina]"));
                 Boolean sexo = request.getParameter("paciente[genero]").equals("1") ? true : false;
                 paciente.setSexo(sexo);

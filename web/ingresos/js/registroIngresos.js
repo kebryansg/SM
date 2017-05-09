@@ -6,9 +6,10 @@ var paginasVisibles = 5;
 var paginaActual = 1;
 var buscar = 0;
 var pagina=1;
-$("#cboMostrar").val(5);
+var ultimo=-1;
+$("#tabIngresos #cboMostrar").val(5);
 limpiar();
-$("#txtBuscar").keyup(function (event) {
+$("#tabIngresos #txtBuscar").keyup(function (event) {
     if ($("#txtBuscar").val().length < 1)
         buscar = 0;
     else
@@ -18,7 +19,7 @@ $("#txtBuscar").keyup(function (event) {
 });
 function validarIngreso()
 {
-    $(".help-block").remove();
+    $("#tabIngresos .help-block").remove();
     $.each($("#tabIngresos input[validate='date']"), function (index, value) {
         $(value).change(function(){    		               
                 validarDateIngresos(value);
@@ -26,47 +27,47 @@ function validarIngreso()
         validarDateIngresos(value);
         
     });
-    $('#txtCodigoCie').blur(function(){    		               
+    $('#tabIngresos #txtCodigoCie').blur(function(){    		               
         validarCodigo();
     });
     validarCodigo();
     validarDefinitivoEgreso();
-    $('#txtDefinitivoEgreso').blur(function(){    		               
+    $('#tabIngresos #txtDefinitivoEgreso').blur(function(){    		               
         validarDefinitivoEgreso();
     });
     if(idHistoria==0)
     {
-        $('#txtCedula').closest("div").addClass("has-error");
-        $('#txtCedula').after('<span id="' + $('#txtCedula').attr("id") + 'help" class="help-block">Cargar un paciente</span');
+        $('#tabIngresos #txtCedula').closest("div").addClass("has-error");
+        $('#tabIngresos #txtCedula').after('<span id="' + $('#tabIngresos #txtCedula').attr("id") + 'help" class="help-block">Cargar un paciente</span');
      
     }
     else
     {
-        $('#txtCedula').closest("div").removeClass("has-error");
+        $('#tabIngresos #txtCedula').closest("div").removeClass("has-error");
         
     }
-    return $(".help-block").length === 0;
+    return $("#tabIngresos .help-block").length === 0;
 }
 function validarCodigo()
 {
-    $("#txtCodigoCiehelp").remove(); 
-    if ($('#txtCodigoCie').val() === null || $('#txtCodigoCie').val()==="" )
+    $("#tabIngresos #txtCodigoCiehelp").remove(); 
+    if ($('#tabIngresos #txtCodigoCie').val() === null || $('#tabIngresos #txtCodigoCie').val()==="" )
         {
-            $('#txtCodigoCie').closest("div").addClass("has-error");
-            $('#txtCodigoCie').after('<span id="' + $('#txtCodigoCie').attr("id") + 'help" class="help-block">Campo Vacio</span');
+            $('#tabIngresos #txtCodigoCie').closest("div").addClass("has-error");
+            $('#tabIngresos #txtCodigoCie').after('<span id="' + $('#tabIngresos #txtCodigoCie').attr("id") + 'help" class="help-block">Campo Vacio</span');
         }
         else
         {
-            $('#txtCodigoCie').closest("div").removeClass("has-error");
+            $('#tabIngresos #txtCodigoCie').closest("div").removeClass("has-error");
         }
 }
 function validarDefinitivoEgreso()
 {
-    $("#txtDefinitivoEgresohelp").remove();  
-    if ($('#txtDefinitivoEgreso').val() === null || $('#txtDefinitivoEgreso').val()==="" )
+    $("#tabIngresos #txtDefinitivoEgresohelp").remove();  
+    if ($('#tabIngresos #txtDefinitivoEgreso').val() === null || $('#tabIngresos #txtDefinitivoEgreso').val()==="" )
         {
-            $('#txtDefinitivoEgreso').closest("div").addClass("has-error");
-            $('#txtDefinitivoEgreso').after('<span id="' + $('#txtDefinitivoEgreso').attr("id") + 'help" class="help-block">Campo Vacio</span');
+            $('#tabIngresos #txtDefinitivoEgreso').closest("div").addClass("has-error");
+            $('#tabIngresos #txtDefinitivoEgreso').after('<span id="' + $('#tabIngresos #txtDefinitivoEgreso').attr("id") + 'help" class="help-block">Campo Vacio</span');
         }
         else
         {
@@ -84,11 +85,11 @@ function validarDateIngresos(value)
             $("#"+$(value).attr("id") + 'help').remove();
         }
 }
-$('#btnBuscar').click(function (event) {
+$('#tabIngresos #btnBuscar').click(function (event) {
 
     cargarPacientes(pagina,buscar);
 });
-$('#cboMostrar').on('change', function () {
+$('#tabIngresos #cboMostrar').on('change', function () {
     pagina=1;
     cargarPacientes(pagina,buscar);
 });
@@ -101,9 +102,9 @@ function momentToDate(varMoment, formato)
 }
 function limpiar()
 {
-    $(':text').val('');
-    $('textarea').val('');
-    $('#tablaPacientes tr:not(:first-child)').remove();
+    $('#tabIngresos :text').val('');
+    $('#tabIngresos textarea').val('');
+    $('#tabIngresos tr:not(:first-child)').remove();
 }
 $("a[data-url]").on("click", "#btnCargar", function ()
 {
@@ -111,8 +112,8 @@ $("a[data-url]").on("click", "#btnCargar", function ()
 
 });
 
-$('#btnCargar').click(function (event) {
-    var cedula = $("#txtCedula").val();
+$('#tabIngresos #btnCargar').click(function (event) {
+    var cedula = $("#tabIngresos #txtCedula").val();
     $.ajax({
         type: 'Post',
         url: 'sIngresosHospital',
@@ -128,14 +129,14 @@ $('#btnCargar').click(function (event) {
             //alert(loginResult.id);
             if(resultado.id==0)
             {
-                $("#txtCedula").focus();
+                $("#tabIngresos #txtCedula").focus();
                 alertify.success("Paciente no encontrado");
             }
             else
             {
-            $("#txtPaciente").val(resultado.paciente);
+            $("#tabIngresos #txtPaciente").val(resultado.paciente);
             idHistoria = resultado.id;
-            $('#txtCedula').closest("div").removeClass("has-error");
+            $('#tabIngresos #txtCedula').closest("div").removeClass("has-error");
             }
             
 
@@ -151,33 +152,35 @@ $('#btnCargar').click(function (event) {
         {
             jqXHR.abort();
         });
-        var totalRegistro=$("#cboMostrar").val();
+        var totalRegistro=$("#tabIngresos #cboMostrar").val();
         var xhr=null;
         xhr=$.post('sIngresosHospital', {
             totalMostrar : totalRegistro,
             pagina: pagina,
             opcion: '4',
             bandera:esBuscar,
-            buscar:$("#txtBuscar").val()
+            buscar:$("#tabIngresos #txtBuscar").val()
         }, function(data) {  
-            $('#paginacionBuscarIngresos').find('li').remove();
-           $('#tablaPacientes tr').remove();
+            $('#tabIngresos #paginacionBuscarIngresos').find('li').remove();
+           $('#tabIngresos #tablaPacientes tr').remove();
             var resultado = JSON && JSON.parse(data) || $.parseJSON(data); 
-            var totalPaginas=resultado[0].registros/$("#cboMostrar").val();
+            var totalPaginas=resultado[0].registros/$("#tabIngresos #cboMostrar").val();
             totalPaginas=Math.ceil(totalPaginas);
-            $("#paginacionBuscarIngresos ul").append('<li><a href="#">&laquo;</a></li>');
+            $("#tabIngresos #paginacionBuscarIngresos ul").append('<li><a href="#">&laquo;</a></li>');
+            var indice=0;
             for(i=0;i <totalPaginas; i++)                
             {
-                var indice=parseInt(i)+1;
+                indice=parseInt(i)+1;
                 //<li><a href="#">1</a></li>                
                 if(indice==pagina)
-                    $("#paginacionBuscarIngresos ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
+                    $("#tabIngresos #paginacionBuscarIngresos ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
                 else 
-                    $("#paginacionBuscarIngresos ul ").append('<li><a href="#">'+indice+'</a></li>');
+                    $("#tabIngresos #paginacionBuscarIngresos ul ").append('<li><a href="#">'+indice+'</a></li>');
             }
-            $("#paginacionBuscarIngresos ul").append('<li><a href="#">&raquo;</a></li>');
+            ultimo=indice;
+            $("#tabIngresos #paginacionBuscarIngresos ul").append('<li><a href="#">&raquo;</a></li>');
             
-            $('#tablaPacientes thead').append("<tr>\n\
+            $('#tabIngresos #tablaPacientes thead').append("<tr>\n\
                                                 <th style='display: none'></th>\n\
                                                 <th class='col-lg-1'>No.</th>\n\
                                                 <th class='col-lg-3'>Cédula</th>\n\
@@ -188,7 +191,7 @@ $('#btnCargar').click(function (event) {
             var resultado = JSON && JSON.parse(data) || $.parseJSON(data);  
             for(i=0;i <resultado.length; i++)
             {
-                $('#tablaPacientes ').append("<tr class='active'>\n\
+                $('#tabIngresos #tablaPacientes ').append("<tr>\n\
                                                 <td style='display: none'>"+resultado[i].idPaciente+"</td>\n\
                                                 <td>"+resultado[i].id+"</td>\n\
                                                 <td>"+resultado[i].cedula+"</td>\n\
@@ -203,12 +206,19 @@ $('#btnCargar').click(function (event) {
              $("#"+id).modal('show');
     }
     
-    $('#paginacionBuscarIngresos ul').click(function (e) {        
-        var a = e.target.parentNode;
-        pagina = a.innerText;        
-        cargarPacientes(pagina,buscar);
+    $('#tabIngresos #paginacionBuscarIngresos ul').click(function (e) {        
+        var a = e.target.parentNode;        
+        if(a.id!=="adelante" && a.id!=="atras")
+        {
+            pagina=a.id;
+        }
+        if(a.id==="adelante"  && pagina!==ultimo)    
+            pagina=parseInt(pagina)+1
+        if(a.id==="atras" && pagina!==1)    
+            pagina=parseInt(pagina)-1;
+        cargarEspecialidades(pagina,buscar);
     });
-    $(".table-responsive").on("click", "#btnSeleccionar", function(){ 
+    $("#tabIngresos .table-responsive").on("click", "#btnSeleccionar", function(){ 
         var cont=0;
         var datos=[];
         $(this).parents("tr").find("td").each(function(){
@@ -216,29 +226,29 @@ $('#btnCargar').click(function (event) {
             cont++;
         });
         idHistoria=datos[1];
-        $("#txtCedula").val(datos[2]);
-        $("#txtPaciente").val(datos[3]+' '+datos[4]);
-        $('#txtCedula').closest("div").removeClass("has-error");
-         $("#txtCedulahelp").remove();  
-        closeModal("myModal");
+        $("#tabIngresos #txtCedula").val(datos[2]);
+        $("#tabIngresos #txtPaciente").val(datos[3]+' '+datos[4]);
+        $('#tabIngresos #txtCedula').closest("div").removeClass("has-error");
+         $("#tabIngresos #txtCedulahelp").remove();  
+        closeModal("modalRegistroIngresos");
     });
     
-    $('#btnGuardar').click(function(event) {   
+    $('#tabIngresos #btnGuardar').click(function(event) {   
          if (validarIngreso()) {
         $.post('sIngresosHospital', {            
             idHistoria : idHistoria,
-            fechaIngreso: $("#dtpFechaIngreso").val(),
+            fechaIngreso: $("#tabIngresos #dtpFechaIngreso").val(),
             idTipoIngreso: 2,
-            idEspecialidadEgreso: $('#cboEspecialidadEgreso').val(),
-            fechaEgreso: $("#dtpFechaEgreso").val(),
-            horaIngreso: $("#dtpHoraIngreso").val(),
+            idEspecialidadEgreso: $('#tabIngresos #cboEspecialidadEgreso').val(),
+            fechaEgreso: $("#tabIngresos #dtpFechaEgreso").val(),
+            horaIngreso: $("#tabIngresos #dtpHoraIngreso").val(),
             sos: 0,
-            condicionEgreso: $("#cboCondicionEgreso").val(),
-            definitivoEgreso: $("#txtDefinitivoEgreso").val(),
-            secundarioEgreso: $("#txtSecundarioEgreso").val(),
-            secundarioEgreso2: $("#txtSecundarioEgreso2").val(),
-            causaExterna: $("#txtCausaExterna").val(),
-            codigoDiagnosticoDefinitivo:$("#txtCodigoCie").val(),
+            condicionEgreso: $("#tabIngresos #cboCondicionEgreso").val(),
+            definitivoEgreso: $("#tabIngresos #txtDefinitivoEgreso").val(),
+            secundarioEgreso: $("#tabIngresos #txtSecundarioEgreso").val(),
+            secundarioEgreso2: $("#tabIngresos #txtSecundarioEgreso2").val(),
+            causaExterna: $("#tabIngresos #txtCausaExterna").val(),
+            codigoDiagnosticoDefinitivo:$("#tabIngresos #txtCodigoCie").val(),
             opcion:'2'                                
         }, function(responseText) {   
             console.log(responseText);        

@@ -11,6 +11,8 @@ $(document).ready(function(){
     var buscar=0;    
     var indice=0;
     var xhrRequest=[];
+    var ultimo=-1;
+
     function validaciones()
     {
         $(".help-block").remove();
@@ -137,17 +139,19 @@ $(document).ready(function(){
             var totalPaginas=resultado[0].registros/$("#cboMostrar").val();
             totalPaginas=Math.ceil(totalPaginas);
             $('#paginacionEspecialidad').find('li').remove();
-            $("#paginacionEspecialidad ul").append('<li><a href="#">&laquo;</a></li>');
+            $("#paginacionEspecialidad ul").append('<li id="atras"><a href="#">&laquo;</a></li>');
+            var indice=0;
             for(i=0;i <totalPaginas; i++)                
             {
-                var indice=parseInt(i)+1;
+                indice=parseInt(i)+1;
                 //<li><a href="#">1</a></li>                
                 if(indice==pagina)
-                    $("#paginacionEspecialidad ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
+                    $("#paginacionEspecialidad ul").append('<li id='+indice+' class="active"><a href="#">'+indice+'</a></li>');
                 else 
-                    $("#paginacionEspecialidad ul ").append('<li><a href="#">'+indice+'</a></li>');
+                    $("#paginacionEspecialidad ul ").append('<li id='+indice+'><a href="#">'+indice+'</a></li>');
             }
-            $("#paginacionEspecialidad ul").append('<li><a href="#">&raquo;</a></li>');
+            ultimo=indice;
+            $("#paginacionEspecialidad ul").append('<li id="adelante" ><a href="#">&raquo;</a></li>');
             $('#especialidades tr').remove();
             $('#especialidades thead').append("<tr>\n\
                                                 <th class='col-lg-1'>No.</th>\n\
@@ -169,8 +173,15 @@ $(document).ready(function(){
         xhrRequest.push(xhr);
     }
     $('#paginacionEspecialidad ul').click(function (e) {        
-        var a = e.target.parentNode;
-        pagina = a.innerText;        
+        var a = e.target.parentNode;        
+        if(a.id!=="adelante" && a.id!=="atras")
+        {
+            pagina=a.id;
+        }
+        if(a.id==="adelante"  && pagina!==ultimo)    
+            pagina=parseInt(pagina)+1
+        if(a.id==="atras" && pagina!==1)    
+            pagina=parseInt(pagina)-1;
         cargarEspecialidades(pagina,buscar);
     });
 });

@@ -18,10 +18,12 @@ $(function () {
     $("#pestaña").click(function () {
         var pestaña = $(getCurrentTab()).attr("href");
 
-        alert($(pestaña + " #optionPaciente").attr("data-id"));
+        //alert($(pestaña + " #optionPaciente").attr("data-id"));
+        //alert(pestaña);
     });
-    $("#ContentAdm").on("keyup", ".solo-numero", function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
+    $("#ContentAdm").on("keypress", ".solo-numero", function (e) {
+        var key = window.Event ? e.which : e.keyCode;
+        return (key >= 48 && key <= 57);
     });
 });
 
@@ -33,6 +35,9 @@ function openModal(id) {
     $.each($("#" + id + " input"), function () {
         $(this).val("");
     });
+}
+function openModal_Clean(id) {
+    $("#" + id).modal('show');
 }
 
 function closeModal(id) {

@@ -38,6 +38,10 @@ function registerComposeButtonEvent() {
             $(this).tab('show');
             showTab(tabId);
             registerCloseEvent();
+        } else {
+            var tab_href = $("a[name='" + $(this).attr("data-title") + "']").attr("href");
+            showTab_a(tab_href);
+            $currentTab = $('#TabAdm a[href="#' + tab_href + '"]');
         }
 
     });
@@ -87,6 +91,10 @@ function registerCloseEvent() {
 //shows the tab with passed content div id..paramter tabid indicates the div where the content resides
 function showTab(tabId) {
     $('#TabAdm a[href="#' + tabId + '"]').tab('show');
+
+}
+function showTab_a(tabId) {
+    $('#TabAdm a[href="' + tabId + '"]').tab('show');
 
 }
 //return current active tab

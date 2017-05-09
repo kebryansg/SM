@@ -16,6 +16,8 @@ var pagina=1;
 var datos = [];
 var idTablaSeleccionada=-1;     
 var indice=-1;
+var ultimo=-1;
+var filas=5;
 $("#tabMedicoEditar #txtBuscar").text("");
 $("#tabMedicoEditar #cboMostrar").val(5);     
 cargarMedicos(1);
@@ -149,22 +151,26 @@ function cargarMedicos(pagina)
         bandera:buscar,
         buscar:$("#tabMedicoEditar #txtBuscar").val()
     }, function(data) {   
+        
         $('#tabMedicoEditar #tablaMedico tr').remove();
         $('#tabMedicoEditar #paginacionMedico').find('li').remove();
         var resultado = JSON && JSON.parse(data) || $.parseJSON(data); 
         var totalPaginas=resultado[0].registros/$("#cboMostrar").val();
         totalPaginas=Math.ceil(totalPaginas); 
         console.log(totalPaginas);
-        $("#tabMedicoEditar #paginacionMedico ul").append('<li><a href="#">&laquo;</a></li>');
+        filas=resultado.length;
+        $("#tabMedicoEditar #paginacionMedico ul").append('<li id="atras"><a  href="#">&laquo;</a></li>');
+        var indice=0;
         for(i=0;i <totalPaginas; i++)                
         {
-            var indice=parseInt(i)+1;
+            indice=parseInt(i)+1;
             if(indice==pagina)
-                $("#tabMedicoEditar #paginacionMedico ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
+                $("#tabMedicoEditar #paginacionMedico ul").append('<li id='+indice+' class="active"><a href="#">'+indice+'</a></li>');
             else 
-                $("#tabMedicoEditar #paginacionMedico ul ").append('<li><a href="#">'+indice+'</a></li>');
+                $("#tabMedicoEditar #paginacionMedico ul ").append('<li id='+indice+'><a  href="#">'+indice+'</a></li>');
         }
-        $("#tabMedicoEditar #paginacionMedico ul").append('<li><a href="#">&raquo;</a></li>');
+        ultimo=indice;
+        $("#tabMedicoEditar #paginacionMedico ul").append('<li id="adelante"><a href="#">&raquo;</a></li>');
         $('#tabMedicoEditar #tablaMedico thead').append("<tr>\n\<th class='col-lg-1'>No.</th>\n\                                                <th>Cédula</th>\n\
                                                <th class='col-lg-2'>Apellidos</th>\n\
                                                <th class='col-lg-2'>Nombres</th>\n\
@@ -202,13 +208,24 @@ function cargarMedicos(pagina)
 
 $('#tabMedicoEditar #paginacionMedico ul').click(function (e) {
     var a = e.target.parentNode;
-    pagina = a.innerText;        
+    if(a.id!=="adelante" && a.id!=="atras")
+    {
+        pagina=a.id;
+    }
+    if(a.id==="adelante"  && pagina!==ultimo)    
+        pagina=parseInt(pagina)+1
+    
+    if(a.id==="atras" && pagina!==1)    
+        pagina=parseInt(pagina)-1;
+    
     cargarMedicos(pagina);
+    
 });
 
 $('#tabMedicoEditar #cboMostrar').on('change', function() {   
     pagina=1;
     cargarMedicos(pagina);
+    filas=$("#tabMedicoEditar #cboMostrar").val();
 });
 //porque las creo de forma dinamicas    
 $("#tabMedicoEditar #tablaMedico").on("click", "#botonEditar", function(){   
@@ -296,7 +313,7 @@ $('#tabMedicoEditar #btnActualizar').click(function(event) {
             $($('#tabMedicoEditar .table-responsive').find('tbody > tr')[indice]).children('td')[10].innerHTML =$("#cboEstadoModal").val();
             alertify.success("Datos Actualizados correctamente");
             var cont=0;     
-            $("#tabMedicoEditar #myModal").modal('toggle');
+            $("#tabMedicoEditar #modalEditarMedico").modal('toggle');
         });
     }
 });
@@ -310,10 +327,23 @@ $('#tabMedicoEditar .table-responsive').on("click", "#btnEliminar", function(eve
         datos[cont]=$(this).html();   
         cont++;
     });
+    
+        
+    
     $.post('sMedico', {
         idMedico : datos[0],
         opcion: 5
-    }, function(responseText) {  
+    }, function(responseText) { 
+        
+        filas--;
+        
+        if(filas===0)
+        {
+            if(pagina>0)
+                pagina--;
+            filas=$("#tabMedicoEditar #cboMostrar").val();
+        }
+        
         cargarMedicos(pagina);
         alertify.success("Registros Eliminado");
     });
