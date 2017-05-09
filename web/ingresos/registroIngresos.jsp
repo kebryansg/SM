@@ -197,10 +197,9 @@
 
         </div>
     </div>     
-</div>
 
 
-<form class="form-horizontal" id="myForm">                             
+                             
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">          
@@ -272,14 +271,6 @@
     </div>
 
 
-</form>
+</div>
+
 <script src="ingresos/js/registroIngresos.js"></script>
-<script>
-
-                                        $(function () {
-                                            /*$('#dtpFechaIngreso').datetimepicker({format: 'DD/MM/YYYY'});
-                                             $('#dtpFechaEgreso').datetimepicker({format: 'DD/MM/YYYY'});
-                                             $('#dtpHoraIngreso').datetimepicker({format: 'LT'});*/
-
-                                        });
-</script>

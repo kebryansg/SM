@@ -85,8 +85,8 @@ function validarDateIngresos(value)
             $("#"+$(value).attr("id") + 'help').remove();
         }
 }
-$('#tabIngresos #btnBuscar').click(function (event) {
-
+$('#btnBuscar').click(function (event) {
+    alert("ingreso");
     cargarPacientes(pagina,buscar);
 });
 $('#tabIngresos #cboMostrar').on('change', function () {
@@ -166,19 +166,19 @@ $('#tabIngresos #btnCargar').click(function (event) {
             var resultado = JSON && JSON.parse(data) || $.parseJSON(data); 
             var totalPaginas=resultado[0].registros/$("#tabIngresos #cboMostrar").val();
             totalPaginas=Math.ceil(totalPaginas);
-            $("#tabIngresos #paginacionBuscarIngresos ul").append('<li><a href="#">&laquo;</a></li>');
+            $("#tabIngresos #paginacionBuscarIngresos ul").append('<li id="atras"><a href="#">&laquo;</a></li>');
             var indice=0;
             for(i=0;i <totalPaginas; i++)                
             {
                 indice=parseInt(i)+1;
                 //<li><a href="#">1</a></li>                
                 if(indice==pagina)
-                    $("#tabIngresos #paginacionBuscarIngresos ul").append('<li class="active"><a href="#">'+indice+'</a></li>');
+                    $("#tabIngresos #paginacionBuscarIngresos ul").append('<li id='+indice+' class="active"><a href="#">'+indice+'</a></li>');
                 else 
-                    $("#tabIngresos #paginacionBuscarIngresos ul ").append('<li><a href="#">'+indice+'</a></li>');
+                    $("#tabIngresos #paginacionBuscarIngresos ul ").append('<li id='+indice+' ><a href="#">'+indice+'</a></li>');
             }
             ultimo=indice;
-            $("#tabIngresos #paginacionBuscarIngresos ul").append('<li><a href="#">&raquo;</a></li>');
+            $("#tabIngresos #paginacionBuscarIngresos ul").append('<li id="adelante"><a href="#">&raquo;</a></li>');
             
             $('#tabIngresos #tablaPacientes thead').append("<tr>\n\
                                                 <th style='display: none'></th>\n\
@@ -202,11 +202,10 @@ $('#tabIngresos #btnCargar').click(function (event) {
             }
         });        
         xhrRequest.push(xhr);
-        var id='myModal';
-             $("#"+id).modal('show');
+        $("#myModal").modal('show');
     }
     
-    $('#tabIngresos #paginacionBuscarIngresos ul').click(function (e) {        
+    $('#paginacionBuscarIngresos ul').click(function (e) {        
         var a = e.target.parentNode;        
         if(a.id!=="adelante" && a.id!=="atras")
         {
@@ -216,7 +215,7 @@ $('#tabIngresos #btnCargar').click(function (event) {
             pagina=parseInt(pagina)+1
         if(a.id==="atras" && pagina!==1)    
             pagina=parseInt(pagina)-1;
-        cargarEspecialidades(pagina,buscar);
+        cargarPacientes(pagina,buscar)
     });
     $("#tabIngresos .table-responsive").on("click", "#btnSeleccionar", function(){ 
         var cont=0;
@@ -230,7 +229,7 @@ $('#tabIngresos #btnCargar').click(function (event) {
         $("#tabIngresos #txtPaciente").val(datos[3]+' '+datos[4]);
         $('#tabIngresos #txtCedula').closest("div").removeClass("has-error");
          $("#tabIngresos #txtCedulahelp").remove();  
-        closeModal("modalRegistroIngresos");
+        closeModal("myModal");
     });
     
     $('#tabIngresos #btnGuardar').click(function(event) {   
