@@ -20,7 +20,27 @@
                 <button class="btn btn-info" id="pac_Cargar" >Cargar</button>    
                 <button class="btn btn-info" id="pac_Buscar" ><i class="glyphicon glyphicon-search"></i> Buscar Paciente</button>    
             </div>
-        </div>      
+        </div>    
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label class="control-label" for="con_nombrePaciente">Nº Historia Clinica:</label>
+                <input class="form-control solo-numero" readonly  id="con_historiaPaciente" placeholder="Nº Historia Clinica" type="text" >
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label" for="con_nombrePaciente">Cedula:</label>
+                <input class="form-control solo-numero" readonly  id="con_cedulaPaciente" placeholder="Cedula Paciente" type="text" >
+            </div>
+            <div class="form-group col-md-4">
+                
+                <label class="control-label" for="con_nombrePaciente">Paciente:</label>
+                <input class="form-control solo-numero" readonly  id="con_nombrePaciente" placeholder="Nombre Paciente" type="text" >
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label" for="con_ciudadPaciente">Ciudad:</label>
+                <input class="form-control solo-numero" readonly  id="con_ciudadPaciente" placeholder="Ciudad Paciente" type="text" >
+            </div>
+        </div>  
+        <hr>
         <div class="row">
             <div class="col-md-6">
                 <div class="row">
