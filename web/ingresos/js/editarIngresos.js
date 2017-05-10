@@ -150,11 +150,11 @@ $(document).ready(function(){
      $('#tabMantenimientoIngresos #btnBuscar').click(function(event) {                        
          cargarIngresos();
      });       
-     $("tabMantenimientoIngresos .table-responsive").on("click", "tr", function(){  
+     $("#tabMantenimientoIngresos .table-responsive").on("click", "tr", function(){  
          indice = $(this).index();
       });
       //editar ingreso
-   $("tabMantenimientoIngresos .table-responsive").on("click", "#botonEditar", function(){  
+   $("#tabMantenimientoIngresos .table-responsive").on("click", "#botonEditar", function(){  
           var cont=0;    
           $(this).parents("tr").find("td").each(function(){
               datos[cont]=$(this).html();   
@@ -177,7 +177,7 @@ $(document).ready(function(){
           $("#"+id).modal('show');
       });
       //agregar medicamento
-      $("tabMantenimientoIngresos .table-responsive").on("click", "#opAgregarMedicina", function(){
+      $("#tabMantenimientoIngresos .table-responsive").on("click", "#opAgregarMedicina", function(){
          idMedicamento=0;
           var cont=0;    
           $(this).parents("tr").find("td").each(function(){
@@ -189,11 +189,11 @@ $(document).ready(function(){
             $(this).val("");
             
         }); 
-        $("tabMantenimientoIngresos #dtpFechaMedicamentoIngresosModal").val('');
+        $("#tabMantenimientoIngresos #dtpFechaMedicamentoIngresosModal").val('');
           $("#"+id).modal('show');
       });
       //editar medicina
-      $("tabMantenimientoIngresos .table-responsive").on("click", "#opMantenimientoMedicina", function(){
+      $("#tabMantenimientoIngresos .table-responsive").on("click", "#opMantenimientoMedicina", function(){
           var cont=0;    
           $(this).parents("tr").find("td").each(function(){
               datos[cont]=$(this).html();   
@@ -207,7 +207,7 @@ $(document).ready(function(){
                $('#tablaMedicamentos tr').remove();
                $('#tablaMedicamentos thead').append("<tr>\n\
                                                 <th style='display:none;' class='col-lg-1'>id</th>\n\
-                                                <th class='col-lg-1'>Fecha</th>\n\
+                                                <th class='col-lg-2'>Fecha</th>\n\
                                                 <th>Hor</th>\n\
                                                 <th class='col-lg-1'>Lni</th>\n\
                                                   <th class='col-lg-1'>Fin</th>\n\
@@ -242,8 +242,15 @@ $(document).ready(function(){
           $("#"+id).modal('show');
       });
       //btnAgregarMedicamentos
-      $('tabMantenimientoIngresos #btnAgregarMedicamentos').click(function(event) {          
+      $('#tabMantenimientoIngresos #btnAgregarMedicamentos').click(function(event) {          
+          console.log(idIngreso);
+          console.log($('#dtpFechaMedicamentoIngresosModal').val());
+          console.log($('#txtHor').val());
+          console.log($('#txtLni').val());
+          console.log($('#txtFin').val());
+          console.log(idMedicamento);
           $.post('sIngresosHospital', {
+              
             idIngreso : idIngreso,
             fechaMedicamento: $('#dtpFechaMedicamentoIngresosModal').val(),
             hor: $('#txtHor').val(),
@@ -252,11 +259,14 @@ $(document).ready(function(){
             medicamentoTratamiento:$('#txtMedicamentos').val(),
             opcion:'9',
             idMedicamento:idMedicamento
-        }, function(responseText) {               
-            alertify.success("Datos registrados correctamente");
+        }, function(responseText) {    
+            if(idMedicamento===0)
+                alertify.success("Datos registrados correctamente");
+            else
+                alertify.success("Datos actualizados correctamente");
         });
       });
-    $('tabMantenimientoIngresos #btnActualizar').click(function(event) {
+    $('#tabMantenimientoIngresos #btnActualizar').click(function(event) {
         $.post('sIngresosHospital', {
             idIngreso : datos[0],
             fechaIngreso: $('#dtpFechaIngresoIngresosModal').val(),
@@ -290,7 +300,7 @@ $(document).ready(function(){
         });
     });
     
-    $('tabMantenimientoIngresos .table-responsive').on("click", "#btnEliminar", function(event){ 
+    $('#tabMantenimientoIngresos .table-responsive').on("click", "#btnEliminar", function(event){ 
         var cont=0;
         $(this).parents("tr").find("td").each(function(){
             datos[cont]=$(this).html();   
@@ -308,7 +318,7 @@ $(document).ready(function(){
     });
     
        //editar Medicamento
-       $("tabMantenimientoIngresos .table-responsive").on("click", "#btnEditarMedicamento", function(){  
+       $("#tabMantenimientoIngresos .table-responsive").on("click", "#btnEditarMedicamento", function(){  
           var cont=0;    
           $(this).parents("tr").find("td").each(function(){
               medicinas[cont]=$(this).html();               

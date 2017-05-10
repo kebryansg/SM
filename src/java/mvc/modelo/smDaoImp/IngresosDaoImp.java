@@ -283,12 +283,12 @@ C_BD conn;
             //Insert
            if(value.getId()==0)
             {
-                sql="INSERT INTO medicamentos(medicamentoTratamiento, fecha, Hor, Lni, Fin, idIngresos) values('"+value.getMedicamentoTratamiento()+"','"+value.getFecha()+"','"+value.getHor()+"','"+value.getLni()+"','"+value.getFin()+"','"+value.getIngreso().getId()+"')";
+                sql="INSERT INTO medicamentos(medicamentoTratamiento, fecha, Hor, Lni, Fin, idIngresos, estado) values('"+value.getMedicamentoTratamiento()+"','"+value.getFecha()+"','"+value.getHor()+"','"+value.getLni()+"','"+value.getFin()+"','"+value.getIngreso().getId()+"','1')";
             }
             //Update
             else
             {
-                //sql="UPDATE especialidad SET descripcion='";
+                sql="update medicamentos set medicamentoTratamiento='"+value.getMedicamentoTratamiento()+"', fecha='"+value.getFecha()+"', Hor='"+value.getHor()+"', lni='"+value.getLni()+"' where id='"+value.getId()+"'";
             }
             this.conn.execute(sql);
             return true;

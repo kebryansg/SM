@@ -66,7 +66,7 @@
                     </ul>
          </div>
     </div>
-</div>
+
 
 
 <div class="modal fade" id="myModal" role="dialog">
@@ -429,5 +429,5 @@
 </div>
                                             
                
-
+</div>
 <script src="ingresos/js/editarIngresos.js" type="text/javascript" async="async"></script>

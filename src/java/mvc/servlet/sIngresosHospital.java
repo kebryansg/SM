@@ -244,9 +244,9 @@ public class sIngresosHospital extends HttpServlet {
             String lni= request.getParameter("lni");
             String fin= request.getParameter("fin");
             Integer idIngresos =Integer.valueOf(request.getParameter("idIngreso"));
-            
+            Integer idMedicamento =Integer.valueOf(request.getParameter("idMedicamento"));
             IngresosDao ingr= new IngresosDaoImp();
-            Medicamento medicamentos = new Medicamento(0,medicamento,new java.sql.Date(fechaMedicamento.getTime()),hor,lni,fin, new Ingresos(idIngresos));
+            Medicamento medicamentos = new Medicamento(idMedicamento,medicamento,new java.sql.Date(fechaMedicamento.getTime()),hor,lni,fin, new Ingresos(idIngresos));
             ingr.guardarMedicamento(medicamentos);
             
             
