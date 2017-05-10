@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+
     var datos = [];
     var totalRegistros=0;
     var totalPaginas=0;
@@ -12,26 +13,37 @@
     var indice=0;
     var xhrRequest=[];
     var ultimo=-1;
-
+    var bandera;
+    var filas=5;
     function validaciones()
     {
-        $("#tbEspecialidad .help-block").remove();
-        $.each($("#tbEspecialidad input[validate='text']"), function (index, value) {
-        if ($(value).val() === null || $(value).val() === "") {
-            $(value).closest("div").addClass("has-error");
-            $(value).after('<span id="' + $(value).attr("id") + 'help" class="help-block">Campo Vacio</span');
-        } else
-        {
-            $(value).closest("div").removeClass("has-error");
-        }
-        return $("#tbEspecialidad .help-block").length === 0;
-    });
+        try {
+      
+           
+            $("#tbEspecialidad .help-block").remove();
+            $.each($("#tbEspecialidad input[validate='text']"), function (index, value) {
+            if ($(value).val() === null || $(value).val() === "") {
+                $(value).closest("div").addClass("has-error");
+                $(value).after('<span id="' + $(value).attr("id") + 'help" class="help-block">Campo Vacio</span');
+            } else
+            {
+                $(value).closest("div").removeClass("has-error");
+            }
+           bandera=$("#tbEspecialidad .help-block").length === 0;
+            return $("#tbEspecialidad .help-block").length === 0;
+        });
+    }
+    catch(err)
+    {
+        alert(err.message);
+    }
         
     }
     $("#tbEspecialidad #cboMostrar").val(5);   
     $('#tbEspecialidad #cboMostrar').on('change', function() {    
          pagina=1;
-        cargarEspecialidades(pagina,buscar);        
+        cargarEspecialidades(pagina,buscar);   
+        filas=$('#tbEspecialidad #cboMostrar').val();
     });    
     $("#tbEspecialidad #txtBuscar").keyup(function(event){		            
         if($("#txtBuscar").val().length < 1) 
@@ -39,7 +51,7 @@
         else
             buscar=1;
          pagina=1;
-         alert("buscar....");
+        
         cargarEspecialidades(pagina,buscar);   
     }); 
     cargarEspecialidades(pagina,buscar);
@@ -51,7 +63,7 @@
             cont++;
         });
         $('#tbEspecialidad .modal-title').text('Editar Especialidad');
-        var id='myModal';
+        var id='modalEspecialidad';
         $("#"+id).modal('show');
         $.each($("#"+id+" input"), function (){
             $(this).val("");
@@ -63,7 +75,7 @@
     $('#tbEspecialidad #btnAgregar').click(function(event) {
         datos[0]=0;
         $('#tbEspecialidad .modal-title').text('Agregar Especialidad');
-        var id='myModal';
+        var id='modalEspecialidad';
         $("#"+id).modal('show');
         $.each($("#"+id+" input"), function (){
             $(this).val("");
@@ -76,8 +88,10 @@
       });
       
     $('#tbEspecialidad #btnActualizar').click(function(event) {
-        alert("ingreso");
-        if (validaciones()) {
+       validaciones();
+      
+        if (bandera===true) {
+            
             var descripcionEspecialidadVar = $('#recipient-name').val();
             var idEspecialidadVar = datos[0];
             $.post('sEspecialidad', {
@@ -88,6 +102,7 @@
             }, function(responseText) { 
                 if(idEspecialidadVar===0)
                 {
+                    cargarEspecialidades(pagina,buscar);
                     alertify.success("Especialidad agregada correctamente");
                 }
                 else
@@ -95,7 +110,7 @@
                     alertify.success("Especialidad Modificada");
                     $($('.table-responsive').find('tbody > tr')[indice]).children('td')[1].innerHTML = $('#recipient-name').val();
                 }
-                $("#myModal").modal('toggle');
+                $("#modalEspecialidad").modal('toggle');
             });
     }
     });
@@ -111,8 +126,15 @@
             idEspecialidad: datos[0],
             visible: 0,
             opcion: "3"
-        }, function(responseText) {  
-            cargarTotalRegistros();  
+        }, function(responseText) {
+            filas--;
+            if(filas===0)
+            {
+                if(pagina>0)
+                    pagina--;
+                filas=$('#tbEspecialidad #cboMostrar').val();
+            }
+            cargarEspecialidades(pagina,buscar);
             alertify.success("Especialidad eliminada");
         });
         event.preventDefault();
@@ -139,6 +161,7 @@
             var resultado = JSON && JSON.parse(data) || $.parseJSON(data); 
             var totalPaginas=resultado[0].registros/$("#cboMostrar").val();
             totalPaginas=Math.ceil(totalPaginas);
+            filas=resultado.length;
             $('#tbEspecialidad #paginacionEspecialidad').find('li').remove();
             $("#tbEspecialidad #paginacionEspecialidad ul").append('<li id="atras"><a href="#">&laquo;</a></li>');
             var indice=0;
@@ -165,8 +188,9 @@
                 $('#tbEspecialidad #especialidades').append("<tr>\n\
                                                 <td>"+resultado[i].id+"</td>\n\
                                                 <td>"+resultado[i].descripcion+"</td>\n\
-                                                <td style='width: 3px' ><button id='botonEditar' class='btn btn-primary' onclick='openModal('myModal')'><span class='glyphicon glyphicon-pencil'></span> </button>\n\
-                                                    <button id='btnEliminar' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span></a></button>\n\
+                                                <td ><button id='botonEditar' class='btn btn-primary' onclick='openModal('myModal')'><span class='glyphicon glyphicon-pencil'></span> </button>\n\
+                                              \n\
+      <button id='btnEliminar' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span></a></button>\n\
                                                 </td>\n\
                                             </tr>");
             }

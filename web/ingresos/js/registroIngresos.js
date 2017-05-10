@@ -85,8 +85,7 @@ function validarDateIngresos(value)
             $("#"+$(value).attr("id") + 'help').remove();
         }
 }
-$('#btnBuscar').click(function (event) {
-    alert("ingreso");
+$('#btnBuscar').click(function (event) {    
     cargarPacientes(pagina,buscar);
 });
 $('#tabIngresos #cboMostrar').on('change', function () {
@@ -102,15 +101,11 @@ function momentToDate(varMoment, formato)
 }
 function limpiar()
 {
-    $('#tabIngresos :text').val('');
-    $('#tabIngresos textarea').val('');
-    $('#tabIngresos tr:not(:first-child)').remove();
+    $(':text').val('');
+    $('textarea').val('');
+    //$('#tabIngresos tr:not(:first-child)').remove();
 }
-$("a[data-url]").on("click", "#btnCargar", function ()
-{
 
-
-});
 
 $('#tabIngresos #btnCargar').click(function (event) {
     var cedula = $("#tabIngresos #txtCedula").val();

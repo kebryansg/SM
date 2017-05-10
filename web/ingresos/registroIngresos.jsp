@@ -237,6 +237,7 @@
                             </div>
                            <div style="width: 100%; height: 300px; overflow-y: scroll; overflow-x: hidden;">         
                             <div class="table-responsive">
+                                
                                 <table id="tablaPacientes" class="table table-bordered table-hover table-striped">
                                     <thead>
 

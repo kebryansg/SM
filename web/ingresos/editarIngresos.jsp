@@ -12,7 +12,7 @@
 
 
 <br>
-<div class="contenedor-tabs">
+<div class="contenedor-tabs" id="tabMantenimientoIngresos">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">

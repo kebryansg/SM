@@ -1,10 +1,10 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script src="medico/js/especialidad.js"></script>
+
+<script src="medico/js/especialidades.js"></script>
 <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-<!DOCTYPE html>
-<div class="contenedor-tabs" >
+
+<div class="contenedor-tabs" id="tbEspecialidad">
     <div class="container-fluid">
         <div class="row ">
             <div class="col-md-12">
@@ -58,7 +58,7 @@
             </nav>
         </div>        
     </div>
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="modalEspecialidad" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
