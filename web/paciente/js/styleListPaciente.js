@@ -16,6 +16,15 @@ $("#ContentAdm").on("click", "#tablePaciente button[name='deletPaciente']", func
         list_filter();
     });
 });
+$("#ContentAdm").on("click", "#tablePaciente button[name='SeleccionarPaciente']", function () {
+    var tr = $(this).closest("tr");
+    var tds = $(tr).find("td");
+    $("#con_historiaPaciente").val($(tds).eq(0).html());
+    $("#con_cedulaPaciente").val($(tds).eq(1).html());
+    $("#con_nombrePaciente").val($(tds).eq(2).html());
+    $("#con_ciudadPaciente").val($(tds).eq(3).html());
+    closeModal("ListPaciente");
+});
 
 $("#ContentAdm").on("click", "#tablePaciente button[name='editPaciente']", function () {
     var title = "Modificar Paciente";

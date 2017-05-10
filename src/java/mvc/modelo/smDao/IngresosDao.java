@@ -25,6 +25,7 @@ public interface IngresosDao {
     public List<Ingresos> listIngresos(int numeroPaginas, int totalRegistro,Date fechaIngreso, Date fechaSalida) ;
     public int totalIngresos(Date fechaIngreso, Date fechaSalida);
     public boolean Delete(int id);
+    public boolean DeleteMedicamento(int id);
     public boolean guardarMedicamento(Medicamento value);
     public List<Medicamento> list(int idRegistro);
     

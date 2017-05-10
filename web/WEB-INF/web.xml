@@ -8,7 +8,7 @@
         <servlet-name>sPaciente</servlet-name>
         <servlet-class>mvc.servlet.sPaciente</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>sEspecialidad</servlet-name>
         <servlet-class>mvc.servlet.sEspecialidad</servlet-class>
     </servlet>
@@ -24,6 +24,10 @@
         <servlet-name>sIngresosHospital</servlet-name>
         <servlet-class>mvc.servlet.sIngresosHospital</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>sConsulta</servlet-name>
+        <servlet-class>mvc.servlet.sConsulta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>pruebaCombo</servlet-name>
         <url-pattern>/pruebaCombo</url-pattern>
@@ -32,7 +36,6 @@
         <servlet-name>sPaciente</servlet-name>
         <url-pattern>/sPaciente</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>sEspecialidad</servlet-name>
         <url-pattern>/sEspecialidad</url-pattern>
@@ -48,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>sIngresosHospital</servlet-name>
         <url-pattern>/sIngresosHospital</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sConsulta</servlet-name>
+        <url-pattern>/sConsulta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

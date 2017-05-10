@@ -59,7 +59,7 @@
 <script type="text/javascript">
     $(function () {
         $.getScript("paciente/js/paciente.js", function () {
-            indexPag(1);
+            indexPag(1,5,"");
         });
     });
 </script>

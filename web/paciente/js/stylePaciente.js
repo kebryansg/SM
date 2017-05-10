@@ -3,6 +3,7 @@ function pestañaActive() {
     var id = $(pestaña + " #optionPaciente").attr("data-id");
     return id;
 }
+
 function pestañaDiv() {
     var pestaña = $(getCurrentTab()).attr("href");
     var div = $(pestaña + " #optionPaciente");

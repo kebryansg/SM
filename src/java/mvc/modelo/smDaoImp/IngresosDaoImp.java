@@ -275,6 +275,23 @@ C_BD conn;
     }
 
     @Override
+    public boolean DeleteMedicamento(int id) {
+        try
+        {
+        
+        this.conn= con_db.open(con_db.MSSQL_SM);    
+         
+         this.conn.query("update medicamentos set estado=0 where id="+id+"");
+         return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
+        
+    }
+
+    @Override
     public boolean guardarMedicamento(Medicamento value) {
         String sql="";
         this.conn= con_db.open(con_db.MSSQL_SM);
@@ -306,7 +323,7 @@ C_BD conn;
               try {  
                   
                 this.conn= con_db.open(con_db.MSSQL_SM); 
-                ResultSet rs = this.conn.query("SELECT * FROM MEDICAMENTOS where idIngresos='"+idIngreso+"'");
+                ResultSet rs = this.conn.query("SELECT * FROM MEDICAMENTOS where idIngresos='"+idIngreso+"' and estado=1");
                 while (rs.next()) {
                     Medicamento value = new Medicamento(rs.getInt("id"),rs.getString("medicamentoTratamiento"),rs.getDate("fecha"),rs.getString("Hor"),rs.getString("Lni"),rs.getString("Fin"), new Ingresos(rs.getInt("idIngresos")));                    
                     list.add(value);

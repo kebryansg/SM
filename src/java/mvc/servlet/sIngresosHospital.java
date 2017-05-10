@@ -273,6 +273,12 @@ public class sIngresosHospital extends HttpServlet {
             {
             }
         }
+        else if("11".equals(opcion))
+        {
+            Integer idMedicamento =Integer.valueOf(request.getParameter("idMedicamento"));
+            IngresosDao ingr= new IngresosDaoImp();
+            ingr.DeleteMedicamento(idMedicamento);
+        }
 
     }
 

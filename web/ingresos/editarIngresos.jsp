@@ -69,7 +69,7 @@
 
 
 
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="modalEditarIngresos" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">          
             <div class="modal-header">
@@ -219,7 +219,7 @@
                                 </div>                                       
                                 <div class="form-group col-xs-2">                                       
                                     <div class="col-md-2">
-                                        <button id="btnActualizar" type="button" onclick="closeModal('myModal')" class="btn btn-primary">Guardar</button>
+                                        <button id="btnActualizar" type="button" onclick="closeModal('modalEditarIngresos')" class="btn btn-primary">Guardar</button>
                                     </div>
                                 </div>
                             </div>
@@ -313,7 +313,7 @@
                                     <div class="col-md-12">
                                         <label class="col-md-12" for="txtDefinitivoEgreso">Administración de medicamentos y tratamientos</label>
                                         <div class="col-md-12">
-                                            <textarea id="txtMedicamentos" rows="3" class="form-control" placeholder=""></textarea>
+                                            <textarea id="txtMedicamentos" validate="text" rows="3" class="form-control" placeholder=""></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -347,7 +347,7 @@
             <div class="modal-footer">
                 <div class="form-group col-xs-2">                                       
                                     <div class="col-md-2">
-                                        <button id="btnAgregarMedicamentos" type="button" onclick="closeModal('medicinas')" class="btn btn-primary">Guardar</button>
+                                        <button id="btnGuardarMedicamento" type="button"  class="btn btn-primary">Guardar</button>
                                     </div>
                                 </div>
             </div>
@@ -401,7 +401,7 @@
                                 </div>                                       
                                 <div class="form-group col-xs-2">                                       
                                     <div class="col-md-2">
-                                        <button id="btnActualizar" type="button" onclick="closeModal('myModal')" class="btn btn-primary">Guardar</button>
+                                        <button id="btnActualizar" type="button"  class="btn btn-primary">Guardar</button>
                                     </div>
                                 </div>
                             </div>

@@ -111,4 +111,26 @@ public class HistorialClinicoDaoImp implements HistorialClinicoDao {
         }
     }
 
+    @Override
+    public HistorialClinico edit_Paciente(String opcion,String param) {
+        this.conn = con_db.open(con_db.MSSQL_SM);
+        String sql_imp = opcion.equals("cedula") ? "where pac.cedula = '"+ param +"'" : "where hc.id = '"+ param +"'";
+        ResultSet rs = this.conn.query("select hc.* from dbo.historialClinico hc INNER JOIN BD_IP.dbo.paciente pac on pac.id = hc.idPaciente "+ sql_imp);
+        HistorialClinico value = new HistorialClinico();
+        try {
+            while (rs.next()) {
+                value.setId(rs.getInt("id"));
+                value.setIdPaciente(rs.getInt("idPaciente"));
+                value.setMenarca(rs.getDate("menarca"));
+                value.setFecha(rs.getDate("fecha"));
+                value.setEstado(rs.getString("estado"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            this.conn.close();
+        }
+        return value;
+    }
+
 }
