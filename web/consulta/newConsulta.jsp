@@ -14,7 +14,7 @@
         </div>
         <div class="row">
             <div class="form-group col-md-2">
-                <input class="form-control solo-numero" maxlength="10" validate="date" id="con_Paciente" placeholder="Buscar (cedula)" type="text" >
+                <input class="form-control solo-numero" maxlength="10" validate="date" id="txt_cargarPaciente" placeholder="Buscar (cedula)" type="text" >
             </div>
             <div class="form-group col-md-3">
                 <button class="btn btn-info" id="pac_Cargar" >Cargar</button>    

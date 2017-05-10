@@ -16,6 +16,7 @@ public interface HistorialClinicoDao {
     public List<HistorialClinico> list();
     public HistorialClinico edit(int id);
     public HistorialClinico edit_Paciente(int idPaciente);
+    public HistorialClinico edit_Paciente(String opcion, String param);
     public boolean save(HistorialClinico value);
     public boolean delete(int id);
 }

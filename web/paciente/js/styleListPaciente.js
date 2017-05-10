@@ -24,13 +24,9 @@ $("#ContentAdm").on("click", "#tablePaciente button[name='SeleccionarPaciente']"
     $("#con_nombrePaciente").val($(tds).eq(2).html());
     $("#con_ciudadPaciente").val($(tds).eq(3).html());
     closeModal("ListPaciente");
-    
-    
 });
 
 $("#ContentAdm").on("click", "#tablePaciente button[name='editPaciente']", function () {
-    alert($(this).attr("data-id"));
-
     var title = "Modificar Paciente";
     var id = $(this).attr("data-id");
     if ($('#editP' + id).length === 0) {
